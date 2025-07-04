@@ -1,13 +1,16 @@
 // App entry point
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const morgan = require("morgan");
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import morgan from "morgan";
 
-// Import routes
+// Import routes here (example):
+// import userRoutes from './routes/user.routes.js';
 
-const errorHandler = require("./middleware/errorHandler");
+import errorHandler from "./middleware/errorHandler.js";
+
+dotenv.config();
 
 const app = express();
 
@@ -17,6 +20,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // API routes
+// app.use('/api/users', userRoutes); // Example usage
 
 // 404 handler
 app.use((req, res, next) => {
