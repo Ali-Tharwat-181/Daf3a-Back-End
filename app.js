@@ -11,6 +11,7 @@ import authRouter from "./routes/auth.routes.js";
 import bookingRouter from "./routes/booking.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import studentRouter from "./routes/student.routes.js";
+import userRouter from "./routes/user.routes.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use("/api/mentors", mentorRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/students", studentRouter);
+app.use("/api/users", userRouter);
 
 // 404 handler
 app.use((req, res, next) => {
