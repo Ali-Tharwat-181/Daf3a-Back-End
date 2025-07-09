@@ -32,9 +32,10 @@ const userSchema = new mongoose.Schema(
     },
     preferredLanguage: {
       type: [String],
-      enum: ["arabic", "english", "french", "german", "italian"],
+      enum: ["arabic", "english"],
       default: ["english"],
     },
+    isRegistered: Boolean,
   },
   {
     timestamps: true,
