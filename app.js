@@ -6,7 +6,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 // Import routes here (example):
-// import userRoutes from './routes/user.routes.js';
+import mentorRouter from "./routes/mentor.routes.js";
 
 import errorHandler from "./middleware/errorHandler.js";
 
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // API routes
-// app.use('/api/users', userRoutes); // Example usage
+app.use("/api/mentors", mentorRouter);
 
 // 404 handler
 app.use((req, res, next) => {
