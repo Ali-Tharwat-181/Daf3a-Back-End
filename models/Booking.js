@@ -1,6 +1,6 @@
 // Booking model (placeholder)
 import mongoose from 'mongoose'
-const Schema = mongoose.Schema;
+
 
 const BookingSchema = new Schema({
     mentor: { type: Schema.Types.ObjectId, ref: "Mentor", required: true },
@@ -13,9 +13,16 @@ const BookingSchema = new Schema({
         enum: ["pending", "paid", "free"],
         default: "free",
     },
+    status: {
+        type: String,
+        enum: ['active', 'cancelled'],
+        default: 'active',
+    },
     summary: String, // AI summary if exists
     review: { type: Schema.Types.ObjectId, ref: "Review" },
-});
+
+}, { timestamps: true });
 
 const Booking = mongoose.model('Booking', BookingSchema);
 export default Booking;
+
