@@ -7,6 +7,7 @@ import morgan from "morgan";
 
 // Import routes here (example):
 import mentorRouter from "./routes/mentor.routes.js";
+import authRouter from "./routes/auth.routes.js";
 
 import errorHandler from "./middleware/errorHandler.js";
 
@@ -21,6 +22,7 @@ app.use(morgan("dev"));
 
 // API routes
 app.use("/api/mentors", mentorRouter);
+app.use("/api/auth", authRouter);
 
 // 404 handler
 app.use((req, res, next) => {

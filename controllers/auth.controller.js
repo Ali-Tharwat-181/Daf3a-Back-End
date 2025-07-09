@@ -1,49 +1,37 @@
-import User from "../models/User.js";
-import generateToken from "../utils/generateToken.js";
+import { registerService, loginService, getMeService, logoutService } from "../services/auth.service.js";
 
-
-export const register = async (req, res, next) => {
+// Register a new user
+export async function register(req, res, next) {
   try {
-    const { name, email, password, phoneNumber, preferredLanguage, role } = req.body;
-
-    // Basic validation
-    if (!name || !email || !password || !phoneNumber) {
-      return res.status(400).json({ success: false, message: "Please provide all required fields." });
-    }
-
-    // Check if user already exists
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ success: false, message: "User already exists." });
-    }
-
-    // Create user
-    const user = await User.create({
-      name,
-      email,
-      password,
-      phoneNumber,
-      preferredLanguage,
-      role, // optional, defaults to 'student'
-    });
-
-    // Generate JWT
-    const token = generateToken(user._id, user.role);
-
-    // Respond with user info (excluding password) and token
-    res.status(201).json({
-      success: true,
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        phoneNumber: user.phoneNumber,
-        preferredLanguage: user.preferredLanguage,
-      },
-      token,
-    });
+    const result = await registerService(req.body);
+    res.status(201).json({ success: true, ...result });
   } catch (err) {
-    next(err);
+    res.status(400).json({ success: false, message: err.message });
   }
-};
+}
+
+// Login a user
+export async function login(req, res, next) {
+  try {
+    const result = await loginService(req.body);
+    res.status(200).json({ success: true, ...result });
+  } catch (err) {
+    res.status(401).json({ success: false, message: err.message });
+  }
+}
+
+// Get current user info
+export async function getMe(req, res, next) {
+  try {
+    const result = await getMeService(req.user);
+    res.status(200).json({ success: true, ...result });
+  } catch (err) {
+    res.status(401).json({ success: false, message: err.message });
+  }
+}
+
+// Logout a user
+export async function logout(req, res, next) {
+  const result = await logoutService();
+  res.status(200).json({ success: true, ...result });
+}
