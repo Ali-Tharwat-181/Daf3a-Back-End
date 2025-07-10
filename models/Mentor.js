@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const mentorSchema = new mongoose.Schema(
   {
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     expertise: [String],
     experience: String,
     languages: [String],
@@ -16,4 +16,5 @@ const mentorSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Mentor", mentorSchema);
+const Mentor = mongoose.model("Mentor", mentorSchema);
+export default Mentor;

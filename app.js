@@ -9,9 +9,12 @@ import morgan from "morgan";
 import mentorRouter from "./routes/mentor.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import bookingRouter from "./routes/booking.routes.js";
-import errorHandler from "./middleware/errorHandler.js";
+import errorHandler from "./middlewares/errorHandler.js";
 import studentRouter from "./routes/student.routes.js";
 import userRouter from "./routes/user.routes.js";
+import reviewRouter from "./routes/review.routes.js";
+import adminRouter from "./routes/admin.routes.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
 
@@ -28,6 +31,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/bookings", bookingRouter);
 app.use("/api/students", studentRouter);
 app.use("/api/users", userRouter);
+app.use("/api/reviews", reviewRouter);
+app.use("/api/admin", adminRouter);
 
 // 404 handler
 app.use((req, res, next) => {
@@ -36,19 +41,21 @@ app.use((req, res, next) => {
 
 // Global error handler
 app.use(errorHandler);
-
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/graduation_project";
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/graduation_project";
 
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGO_URI)
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    console.log("MongoDB connected");
   })
   .catch((err) => {
     console.error("MongoDB connection error:", err);
+    process.exit(1);
   });
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

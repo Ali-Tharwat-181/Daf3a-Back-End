@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export default validateObjectId = (req, res, next) => {
+const validateObjectId = (req, res, next) => {
   const id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res
@@ -9,3 +9,5 @@ export default validateObjectId = (req, res, next) => {
   }
   next();
 };
+
+export default validateObjectId;

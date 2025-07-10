@@ -5,9 +5,9 @@ import {
   createMentorController,
   updateMentorController,
 } from "../controllers/mentor.controller.js";
-import authMiddleware from "../middleware/auth.js";
-import validateObjectId from "../middleware/validateObjectId.js";
-import upload from "./../middleware/upload";
+import authMiddleware from "../middlewares/auth.js";
+import validateObjectId from "../middlewares/validateObjectId.js";
+import upload from "../middlewares/upload.js";
 
 const mentorRouter = express.Router();
 mentorRouter.get("/", getMentorsController);

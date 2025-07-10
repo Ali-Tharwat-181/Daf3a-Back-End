@@ -7,9 +7,9 @@ import {
   updateUserProfile,
   changePassword,
 } from "../controllers/user.controller.js";
-import authMiddleware from "../middleware/auth.js";
-import roleCheck from "../middleware/roleCheck.js";
-import validateObjectId from "../middleware/validateObjectId.js";
+import authMiddleware from "../middlewares/auth.js";
+import roleCheck from "../middlewares/roleCheck.js";
+import validateObjectId from "../middlewares/validateObjectId.js";
 
 const router = express.Router();
 

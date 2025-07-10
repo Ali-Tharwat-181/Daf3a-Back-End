@@ -3,15 +3,14 @@ import {
   updateStudent,
   getStudentCVs,
 } from "../services/student.service.js";
-import tryToCatch from "try-to-catch";
 
-export const getStudent = tryToCatch(async (req, res) => {
+export const getStudentController = async (req, res) => {
   const { id } = req.params;
   const student = await getStudentById(id);
   res.status(200).json(student);
-});
+};
 
-export const updateStudent = tryToCatch(async (req, res) => {
+export const updateStudentController = async (req, res) => {
   const result = await updateStudent(
     req.params.id,
     req.user._id,
@@ -27,13 +26,13 @@ export const updateStudent = tryToCatch(async (req, res) => {
     });
   }
   res.status(200).json(result);
-});
+};
 
-export const getStudentCVs = tryToCatch(async (req, res) => {
+export const getStudentCVsController = async (req, res) => {
   const { id } = req.params;
   const cvs = await getStudentCVs(id);
   if (!cvs) {
     return res.status(404).json({ message: "Student not found" });
   }
   res.status(200).json(cvs);
-});
+};

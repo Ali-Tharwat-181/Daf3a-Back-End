@@ -1,28 +1,36 @@
 // Booking model (placeholder)
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-
-const BookingSchema = new Schema({
-    mentor: { type: Schema.Types.ObjectId, ref: "Mentor", required: true },
-    student: { type: Schema.Types.ObjectId, ref: "Student", required: true },
+const BookingSchema = new mongoose.Schema(
+  {
+    mentor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Mentor",
+      required: true,
+    },
+    student: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Student",
+      required: true,
+    },
     date: Date,
     timeSlot: String,
     type: { type: String, enum: ["online", "offline"] },
     paymentStatus: {
-        type: String,
-        enum: ["pending", "paid", "free"],
-        default: "free",
+      type: String,
+      enum: ["pending", "paid", "free"],
+      default: "free",
     },
     status: {
-        type: String,
-        enum: ['active', 'cancelled'],
-        default: 'active',
+      type: String,
+      enum: ["active", "cancelled"],
+      default: "active",
     },
     summary: String, // AI summary if exists
-    review: { type: Schema.Types.ObjectId, ref: "Review" },
+    review: { type: mongoose.Schema.Types.ObjectId, ref: "Review" },
+  },
+  { timestamps: true }
+);
 
-}, { timestamps: true });
-
-const Booking = mongoose.model('Booking', BookingSchema);
+const Booking = mongoose.model("Booking", BookingSchema);
 export default Booking;
-

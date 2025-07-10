@@ -4,26 +4,25 @@ import {
   createMentor,
   updateMentor,
 } from "../services/mentor.service.js";
-import tryToCatch from "try-to-catch";
 
-export const getMentorsController = tryToCatch(async (req, res) => {
+export const getMentorsController = async (req, res) => {
   const [error, mentors] = await getMentors();
   if (error) {
     return res.status(500).json({ error: error.message });
   }
   return res.status(200).json(mentors);
-});
+};
 
-export const getMentorByIdController = tryToCatch(async (req, res) => {
+export const getMentorByIdController = async (req, res) => {
   const { id } = req.params;
   const [error, mentor] = await getMentorById(id);
   if (error) {
     return res.status(404).json({ error: error.message });
   }
   return res.status(200).json(mentor);
-});
+};
 
-export const createMentorController = tryToCatch(async (req, res) => {
+export const createMentorController = async (req, res) => {
   if (req.user.role !== "mentor") {
     return res.status(403).json({ error: "Only mentors can create profile" });
   }
@@ -34,9 +33,9 @@ export const createMentorController = tryToCatch(async (req, res) => {
   }
 
   return res.status(201).json(mentor);
-});
+};
 
-export const updateMentorController = tryToCatch(async (req, res) => {
+export const updateMentorController = async (req, res) => {
   const { id } = req.params;
   const [error, mentor] = await updateMentor(
     id,
@@ -50,4 +49,4 @@ export const updateMentorController = tryToCatch(async (req, res) => {
   }
 
   return res.status(200).json(mentor);
-});
+};
