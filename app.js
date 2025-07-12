@@ -34,10 +34,6 @@ app.use("/api/users", userRouter);
 app.use("/api/reviews", reviewRouter);
 app.use("/api/admin", adminRouter);
 
-app.get("/", (req, res) => {
-  res.json({ message: "Server is Runing" });
-});
-
 // 404 handler
 app.use((req, res, next) => {
   res.status(404).json({ success: false, message: "Endpoint not found" });
@@ -47,7 +43,8 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI =
+  process.env.MONGO_URI || "mongodb://localhost:27017/graduation_project";
 
 mongoose
   .connect(MONGO_URI)
@@ -59,6 +56,6 @@ mongoose
     process.exit(1);
   });
 
-export default (req, res) => {
-  app(req, res);
-};
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
