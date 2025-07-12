@@ -47,8 +47,7 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 // Connect to MongoDB and start server
 const PORT = process.env.PORT || 5000;
-const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://localhost:27017/graduation_project";
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
   .connect(MONGO_URI)
@@ -60,4 +59,6 @@ mongoose
     process.exit(1);
   });
 
-export default app;
+export default (req, res) => {
+  app(req, res);
+};
