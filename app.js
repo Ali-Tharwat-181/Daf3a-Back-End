@@ -15,6 +15,7 @@ import userRouter from "./routes/user.routes.js";
 import reviewRouter from "./routes/review.routes.js";
 import adminRouter from "./routes/admin.routes.js";
 import connectDB from "./config/db.js";
+import workshopRouter from "./routes/workshop.routes.js";
 
 dotenv.config();
 
@@ -33,6 +34,8 @@ app.use("/api/students", studentRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reviews", reviewRouter);
 app.use("/api/admin", adminRouter);
+app.use("api/workshops", workshopRouter);
+
 
 // 404 handler
 app.use((req, res, next) => {
