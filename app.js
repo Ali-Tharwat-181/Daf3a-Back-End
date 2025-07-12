@@ -34,6 +34,10 @@ app.use("/api/users", userRouter);
 app.use("/api/reviews", reviewRouter);
 app.use("/api/admin", adminRouter);
 
+app.get("/", (req, res) => {
+  res.json({ message: "Server is Runing" });
+});
+
 // 404 handler
 app.use((req, res, next) => {
   res.status(404).json({ success: false, message: "Endpoint not found" });
@@ -56,6 +60,4 @@ mongoose
     process.exit(1);
   });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export default app;
