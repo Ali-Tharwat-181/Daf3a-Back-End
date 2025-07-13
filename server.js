@@ -1,4 +1,3 @@
-// server.js
 import http from 'http';
 import { Server } from 'socket.io';
 import app from './app.js';
@@ -29,7 +28,7 @@ io.on('connection', (socket) => {
     // Receive and store user ID
     socket.on('register', (userId) => {
         onlineUsers.set(userId, socket.id);
-        console.log(`🧍 Registered user ${userId} with socket ${socket.id}`);
+        console.log(`Registered user ${userId} with socket ${socket.id}`);
     });
 
     // Handle sending messages
