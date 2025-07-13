@@ -23,15 +23,14 @@ export const createReview = async (reviewData) => {
   }
 
   // Create and save the review
-  const review = new Review({
-    author,
-    targetType,
-    targetId,
-    rating,
-    comment,
-  });
+  const review = new Review(reviewData);
+  const savedReview = await review.save();
 
-  return await review.save();
+  if (targetType === "mentor") {
+    await updateMentorRating(targetId);
+  }
+
+  return savedReview;
 };
 
 export const getReviewsByTarget = async (targetType, targetId) => {
@@ -46,4 +45,17 @@ export const getReviewsByTarget = async (targetType, targetId) => {
     .sort({ createdAt: -1 }); // Sort by creation date
 
   return reviews;
+};
+
+export const updateMentorRating = async (mentorId) => {
+  const reviews = await Review.find({
+    targetType: "mentor",
+    targetId: mentorId,
+  });
+  if (reviews.length === 0) return;
+
+  const avgRating =
+    reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+
+  await Mentor.findByIdAndUpdate(mentorId, { rating: avgRating.toFixed(1) });
 };

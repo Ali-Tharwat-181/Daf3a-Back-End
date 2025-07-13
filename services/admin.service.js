@@ -2,15 +2,17 @@ import User from "../models/User.js";
 import Mentor from "../models/Mentor.js";
 import Review from "../models/Review.js";
 
-export const getAllMentors = async () => {
-  Mentor.find().populate("user", "-password");
-};
-
 export const verifyMentor = async (id) => {
-  const mentor = await Mentor.findById(id, { verified: true }, { new: true });
+  const mentor = await Mentor.findByIdAndUpdate(
+    id,
+    { verified: true },
+    { new: true } // returns updated doc
+  );
+
   if (!mentor) {
     throw new Error("Mentor not found");
   }
+
   return mentor;
 };
 

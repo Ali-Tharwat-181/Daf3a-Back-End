@@ -2,7 +2,21 @@ import {
   getStudentById,
   updateStudent,
   getStudentCVs,
+  createStudent,
 } from "../services/student.service.js";
+
+export const createStudentController = async (req, res) => {
+  if (req.user.role !== "student") {
+    return res.status(403).json({ error: "Only students can create profile" });
+  }
+
+  try {
+    const student = await createStudent(req.user._id, req.body);
+    return res.status(201).json(student);
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
 
 export const getStudentController = async (req, res) => {
   const { id } = req.params;

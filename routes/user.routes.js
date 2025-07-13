@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
-router.get("/", roleCheck("admin"), getAllUsers);
+router.get("/", getAllUsers);
 
 router.get("/:id", validateObjectId, getUserById);
 

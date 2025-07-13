@@ -3,7 +3,6 @@ import {
   createReviewController,
   getReviewsByTargetController,
 } from "../controllers/review.controller.js";
-import validateObjectId from "../middlewares/validateObjectId.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "../middlewares/roleCheck.js";
 
@@ -15,10 +14,6 @@ reviewRouter.post(
   roleCheck("student"),
   createReviewController
 );
-reviewRouter.get(
-  "/:targetType/:targetId",
-  validateObjectId,
-  getReviewsByTargetController
-);
+reviewRouter.get("/:targetType/:targetId", getReviewsByTargetController);
 
 export default reviewRouter;
