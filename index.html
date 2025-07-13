@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Socket.IO Chat Test</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+
+<body>
+    <h2>Socket.IO Chat Test</h2>
+    <label>User ID:</label>
+    <input type="text" id="userId" />
+    <button onclick="connect()">Connect</button>
+
+    <hr />
+    <label>Send To (User ID):</label>
+    <input type="text" id="receiverId" />
+    <br />
+    <label>Message:</label>
+    <input type="text" id="messageText" />
+    <button onclick="sendMessage()">Send</button>
+
+    <hr />
+    <h3>Messages</h3>
+    <ul id="messages"></ul>
+
+    <script>
+        let socket;
+
+        function connect() {
+            const userId = document.getElementById("userId").value;
+            socket = io("http://localhost:5000");
+
+            socket.on("connect", () => {
+                console.log("Connected to Socket.IO server");
+                socket.emit("register", userId);
+            });
+
+            socket.on("receiveMessage", (msg) => {
+                const li = document.createElement("li");
+                li.innerText = `[${msg.sender}] → [${msg.receiver}]: ${msg.text}`;
+                document.getElementById("messages").appendChild(li);
+            });
+        }
+
+        function sendMessage() {
+            const sender = document.getElementById("userId").value;
+            const receiver = document.getElementById("receiverId").value;
+            const text = document.getElementById("messageText").value;
+
+            socket.emit("sendMessage", { sender, receiver, text });
+        }
+    </script>
+</body>
+
+</html>

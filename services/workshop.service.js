@@ -1,4 +1,4 @@
-// workshop.service.js
+
 import Workshop from "../models/Workshop.js";
 
 export const getAllWorkshops = async () => {

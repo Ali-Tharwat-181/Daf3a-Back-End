@@ -1,7 +1,5 @@
 // App entry point
-import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 
@@ -14,10 +12,10 @@ import studentRouter from "./routes/student.routes.js";
 import userRouter from "./routes/user.routes.js";
 import reviewRouter from "./routes/review.routes.js";
 import adminRouter from "./routes/admin.routes.js";
-import connectDB from "./config/db.js";
 import workshopRouter from "./routes/workshop.routes.js";
+import messageRouter from "./routes/message.routes.js";
 
-dotenv.config();
+
 
 const app = express();
 
@@ -34,7 +32,8 @@ app.use("/api/students", studentRouter);
 app.use("/api/users", userRouter);
 app.use("/api/reviews", reviewRouter);
 app.use("/api/admin", adminRouter);
-app.use("api/workshops", workshopRouter);
+app.use("/api/workshops", workshopRouter);
+app.use("/api/messages", messageRouter);
 
 
 // 404 handler
@@ -44,21 +43,5 @@ app.use((req, res, next) => {
 
 // Global error handler
 app.use(errorHandler);
-// Connect to MongoDB and start server
-const PORT = process.env.PORT || 5000;
-const MONGO_URI =
-  process.env.MONGO_URI || "mongodb://localhost:27017/graduation_project";
 
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-  })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  });
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export default app;

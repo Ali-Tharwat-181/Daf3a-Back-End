@@ -6,8 +6,12 @@ import {
     updateBookingById,
     cancelBookingById,
 } from '../controllers/booking.controller.js';
+import authMiddleware from '../middlewares/auth.js';
+
 
 const bookingRouter = express.Router();
+
+bookingRouter.use(authMiddleware);
 
 bookingRouter.get('/', getAllBookings);
 bookingRouter.post('/', createNewBooking);
