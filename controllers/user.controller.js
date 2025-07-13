@@ -3,7 +3,6 @@ import {
   getUserByIdService,
   updateUserService,
   deleteUserService,
-  changePasswordService,
 } from "../services/user.service.js";
 
 // Get all users (admin only)
@@ -29,7 +28,7 @@ export async function getUserById(req, res, next) {
 // Update user (admin only)
 export async function updateUser(req, res, next) {
   try {
-    const result = await updateUserService(req.params.id, req.body, 'admin');
+    const result = await updateUserService(req.params.id, req.body, "admin");
     res.status(200).json({ success: true, ...result });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
@@ -49,17 +48,7 @@ export async function deleteUser(req, res, next) {
 // User can update their own profile
 export async function updateUserProfile(req, res, next) {
   try {
-    const result = await updateUserService(req.user._id, req.body, 'user');
-    res.status(200).json({ success: true, ...result });
-  } catch (err) {
-    res.status(400).json({ success: false, message: err.message });
-  }
-}
-
-// User can change their own password
-export async function changePassword(req, res, next) {
-  try {
-    const result = await changePasswordService(req.user._id, req.body);
+    const result = await updateUserService(req.user._id, req.body, "user");
     res.status(200).json({ success: true, ...result });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });

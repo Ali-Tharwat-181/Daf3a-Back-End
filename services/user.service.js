@@ -46,17 +46,17 @@ export async function getUserByIdService(userId) {
   return { user };
 }
 
-export async function updateUserService(userId, updateData, mode = "user") {
+export async function updateUserService(userId, updateData, role = "user") {
   let fieldsToUpdate;
 
-  if (mode === "admin") {
+  if (role === "admin") {
     const { password, ...otherFields } = updateData;
 
     if (password) {
       throw new Error("Password cannot be updated through this endpoint.");
     }
     fieldsToUpdate = otherFields;
-  } else if (mode === "user") {
+  } else if (role === "user") {
     const { password, email, role, ...allowedFields } = updateData;
 
     if (password || email || role) {
@@ -66,7 +66,7 @@ export async function updateUserService(userId, updateData, mode = "user") {
     }
     fieldsToUpdate = allowedFields;
   } else {
-    throw new Error("Invalid mode. Use 'admin' or 'user'.");
+    throw new Error("Invalid role. Use 'admin' or 'user'.");
   }
 
   const user = await User.findByIdAndUpdate(userId, fieldsToUpdate, {
@@ -87,32 +87,4 @@ export async function deleteUserService(userId) {
     throw new Error("User not found.");
   }
   return { message: "User deleted successfully." };
-}
-
-export async function changePasswordService(
-  userId,
-  { currentPassword, newPassword }
-) {
-  if (!currentPassword || !newPassword) {
-    throw new Error("Please provide current password and new password.");
-  }
-
-  if (newPassword.length < 6) {
-    throw new Error("New password must be at least 6 characters long.");
-  }
-
-  const user = await User.findById(userId);
-  if (!user) {
-    throw new Error("User not found.");
-  }
-
-  const isMatch = await user.matchPassword(currentPassword);
-  if (!isMatch) {
-    throw new Error("Current password is incorrect.");
-  }
-
-  user.password = newPassword;
-  await user.save();
-
-  return { message: "Password changed successfully." };
 }
