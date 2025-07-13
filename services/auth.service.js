@@ -1,8 +1,17 @@
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
+import crypto from "crypto";
+import { sendEmail } from "../utils/email.service.js";
 
 // Register a new user
-export async function registerService({ name, email, password, phoneNumber, preferredLanguage, role }) {
+export async function registerService({
+  name,
+  email,
+  password,
+  phoneNumber,
+  preferredLanguage,
+  role,
+}) {
   if (!name || !email || !password || !phoneNumber) {
     throw new Error("Please provide all required fields.");
   }
@@ -70,4 +79,47 @@ export async function getMeService(user) {
 // Logout a user (dummy for JWT)
 export async function logoutService() {
   return { message: "Logged out successfully." };
+}
+
+// Forgot Password
+
+export async function forgotPasswordService(email) {
+  const user = await User.findOne({ email });
+  if (!user) throw new Error("No user found with that email.");
+  const token = user.generatePasswordReset();
+  await user.save();
+  // Send email with reset link (replace URL as needed)
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${token}`;
+  await sendEmail({
+    to: user.email,
+    subject: "Password Reset",
+    html: `<h1>Reset your password using this link: ${resetUrl}<h1>`,
+  });
+  return { message: "Password reset link sent to email." };
+}
+
+// Reset Password
+export async function resetPasswordService(token, newPassword) {
+  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+  const user = await User.findOne({
+    resetPasswordToken: hashedToken,
+    resetPasswordExpires: { $gt: Date.now() },
+  });
+  if (!user) throw new Error("Invalid or expired token.");
+  user.password = newPassword;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+  await user.save();
+  return { message: "Password has been reset." };
+}
+
+// Update Password (authenticated user)
+export async function updatePasswordService(userId, oldPassword, newPassword) {
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found.");
+  const isMatch = await user.matchPassword(oldPassword);
+  if (!isMatch) throw new Error("Old password is incorrect.");
+  user.password = newPassword;
+  await user.save();
+  return { message: "Password updated successfully." };
 }
