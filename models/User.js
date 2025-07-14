@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
       enum: ["arabic", "english"],
       default: ["english"],
     },
-    isRegistered: Boolean,
+    isRegistered: { type: Boolean, default: false },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
   },
@@ -63,6 +63,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // Method to generate password reset token
 import crypto from "crypto";
+import { type } from "os";
 userSchema.methods.generatePasswordReset = function () {
   const token = crypto.randomBytes(20).toString("hex");
   this.resetPasswordToken = crypto
