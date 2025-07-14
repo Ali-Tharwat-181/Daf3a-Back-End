@@ -1,8 +1,10 @@
-
 import Workshop from "../models/Workshop.js";
+import Booking from "../models/Booking.js";
 
 export const getAllWorkshops = async () => {
-  return await Workshop.find().populate("mentor registeredStudents");
+  return await Workshop.find()
+    .populate("mentor")
+    .populate("registeredStudents");
 };
 
 export const createWorkshop = async (data) => {
@@ -11,19 +13,40 @@ export const createWorkshop = async (data) => {
 };
 
 export const getWorkshopById = async (id) => {
-  return await Workshop.findById(id).populate("mentor registeredStudents");
+  return await Workshop.findById(id)
+    .populate("mentor")
+    .populate("registeredStudents");
 };
 
-export const updateWorkshop = async (id, updates) => {
-  return await Workshop.findByIdAndUpdate(id, updates, { new: true });
+export const updateWorkshop = async (id, updates, authMentorId) => {
+  const workshop = await Workshop.findById(id);
+  if (!workshop) throw new Error("Workshop not found");
+
+  if (workshop.mentor.toString() !== authMentorId.toString()) {
+    const err = new Error("You are not authorized to update this workshop");
+    err.status = 403;
+    throw err;
+  }
+
+  Object.assign(workshop, updates); // apply changes
+  return await workshop.save();
 };
 
-export const deleteWorkshop = async (id) => {
+export const deleteWorkshop = async (id, authMentorId) => {
+  const workshop = await Workshop.findById(id);
+  if (!workshop) throw new Error("Workshop not found");
+
+  if (workshop.mentor.toString() !== authMentorId.toString()) {
+    const err = new Error("You are not authorized to delete this workshop");
+    err.status = 403;
+    throw err;
+  }
+
   return await Workshop.findByIdAndDelete(id);
 };
 
 export const registerStudentToWorkshop = async (workshopId, studentId) => {
-  const workshop = await Workshop.findById(workshopId);
+  const workshop = await Workshop.findById(workshopId).populate("mentor");
 
   if (!workshop) throw new Error("Workshop not found");
 
@@ -35,6 +58,15 @@ export const registerStudentToWorkshop = async (workshopId, studentId) => {
     throw new Error("Workshop is full");
   }
 
+  //  Add student to the workshop
   workshop.registeredStudents.push(studentId);
-  return await workshop.save();
+  await workshop.save();
+
+  return workshop;
+};
+
+export const getWorkshopsByStudent = async (studentId) => {
+  return await Workshop.find({ registeredStudents: studentId }).populate(
+    "mentor"
+  );
 };
