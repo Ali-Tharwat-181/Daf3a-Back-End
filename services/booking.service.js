@@ -36,38 +36,31 @@ export const createBooking = async ({ mentorId, date, slots, type, student }) =>
 };
 
 
-export const confirmBooking = async (bookingId, userId) => {
+export const confirmBooking = async (bookingId, mentorId) => {
     const booking = await Booking.findById(bookingId);
     if (!booking) throw new Error("Booking not found");
 
-    // ✅ Step 1: Find mentor by userId
-    const mentor = await Mentor.findOne({ user: userId });
-    if (!mentor) throw new Error("Mentor not found for this user");
-
-    // ✅ Step 2: Check authorization
-    if (booking.mentor.toString() !== mentor._id.toString()) {
-        throw new Error("Unauthorized: You are not the mentor for this booking");
+    if (booking.mentor.toString() !== mentorId.toString()) {
+        throw new Error("Unauthorized: Only mentor can confirm this booking");
     }
 
     if (booking.status !== 'pending') throw new Error("Booking already confirmed or cancelled");
 
-    // ✅ Step 3: Confirm booking
     booking.status = 'confirmed';
     await booking.save();
 
-    // ✅ Step 4: Remove booked slot from availability
+    // Remove booked slot from mentor availability
+    const mentor = await Mentor.findById(mentorId);
     const day = new Date(booking.date).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
 
-    const dayAvailability = mentor.availability.find(avail => avail.day.toLowerCase() === day);
-    if (dayAvailability) {
-        dayAvailability.slots = dayAvailability.slots.filter(slot => slot !== booking.timeSlot);
+    const dayIndex = mentor.availability.findIndex(avail => avail.day.toLowerCase() === day);
+    if (dayIndex !== -1) {
+        mentor.availability[dayIndex].slots = mentor.availability[dayIndex].slots.filter(slot => slot !== booking.timeSlot);
+        await mentor.save();
     }
-
-    await mentor.save();
 
     return booking;
 };
-
 
 export const cancelBooking = async (bookingId) => {
     const booking = await Booking.findByIdAndUpdate(bookingId, { status: 'cancelled' }, { new: true });
