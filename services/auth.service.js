@@ -55,6 +55,15 @@ export async function loginService({ email, password }) {
     throw new Error("Invalid credentials.");
   }
   const token = generateToken(user._id, user.role);
+
+  let profile = null;
+  if (user.role === "student") {
+    const Student = (await import("../models/Student.js")).default;
+    profile = await Student.findOne({ user: user._id });
+  } else if (user.role === "mentor") {
+    const Mentor = (await import("../models/Mentor.js")).default;
+    profile = await Mentor.findOne({ user: user._id });
+  }
   return {
     user: {
       _id: user._id,
@@ -64,6 +73,7 @@ export async function loginService({ email, password }) {
       phoneNumber: user.phoneNumber,
       preferredLanguage: user.preferredLanguage,
     },
+    profile,
     token,
   };
 }
