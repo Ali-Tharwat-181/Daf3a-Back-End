@@ -19,7 +19,12 @@ export async function getAllUsers(req, res, next) {
 export async function getUserById(req, res, next) {
   try {
     const result = await getUserByIdService(req.params.id);
-    res.status(200).json({ success: true, ...result });
+    res.status(200).json({
+      success: true,
+      user: result.user,
+      studentId: result.studentId,
+      mentorId: result.mentorId,
+    });
   } catch (err) {
     res.status(404).json({ success: false, message: err.message });
   }
