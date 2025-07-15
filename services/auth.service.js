@@ -19,26 +19,37 @@ export async function registerService({
   if (userExists) {
     throw new Error("User already exists.");
   }
-  const user = await User.create({
-    name,
-    email,
-    password,
-    phoneNumber,
-    preferredLanguage,
-    role,
-  });
-  const token = generateToken(user._id, user.role);
-  return {
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      phoneNumber: user.phoneNumber,
-      preferredLanguage: user.preferredLanguage,
-    },
-    token,
-  };
+  const phoneExists = await User.findOne({ phoneNumber });
+  if (phoneExists) {
+    throw new Error("Phone number already registered.");
+  }
+  try {
+    const user = await User.create({
+      name,
+      email,
+      password,
+      phoneNumber,
+      preferredLanguage,
+      role,
+    });
+    const token = generateToken(user._id, user.role);
+    return {
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        phoneNumber: user.phoneNumber,
+        preferredLanguage: user.preferredLanguage,
+      },
+      token,
+    };
+  } catch (err) {
+    if (err.code === 11000 && err.keyPattern && err.keyPattern.phoneNumber) {
+      throw new Error("Phone number already registered.");
+    }
+    throw err;
+  }
 }
 
 // Login a user
@@ -100,11 +111,11 @@ export async function forgotPasswordService(email) {
   await user.save();
   // Send email with reset link (replace URL as needed)
   const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${token}`;
-  await sendEmail({
-    to: user.email,
-    subject: "Password Reset",
-    html: `<h1>Reset your password using this link: ${resetUrl}<h1>`,
-  });
+  await sendEmail(
+    user.email,
+    "Password Reset",
+    `<h1>Reset your password using this link: ${resetUrl}<h1>`
+  );
   return { message: "Password reset link sent to email." };
 }
 
