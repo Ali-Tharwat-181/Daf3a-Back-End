@@ -5,6 +5,7 @@ import {
     getBookingById,
     updateBookingById,
     cancelBookingById,
+    confirmBookingController,
 } from '../controllers/booking.controller.js';
 import authMiddleware from '../middlewares/auth.js';
 
@@ -18,5 +19,7 @@ bookingRouter.post('/', createNewBooking);
 bookingRouter.get('/:id', getBookingById);
 bookingRouter.patch('/:id', updateBookingById);
 bookingRouter.patch('/:id/cancel', cancelBookingById);
+
+bookingRouter.patch('/:id/confirm', confirmBookingController);
 
 export default bookingRouter;

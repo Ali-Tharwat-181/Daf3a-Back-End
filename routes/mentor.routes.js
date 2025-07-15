@@ -4,6 +4,8 @@ import {
   getMentorByIdController,
   createMentorController,
   updateMentorController,
+  addAvailabilityController,
+  removeAvailabilityController,
 } from "../controllers/mentor.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import upload from "../middlewares/upload.js";
@@ -18,5 +20,8 @@ mentorRouter.post(
   createMentorController
 );
 mentorRouter.put("/:id", authMiddleware, updateMentorController);
+
+mentorRouter.post("/availability/add", authMiddleware, addAvailabilityController);
+mentorRouter.post("/availability/remove", authMiddleware, removeAvailabilityController);
 
 export default mentorRouter;

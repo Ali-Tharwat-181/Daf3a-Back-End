@@ -58,3 +58,44 @@ export const updateMentor = async (id, userId, userRole, body) => {
   await mentor.save();
   return mentor;
 };
+
+// add slots to availability
+export const addAvailabilitySlot = async (mentorId, day, slots) => {
+  const mentor = await Mentor.findOne({ user: mentorId });
+  if (!mentor) throw new Error("Mentor not found");
+
+  const dayAvailability = mentor.availability.find(av => av.day === day);
+
+  if (dayAvailability) {
+    slots.forEach(slot => {
+      if (!dayAvailability.slots.includes(slot)) {
+        dayAvailability.slots.push(slot);
+      }
+    });
+  } else {
+    mentor.availability.push({ day, slots });
+  }
+
+  await mentor.save();
+  return mentor.availability;
+};
+
+//Remove Slots from Availability
+
+export const removeAvailabilitySlot = async (mentorId, day, slots) => {
+  const mentor = await Mentor.findOne({ user: mentorId });
+  if (!mentor) throw new Error("Mentor not found");
+
+  const dayAvailability = mentor.availability.find(av => av.day === day);
+  if (!dayAvailability) throw new Error("No availability found for this day");
+
+  dayAvailability.slots = dayAvailability.slots.filter(s => !slots.includes(s));
+
+
+  if (dayAvailability.slots.length === 0) {
+    mentor.availability = mentor.availability.filter(av => av.day !== day);
+  }
+
+  await mentor.save();
+  return mentor.availability;
+};
