@@ -1,8 +1,3 @@
-import * as bookingService from "../services/booking.service.js";
-
-function sendResponse(res, status, success, data, message) {
-    return res.status(status).json({ success, data, message });
-}
 import * as bookingService from '../services/booking.service.js';
 
 export const getAllBookings = async (req, res, next) => {
@@ -12,18 +7,6 @@ export const getAllBookings = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-
-    const bookings = await bookingService.getAllBookings(req.student._id);
-    return sendResponse(
-        res,
-        200,
-        true,
-        bookings,
-        "Bookings fetched successfully"
-    );
-} catch (error) {
-    next(error);
-}
 };
 
 export const createNewBooking = async (req, res, next) => {
@@ -49,20 +32,6 @@ export const createNewBooking = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-
-    const mentorId = req.params.mentorId;
-    const studentId = req.student._id;
-
-    const booking = await bookingService.createBooking(mentorId, studentId);
-
-    return res.status(201).json({
-        success: true,
-        data: booking,
-        message: "Booking created successfully",
-    });
-} catch (error) {
-    next(error);
-}
 };
 
 
