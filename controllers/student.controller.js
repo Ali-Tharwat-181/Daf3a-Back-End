@@ -4,6 +4,7 @@ import {
   getStudentCVs,
   createStudent,
 } from "../services/student.service.js";
+import * as workshopService from "../services/workshop.service.js";
 
 export const createStudentController = async (req, res) => {
   if (req.user.role !== "student") {
@@ -49,4 +50,20 @@ export const getStudentCVsController = async (req, res) => {
     return res.status(404).json({ message: "Student not found" });
   }
   res.status(200).json(cvs);
+};
+
+export const getRegisteredWorkshops = async (req, res, next) => {
+  try {
+    const studentId = req.student._id;
+
+    const workshops = await workshopService.getWorkshopsByStudent(studentId);
+
+    return res.status(200).json({
+      success: true,
+      data: workshops,
+      message: "Registered workshops fetched successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
 };
