@@ -13,6 +13,7 @@ import upload from "../middlewares/upload.js";
 const mentorRouter = express.Router();
 mentorRouter.get("/", getMentorsController);
 mentorRouter.get("/:id", authMiddleware, getMentorByIdController);
+
 mentorRouter.post(
   "/",
   authMiddleware,
@@ -21,7 +22,15 @@ mentorRouter.post(
 );
 mentorRouter.put("/:id", authMiddleware, updateMentorController);
 
-mentorRouter.post("/availability/add", authMiddleware, addAvailabilityController);
-mentorRouter.post("/availability/remove", authMiddleware, removeAvailabilityController);
+mentorRouter.post(
+  "/availability/add",
+  authMiddleware,
+  addAvailabilityController
+);
+mentorRouter.post(
+  "/availability/remove",
+  authMiddleware,
+  removeAvailabilityController
+);
 
 export default mentorRouter;

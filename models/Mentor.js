@@ -4,6 +4,9 @@ const mentorSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     expertise: [String],
+    title: String,
+    bio: String,
+    links: [String],
     experience: String,
     languages: [String],
     availability: [{ day: String, slots: [String] }],

@@ -10,7 +10,6 @@ import authMiddleware from "../middlewares/auth.js";
 const studentRouter = express.Router();
 
 studentRouter.use(authMiddleware);
-// studentRouter.use(validateObjectId);
 
 studentRouter.post("/", createStudentController);
 studentRouter.get("/:id", getStudentController);

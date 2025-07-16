@@ -14,14 +14,22 @@ const BookingSchema = new mongoose.Schema(
     },
     date: { type: String, required: true },
     timeSlot: [{ type: String, required: true }],
-    type: { type: String, enum: ["online", "offline"], default: "online", required: true },
+    type: {
+      type: String,
+      enum: ["online", "offline"],
+      default: "online",
+      required: true,
+    },
     paymentStatus: {
       type: String,
       enum: ["pending", "paid", "free"],
       default: "free",
     },
-    status: { type: String, enum: ["pending", "confirmed", "cancelled"], default: "pending" },
-    summary: String, // AI summary if exists
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "cancelled"],
+      default: "pending",
+    },
     review: { type: mongoose.Schema.Types.ObjectId, ref: "Review" },
   },
   { timestamps: true }
