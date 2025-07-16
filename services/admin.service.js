@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import Mentor from "../models/Mentor.js";
 import Review from "../models/Review.js";
-import Workshop from "./../models/Workshop";
+import Workshop from "./../models/Workshop.js";
 import Student from "../models/Student.js";
 
 export const verifyMentor = async (id) => {
