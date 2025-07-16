@@ -55,25 +55,35 @@ export async function getUserByIdService(userId) {
   };
 }
 
+function sanitizeUserUpdate(data) {
+  const { password, email, mode, role, ...allowedFields } = data;
+
+  if (password || email || mode || role) {
+    throw new Error(
+      "Password, email, role, and mode cannot be updated through profile update."
+    );
+  }
+
+  return allowedFields;
+}
+
+function sanitizeAdminUpdate(data) {
+  const { password, ...allowedFields } = data;
+
+  if (password) {
+    throw new Error("Password cannot be updated through this endpoint.");
+  }
+
+  return allowedFields;
+}
+
 export async function updateUserService(userId, updateData, mode = "user") {
   let fieldsToUpdate;
 
   if (mode === "admin") {
-    const { password, ...otherFields } = updateData;
-
-    if (password) {
-      throw new Error("Password cannot be updated through this endpoint.");
-    }
-    fieldsToUpdate = otherFields;
+    fieldsToUpdate = sanitizeAdminUpdate(updateData);
   } else if (mode === "user") {
-    const { password, email, mode, ...allowedFields } = updateData;
-
-    if (password || email || mode) {
-      throw new Error(
-        "Password, email, and mode cannot be updated through profile update."
-      );
-    }
-    fieldsToUpdate = allowedFields;
+    fieldsToUpdate = sanitizeUserUpdate(updateData);
   } else {
     throw new Error("Invalid mode. Use 'admin' or 'user'.");
   }
