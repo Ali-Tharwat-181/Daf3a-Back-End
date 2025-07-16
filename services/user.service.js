@@ -55,27 +55,27 @@ export async function getUserByIdService(userId) {
   };
 }
 
-export async function updateUserService(userId, updateData, role = "user") {
+export async function updateUserService(userId, updateData, mode = "user") {
   let fieldsToUpdate;
 
-  if (role === "admin") {
+  if (mode === "admin") {
     const { password, ...otherFields } = updateData;
 
     if (password) {
       throw new Error("Password cannot be updated through this endpoint.");
     }
     fieldsToUpdate = otherFields;
-  } else if (role === "user") {
-    const { password, email, role, ...allowedFields } = updateData;
+  } else if (mode === "user") {
+    const { password, email, mode, ...allowedFields } = updateData;
 
-    if (password || email || role) {
+    if (password || email || mode) {
       throw new Error(
-        "Password, email, and role cannot be updated through profile update."
+        "Password, email, and mode cannot be updated through profile update."
       );
     }
     fieldsToUpdate = allowedFields;
   } else {
-    throw new Error("Invalid role. Use 'admin' or 'user'.");
+    throw new Error("Invalid mode. Use 'admin' or 'user'.");
   }
 
   const user = await User.findByIdAndUpdate(userId, fieldsToUpdate, {

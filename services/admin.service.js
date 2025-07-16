@@ -1,6 +1,8 @@
 import User from "../models/User.js";
 import Mentor from "../models/Mentor.js";
 import Review from "../models/Review.js";
+import Workshop from "./../models/Workshop";
+import Student from "../models/Student.js";
 
 export const verifyMentor = async (id) => {
   const mentor = await Mentor.findByIdAndUpdate(
@@ -28,10 +30,13 @@ export const getAnalytics = async () => {
   const totalUsers = await User.countDocuments();
   const totalMentors = await Mentor.countDocuments();
   const totalReviews = await Review.countDocuments();
-
+  const totalWorkshops = await Workshop.countDocuments();
+  const totalStudents = await Student.countDocuments();
   return {
     totalUsers,
     totalMentors,
     totalReviews,
+    totalWorkshops,
+    totalStudents,
   };
 };
