@@ -1,4 +1,5 @@
 import Student from "../models/Student.js";
+import User from "../models/User.js";
 
 export const createStudent = async (userId, body) => {
   // Check if the student profile already exists for this user
@@ -9,6 +10,9 @@ export const createStudent = async (userId, body) => {
 
   // Create the student profile
   const newStudent = await Student.create({ user: userId, ...body });
+
+  await User.findByIdAndUpdate(userId, { isRegistered: true }, { new: true });
+
   return newStudent;
 };
 
@@ -19,7 +23,7 @@ export const getStudentById = async (id) => {
     throw new Error("Student not found");
   }
 
-  // ✅ Check if associated user has role "student"
+  //  Check if associated user has role "student"
   if (!student.user || student.user.role !== "student") {
     throw new Error("User is not a student");
   }

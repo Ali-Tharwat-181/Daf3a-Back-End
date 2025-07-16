@@ -37,7 +37,10 @@ export const createMentor = async (userId, body) => {
     throw new Error("Mentor already exists for this user");
   }
 
-  return Mentor.create({ user: userId, ...body });
+  const newMentor = Mentor.create({ user: userId, ...body });
+  await User.findByIdAndUpdate(userId, { isRegistered: true }, { new: true });
+
+  return newMentor;
 };
 export const updateMentor = async (id, userId, userRole, body) => {
   const user = await User.findById(userId);
@@ -64,10 +67,10 @@ export const addAvailabilitySlot = async (mentorId, day, slots) => {
   const mentor = await Mentor.findOne({ user: mentorId });
   if (!mentor) throw new Error("Mentor not found");
 
-  const dayAvailability = mentor.availability.find(av => av.day === day);
+  const dayAvailability = mentor.availability.find((av) => av.day === day);
 
   if (dayAvailability) {
-    slots.forEach(slot => {
+    slots.forEach((slot) => {
       if (!dayAvailability.slots.includes(slot)) {
         dayAvailability.slots.push(slot);
       }
@@ -86,14 +89,15 @@ export const removeAvailabilitySlot = async (mentorId, day, slots) => {
   const mentor = await Mentor.findOne({ user: mentorId });
   if (!mentor) throw new Error("Mentor not found");
 
-  const dayAvailability = mentor.availability.find(av => av.day === day);
+  const dayAvailability = mentor.availability.find((av) => av.day === day);
   if (!dayAvailability) throw new Error("No availability found for this day");
 
-  dayAvailability.slots = dayAvailability.slots.filter(s => !slots.includes(s));
-
+  dayAvailability.slots = dayAvailability.slots.filter(
+    (s) => !slots.includes(s)
+  );
 
   if (dayAvailability.slots.length === 0) {
-    mentor.availability = mentor.availability.filter(av => av.day !== day);
+    mentor.availability = mentor.availability.filter((av) => av.day !== day);
   }
 
   await mentor.save();
