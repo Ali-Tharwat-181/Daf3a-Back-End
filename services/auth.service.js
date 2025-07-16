@@ -67,33 +67,47 @@ export async function loginService({ email, password }) {
   }
   const token = generateToken(user._id, user.role);
 
-  let profile = null;
-  if (user.role === "student") {
-    const Student = (await import("../models/Student.js")).default;
-    profile = await Student.findOne({ user: user._id });
-  } else if (user.role === "mentor") {
-    const Mentor = (await import("../models/Mentor.js")).default;
-    profile = await Mentor.findOne({ user: user._id });
-  }
+  // All user data is now in the User model
   return {
     user: {
       _id: user._id,
+      title: user.title,
+      bio: user.bio,
       name: user.name,
       email: user.email,
       role: user.role,
       phoneNumber: user.phoneNumber,
       preferredLanguage: user.preferredLanguage,
+      isRegistered: user.isRegistered,
+      education: user.education,
+      skills: user.skills,
+      careerGoals: user.careerGoals,
+      cvs: user.cvs,
+      expertise: user.expertise,
+      links: user.links,
+      experience: user.experience,
+      languages: user.languages,
+      availability: user.availability,
+      rating: user.rating,
+      verified: user.verified,
+      image: user.image,
     },
-    profile,
     token,
   };
 }
 
 // Get current user info
-export async function getMeService(user) {
-  if (!user) {
+
+export async function getMeService(userId) {
+  if (!userId) {
     throw new Error("Not authorized.");
   }
+
+  const user = await User.findById(userId).select("-password"); // Exclude sensitive fields
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
   return { user };
 }
 

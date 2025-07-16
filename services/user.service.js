@@ -43,16 +43,7 @@ export async function getUserByIdService(userId) {
   if (!user) {
     throw new Error("User not found.");
   }
-  // Find related student and mentor profiles
-  const Student = (await import("../models/Student.js")).default;
-  const Mentor = (await import("../models/Mentor.js")).default;
-  const student = await Student.findOne({ user: userId });
-  const mentor = await Mentor.findOne({ user: userId });
-  return {
-    user,
-    studentId: student ? student._id : null,
-    mentorId: mentor ? mentor._id : null,
-  };
+  return { user };
 }
 
 function sanitizeUserUpdate(data) {

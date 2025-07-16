@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    image: { type: String, default: "" },
+    title: String,
+    bio: String,
     preferredLanguage: {
       type: [String],
       enum: ["arabic", "english"],
@@ -40,6 +43,19 @@ const userSchema = new mongoose.Schema(
     isRegistered: { type: Boolean, default: false },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+    //student
+    education: String,
+    skills: [String],
+    careerGoals: String,
+    cvs: [String],
+    //mentor
+    expertise: [String],
+    links: [String],
+    experience: String,
+    languages: [String],
+    availability: [{ day: String, slots: [String] }],
+    rating: { type: Number, default: 0 },
+    verified: { type: Boolean, default: false },
   },
   {
     timestamps: true,

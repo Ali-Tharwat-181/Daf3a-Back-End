@@ -1,5 +1,5 @@
 import Booking from "../models/Booking.js";
-import Mentor from "../models/Mentor.js";
+import User from "../models/User.js";
 
 export const getAllBookings = async () => {
   return Booking.find().populate("mentor student review");
@@ -12,8 +12,7 @@ export const createBooking = async ({
   type,
   student,
 }) => {
-  const mentor = await Mentor.findById(mentorId);
-  console.log(mentor);
+  const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
   const day = date; // "Monday"
@@ -33,7 +32,7 @@ export const createBooking = async ({
   }
 
   const booking = new Booking({
-    mentor,
+    mentor: mentor._id,
     student,
     date: day,
     timeSlot: slots,
@@ -49,11 +48,11 @@ export const confirmBooking = async (bookingId, userId) => {
   const booking = await Booking.findById(bookingId);
   if (!booking) throw new Error("Booking not found");
 
-  //  Step 1: Find mentor by userId
-  const mentor = await Mentor.findOne({ user: userId });
+  // Find mentor by userId
+  const mentor = await User.findOne({ _id: userId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found for this user");
 
-  //  Step 2: Check authorization
+  // Check authorization
   if (booking.mentor.toString() !== mentor._id.toString()) {
     throw new Error("Unauthorized: You are not the mentor for this booking");
   }
@@ -61,21 +60,18 @@ export const confirmBooking = async (bookingId, userId) => {
   if (booking.status !== "pending")
     throw new Error("Booking already confirmed or cancelled");
 
-  //  Step 3: Confirm booking
+  // Confirm booking
   booking.status = "confirmed";
   await booking.save();
 
-  //  Step 4: Remove booked slot from availability
-  const day = new Date(booking.date)
-    .toLocaleDateString("en-US", { weekday: "long" })
-    .toLowerCase();
-
+  // Remove booked slot from availability
+  const day = booking.date.toLowerCase();
   const dayAvailability = mentor.availability.find(
     (avail) => avail.day.toLowerCase() === day
   );
   if (dayAvailability) {
     dayAvailability.slots = dayAvailability.slots.filter(
-      (slot) => slot !== booking.timeSlot
+      (slot) => !booking.timeSlot.includes(slot)
     );
   }
 

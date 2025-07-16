@@ -31,7 +31,7 @@ export async function login(req, res, next) {
 // Get current user info
 export async function getMe(req, res, next) {
   try {
-    const result = await getMeService(req.user);
+    const result = await getMeService(req.user._id || req.user.id); // Adjust depending on how your `req.user` is structured
     res.status(200).json({ success: true, ...result });
   } catch (err) {
     res.status(401).json({ success: false, message: err.message });

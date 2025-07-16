@@ -1,8 +1,8 @@
-import Mentor from "../models/Mentor.js";
 import User from "../models/User.js";
+import Review from "./../models/Review.js";
 
 export const getMentors = async () => {
-  const mentors = await Mentor.find().populate("user", "-password");
+  const mentors = await User.find({ role: "mentor" }).select("-password");
   return mentors;
 };
 
@@ -12,7 +12,9 @@ export const getMentorById = async (id, user) => {
     throw new Error("Unauthorized: Only mentors can access this resource");
   }
 
-  const mentor = await Mentor.findById(id).populate("user", "-password");
+  const mentor = await User.findOne({ _id: id, role: "mentor" }).select(
+    "-password"
+  );
   if (!mentor) {
     throw new Error("Mentor not found");
   }
@@ -31,32 +33,23 @@ export const createMentor = async (userId, body) => {
   if (!user || user.role !== "mentor") {
     throw new Error("Only users with mentor role can create a mentor profile");
   }
-
-  const existingMentor = await Mentor.findOne({ user: userId });
-  if (existingMentor) {
+  if (user.isRegistered) {
     throw new Error("Mentor already exists for this user");
   }
-
-  const newMentor = Mentor.create({ user: userId, ...body });
-  await User.findByIdAndUpdate(userId, { isRegistered: true }, { new: true });
-
-  return newMentor;
+  Object.assign(user, body, { isRegistered: true });
+  await user.save();
+  return user;
 };
+
 export const updateMentor = async (id, userId, userRole, body) => {
   const user = await User.findById(userId);
   if (!user || user.role !== "mentor") {
     throw new Error("Only users with mentor role can update a mentor profile");
   }
-
-  const mentor = await Mentor.findById(id);
+  const mentor = await User.findOne({ _id: id, role: "mentor" });
   if (!mentor) {
     throw new Error("Mentor not found");
   }
-
-  // if (mentor.user.toString() !== userId) {
-  //   throw new Error("Unauthorized to update this mentor");
-  // }
-
   Object.assign(mentor, body);
   await mentor.save();
   return mentor;
@@ -64,7 +57,7 @@ export const updateMentor = async (id, userId, userRole, body) => {
 
 // add slots to availability
 export const addAvailabilitySlot = async (mentorId, day, slots) => {
-  const mentor = await Mentor.findOne({ user: mentorId });
+  const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
   const dayAvailability = mentor.availability.find((av) => av.day === day);
@@ -86,7 +79,7 @@ export const addAvailabilitySlot = async (mentorId, day, slots) => {
 //Remove Slots from Availability
 
 export const removeAvailabilitySlot = async (mentorId, day, slots) => {
-  const mentor = await Mentor.findOne({ user: mentorId });
+  const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
   const dayAvailability = mentor.availability.find((av) => av.day === day);

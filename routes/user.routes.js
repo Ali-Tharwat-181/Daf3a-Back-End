@@ -8,6 +8,7 @@ import {
 } from "../controllers/user.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "../middlewares/roleCheck.js";
+import upload from "../middlewares/upload.js";
 
 const router = express.Router();
 
@@ -21,6 +22,6 @@ router.put("/:id", roleCheck("admin"), updateUser);
 
 router.delete("/:id", roleCheck("admin"), deleteUser);
 
-router.put("/profile/update", updateUserProfile);
+router.put("/profile/update", upload.single("image"), updateUserProfile);
 
 export default router;

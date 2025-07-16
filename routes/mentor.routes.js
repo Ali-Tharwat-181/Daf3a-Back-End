@@ -8,7 +8,7 @@ import {
   removeAvailabilityController,
 } from "../controllers/mentor.controller.js";
 import authMiddleware from "../middlewares/auth.js";
-import upload from "../middlewares/upload.js";
+import roleCheck from "./../middlewares/roleCheck.js";
 
 const mentorRouter = express.Router();
 mentorRouter.get("/", getMentorsController);
@@ -17,10 +17,15 @@ mentorRouter.get("/:id", authMiddleware, getMentorByIdController);
 mentorRouter.post(
   "/",
   authMiddleware,
-  upload.single("mentorImage"),
+  roleCheck("mentor"),
   createMentorController
 );
-mentorRouter.put("/:id", authMiddleware, updateMentorController);
+mentorRouter.put(
+  "/:id",
+  authMiddleware,
+  roleCheck("mentor"),
+  updateMentorController
+);
 
 mentorRouter.post(
   "/availability/add",

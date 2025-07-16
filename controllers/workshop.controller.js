@@ -10,16 +10,18 @@ export const getAllWorkshops = async (req, res, next) => {
   }
 };
 
-// workshop.controller.js
 export const createWorkshop = async (req, res, next) => {
   try {
     // Add mentor ID from the authenticated user
+    if (req.user.role !== "mentor") {
+      return res
+        .status(403)
+        .json({ success: false, message: "Only mentors can create workshops" });
+    }
     const data = {
       ...req.body,
-      mentor: req.mentor._id,
+      mentor: req.user._id,
     };
-    console.log("Creating workshop with mentor:", data.mentor);
-
     const workshop = await workshopService.createWorkshop(data);
     return res.status(201).json({ success: true, data: workshop });
   } catch (error) {
@@ -60,7 +62,7 @@ export const deleteWorkshopById = async (req, res, next) => {
 
 export const registerToWorkshop = async (req, res, next) => {
   try {
-    if (!req.student) {
+    if (req.user.role !== "student") {
       return res.status(403).json({
         success: false,
         message: "Only students can register for workshops",
@@ -69,7 +71,7 @@ export const registerToWorkshop = async (req, res, next) => {
 
     const updatedWorkshop = await workshopService.registerStudentToWorkshop(
       req.params.id,
-      req.student._id
+      req.user._id
     );
 
     return res.status(200).json({

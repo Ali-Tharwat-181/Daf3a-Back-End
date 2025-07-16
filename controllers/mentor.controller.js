@@ -33,9 +33,11 @@ export const createMentorController = async (req, res) => {
   }
 
   try {
+    console.log("Mentor create body:", req.body);
     const mentor = await createMentor(req.user._id, req.body);
     return res.status(201).json(mentor);
   } catch (error) {
+    console.error("Create error:", error);
     return res.status(400).json({ success: false, message: error.message });
   }
 };
@@ -61,12 +63,20 @@ export const addAvailabilityController = async (req, res) => {
   const { day, slots } = req.body;
 
   if (!day || !slots || !Array.isArray(slots)) {
-    return res.status(400).json({ success: false, message: "day and slots (array) are required" });
+    return res
+      .status(400)
+      .json({ success: false, message: "day and slots (array) are required" });
   }
 
   try {
-    const updatedAvailability = await addAvailabilitySlot(req.user._id, day, slots);
-    return res.status(200).json({ success: true, availability: updatedAvailability });
+    const updatedAvailability = await addAvailabilitySlot(
+      req.user._id,
+      day,
+      slots
+    );
+    return res
+      .status(200)
+      .json({ success: true, availability: updatedAvailability });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }
@@ -77,12 +87,20 @@ export const removeAvailabilityController = async (req, res) => {
   const { day, slots } = req.body;
 
   if (!day || !slots || !Array.isArray(slots)) {
-    return res.status(400).json({ success: false, message: "day and slots (array) are required" });
+    return res
+      .status(400)
+      .json({ success: false, message: "day and slots (array) are required" });
   }
 
   try {
-    const updatedAvailability = await removeAvailabilitySlot(req.user._id, day, slots);
-    return res.status(200).json({ success: true, availability: updatedAvailability });
+    const updatedAvailability = await removeAvailabilitySlot(
+      req.user._id,
+      day,
+      slots
+    );
+    return res
+      .status(200)
+      .json({ success: true, availability: updatedAvailability });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }

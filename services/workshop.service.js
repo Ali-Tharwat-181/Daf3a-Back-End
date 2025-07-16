@@ -1,5 +1,6 @@
 import Workshop from "../models/Workshop.js";
 import Booking from "../models/Booking.js";
+import User from "../models/User.js";
 
 export const getAllWorkshops = async () => {
   return await Workshop.find()
@@ -21,6 +22,11 @@ export const getWorkshopById = async (id) => {
 export const updateWorkshop = async (id, updates, authMentorId) => {
   const workshop = await Workshop.findById(id);
   if (!workshop) throw new Error("Workshop not found");
+
+  // Ensure the user is a mentor
+  const mentor = await User.findOne({ _id: authMentorId, role: "mentor" });
+  if (!mentor)
+    throw new Error("You are not authorized to update this workshop");
 
   if (workshop.mentor.toString() !== authMentorId.toString()) {
     const err = new Error("You are not authorized to update this workshop");
@@ -47,8 +53,11 @@ export const deleteWorkshop = async (id, authMentorId) => {
 
 export const registerStudentToWorkshop = async (workshopId, studentId) => {
   const workshop = await Workshop.findById(workshopId).populate("mentor");
-
   if (!workshop) throw new Error("Workshop not found");
+
+  // Ensure the user is a student
+  const student = await User.findOne({ _id: studentId, role: "student" });
+  if (!student) throw new Error("User is not a student");
 
   if (workshop.registeredStudents.includes(studentId)) {
     throw new Error("Student already registered in this workshop");

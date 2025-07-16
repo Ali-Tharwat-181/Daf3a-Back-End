@@ -1,5 +1,5 @@
 import Review from "../models/Review.js";
-import Mentor from "../models/Mentor.js";
+import User from "../models/User.js";
 import Workshop from "../models/Workshop.js";
 
 export const createReview = async (reviewData) => {
@@ -13,7 +13,7 @@ export const createReview = async (reviewData) => {
   // Check if the target exists
   let target;
   if (targetType === "mentor") {
-    target = await Mentor.findById(targetId);
+    target = await User.findOne({ _id: targetId, role: "mentor" });
   } else if (targetType === "workshop") {
     target = await Workshop.findById(targetId);
   }
@@ -57,5 +57,8 @@ export const updateMentorRating = async (mentorId) => {
   const avgRating =
     reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 
-  await Mentor.findByIdAndUpdate(mentorId, { rating: avgRating.toFixed(1) });
+  await User.findOneAndUpdate(
+    { _id: mentorId, role: "mentor" },
+    { rating: avgRating.toFixed(1) }
+  );
 };

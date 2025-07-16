@@ -3,15 +3,8 @@ import mongoose from "mongoose";
 
 const BookingSchema = new mongoose.Schema(
   {
-    mentor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Mentor",
-    },
-    student: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Student",
-      required: true,
-    },
+    student: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    mentor: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     date: { type: String, required: true },
     timeSlot: [{ type: String, required: true }],
     type: {

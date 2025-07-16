@@ -22,8 +22,6 @@ export async function getUserById(req, res, next) {
     res.status(200).json({
       success: true,
       user: result.user,
-      studentId: result.studentId,
-      mentorId: result.mentorId,
     });
   } catch (err) {
     res.status(404).json({ success: false, message: err.message });

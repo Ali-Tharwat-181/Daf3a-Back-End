@@ -10,7 +10,7 @@ const workshopSchema = new mongoose.Schema(
     type: { type: String, enum: ["online", "offline"], required: true },
     mentor: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Mentor",
+      ref: "User",
       required: true,
     },
     capacity: { type: Number, default: 10 },
