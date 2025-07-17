@@ -15,6 +15,7 @@ import adminRouter from "./routes/admin.routes.js";
 import workshopRouter from "./routes/workshop.routes.js";
 import messageRouter from "./routes/message.routes.js";
 import aiRouter from "./routes/ai.routes.js";
+import { multerErrorHandler } from "./middlewares/upload.js";
 
 const app = express();
 
@@ -34,6 +35,9 @@ app.use("/api/admin", adminRouter);
 app.use("/api/workshops", workshopRouter);
 app.use("/api/messages", messageRouter);
 app.use("/api/ai", aiRouter);
+
+// Multer error handler (for file upload errors)
+app.use(multerErrorHandler);
 
 // 404 handler
 app.use((req, res, next) => {

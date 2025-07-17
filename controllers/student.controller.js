@@ -3,8 +3,12 @@ import {
   updateStudent,
   getStudentCVs,
   createStudent,
+  uploadStudentCv,
+  deleteStudentCv,
 } from "../services/student.service.js";
 import * as workshopService from "../services/workshop.service.js";
+import cloudinary from "../config/cloudinary.js";
+import fs from "fs";
 
 export const createStudentController = async (req, res) => {
   if (req.user.role !== "student") {
@@ -55,9 +59,57 @@ export const getStudentCVsController = async (req, res) => {
     if (!cvs) {
       return res.status(404).json({ message: "Student not found" });
     }
-    res.status(200).json(cvs);
+    // Map to objects with both stored and original names
+    const files = cvs.map((cv) => {
+      if (typeof cv === "object" && cv.stored && cv.original) {
+        return { stored: cv.stored, original: cv.original };
+      } else {
+        // fallback for old entries: extract stored name, use as original
+        const stored = typeof cv === "string" ? cv : "";
+        const filename = stored.split(/[/\\]/).pop();
+        return { stored, original: filename };
+      }
+    });
+    res.status(200).json(files);
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const uploadCvController = async (req, res) => {
+  try {
+    if (!req.file) throw new Error("No file uploaded");
+
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "raw",
+      folder: "student_cvs",
+    });
+
+    fs.unlinkSync(req.file.path); // Clean up local file
+
+    res.status(200).json({
+      success: true,
+      url: result.secure_url,
+      public_id: result.public_id,
+    });
+  } catch (err) {
+    console.error("Upload error:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export const deleteCvController = async (req, res) => {
+  try {
+    const { public_id } = req.body;
+
+    if (!public_id) throw new Error("public_id is required");
+
+    await cloudinary.uploader.destroy(public_id, { resource_type: "raw" });
+
+    res.status(200).json({ success: true, message: "CV deleted successfully" });
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(400).json({ success: false, message: err.message });
   }
 };
 

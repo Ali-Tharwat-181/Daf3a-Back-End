@@ -47,3 +47,31 @@ export const getStudentCVs = async (id) => {
   }
   return student.cvs;
 };
+
+export const uploadStudentCv = async (user, fileObj) => {
+  user.cvs = user.cvs || [];
+  user.cvs.push(fileObj);
+  await user.save();
+  return user;
+};
+
+export const deleteStudentCv = async (user, filePath) => {
+  if (!user.cvs || !Array.isArray(user.cvs)) {
+    throw new Error("No CVs found for this user");
+  }
+  // Support both old (string) and new (object) formats
+  const index = user.cvs.findIndex((cv) => {
+    if (typeof cv === "object" && cv.stored) {
+      return cv.stored === filePath;
+    } else if (typeof cv === "string") {
+      return cv === filePath;
+    }
+    return false;
+  });
+  if (index === -1) {
+    throw new Error("CV not found");
+  }
+  user.cvs.splice(index, 1);
+  await user.save();
+  return user;
+};

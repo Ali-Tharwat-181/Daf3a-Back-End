@@ -14,9 +14,7 @@ const workshopSchema = new mongoose.Schema(
       required: true,
     },
     capacity: { type: Number, default: 10 },
-    registeredStudents: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
-    ],
+    registeredStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

@@ -55,7 +55,21 @@ function sanitizeUserUpdate(data) {
     );
   }
 
-  return allowedFields;
+  // Only allow updating certain fields, including image
+  const allowed = [
+    "name",
+    "phoneNumber",
+    "title",
+    "bio",
+    "preferredLanguage",
+    "image",
+    // add other fields you want to allow
+  ];
+  const filtered = {};
+  for (const key of allowed) {
+    if (key in allowedFields) filtered[key] = allowedFields[key];
+  }
+  return filtered;
 }
 
 function sanitizeAdminUpdate(data) {
@@ -80,6 +94,7 @@ export async function updateUserService(userId, updateData, mode = "user") {
   }
 
   const user = await User.findByIdAndUpdate(userId, fieldsToUpdate, {
+    isRegistered: true,
     new: true,
     runValidators: true,
   }).select("-password");
