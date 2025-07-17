@@ -63,6 +63,16 @@ function sanitizeUserUpdate(data) {
     "bio",
     "preferredLanguage",
     "image",
+    "expertise",
+    "links",
+    "experience",
+    "languages",
+    "availability",
+    "isRegistered",
+    "education",
+    "skills",
+    "careerGoals",
+    "cvs",
     // add other fields you want to allow
   ];
   const filtered = {};
@@ -92,6 +102,7 @@ export async function updateUserService(userId, updateData, mode = "user") {
   } else {
     throw new Error("Invalid mode. Use 'admin' or 'user'.");
   }
+  fieldsToUpdate.isRegistered = true;
 
   const user = await User.findByIdAndUpdate(userId, fieldsToUpdate, {
     isRegistered: true,

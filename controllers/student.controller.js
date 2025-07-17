@@ -80,9 +80,13 @@ export const uploadCvController = async (req, res) => {
   try {
     if (!req.file) throw new Error("No file uploaded");
 
+    const originalFilename = req.file.originalname.split(".")[0]; // "Ali_CV"
+    const extension = req.file.originalname.split(".").pop(); // "pdf"
+
     const result = await cloudinary.uploader.upload(req.file.path, {
       resource_type: "raw",
       folder: "student_cvs",
+      public_id: `${Date.now()}-${originalFilename}`, // optional, keeps names readable
     });
 
     fs.unlinkSync(req.file.path); // Clean up local file
@@ -91,6 +95,7 @@ export const uploadCvController = async (req, res) => {
       success: true,
       url: result.secure_url,
       public_id: result.public_id,
+      original_filename: result.original_filename,
     });
   } catch (err) {
     console.error("Upload error:", err);

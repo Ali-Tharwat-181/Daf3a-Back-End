@@ -47,7 +47,13 @@ const userSchema = new mongoose.Schema(
     education: String,
     skills: [String],
     careerGoals: String,
-    cvs: [String],
+    cvs: [
+      {
+        url: { type: String, required: true },
+        public_id: { type: String, required: true },
+        uploadedAt: { type: Date, default: Date.now },
+      },
+    ],
     //mentor
     expertise: [String],
     links: [String],
