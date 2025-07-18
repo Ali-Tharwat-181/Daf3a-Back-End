@@ -1,0 +1,72 @@
+[
+  {
+    "author": "66dcb0014f2b8509a1c1a102",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11c",
+    "rating": 5,
+    "comment": "Dr. Hossam explained backend concepts in a very clear and practical way."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a103",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11e",
+    "rating": 4,
+    "comment": "Great insights into data analytics, learned a lot from real-life examples."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a104",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11d",
+    "rating": 5,
+    "comment": "Maha's UI/UX approach completely changed how I think about design!"
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a105",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a120",
+    "rating": 4,
+    "comment": "Very knowledgeable in finance, appreciated the structured delivery."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a106",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a125",
+    "rating": 5,
+    "comment": "Reem is inspiring! Her educational strategies are game-changing."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a107",
+    "targetType": "workshop",
+    "targetId": "66aaf9949f1a6b13e4e19b2f",
+    "rating": 5,
+    "comment": "Hands-on workshop with real-world MERN examples. Loved it!"
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a108",
+    "targetType": "workshop",
+    "targetId": "66aaf9949f1a6b13e4e19b30",
+    "rating": 4,
+    "comment": "Solid bootcamp! Would've liked more time for Q&A, though."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a109",
+    "targetType": "workshop",
+    "targetId": "66aaf9949f1a6b13e4e19b31",
+    "rating": 5,
+    "comment": "Lina gave us a full roadmap on launching startups. Amazing session!"
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a10a",
+    "targetType": "workshop",
+    "targetId": "66aaf9949f1a6b13e4e19b33",
+    "rating": 4,
+    "comment": "Helpful finance tips, but some parts were a bit too fast-paced."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a10b",
+    "targetType": "workshop",
+    "targetId": "66aaf9949f1a6b13e4e19b37",
+    "rating": 5,
+    "comment": "Best interview prep ever! Mock interviews were super useful."
+  }
+]
