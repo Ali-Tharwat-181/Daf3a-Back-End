@@ -17,7 +17,9 @@
     "isRegistered": true,
     "education": "Computer Science",
     "skills": ["JavaScript", "React"],
-    "careerGoals": "Front-end Developer"
+    "careerGoals": "Front-end Developer",
+    "title": "Aspiring Frontend Developer",
+    "bio": "Ahmed is passionate about building modern web interfaces using React and JavaScript."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a103",
@@ -29,7 +31,9 @@
     "isRegistered": true,
     "education": "Engineering",
     "skills": ["Python", "SQL"],
-    "careerGoals": "Data Scientist"
+    "careerGoals": "Data Scientist",
+    "title": "Future Data Scientist",
+    "bio": "Sara is exploring data science and machine learning to uncover insights from data."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a104",
@@ -41,7 +45,9 @@
     "isRegistered": true,
     "education": "Marketing",
     "skills": ["UI/UX Design", "HTML"],
-    "careerGoals": "UX Designer"
+    "careerGoals": "UX Designer",
+    "title": "Creative UI/UX Learner",
+    "bio": "Omar is dedicated to designing intuitive user experiences and enhancing digital interfaces."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a105",
@@ -53,7 +59,9 @@
     "isRegistered": true,
     "education": "Psychology",
     "skills": ["Machine Learning", "Python"],
-    "careerGoals": "AI Engineer"
+    "careerGoals": "AI Engineer",
+    "title": "AI Enthusiast",
+    "bio": "Nour is combining psychology with machine learning to build smarter AI systems."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a106",
@@ -65,7 +73,9 @@
     "isRegistered": true,
     "education": "Physics",
     "skills": ["C++", "Node.js"],
-    "careerGoals": "Software Architect"
+    "careerGoals": "Software Architect",
+    "title": "Future Software Architect",
+    "bio": "Mohamed is exploring system design and backend development to become a software architect."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a107",
@@ -77,7 +87,9 @@
     "isRegistered": true,
     "education": "Media Studies",
     "skills": ["CSS", "JavaScript"],
-    "careerGoals": "Project Manager"
+    "careerGoals": "Project Manager",
+    "title": "Project Manager in the Making",
+    "bio": "Layla brings creativity and structure together to manage tech projects effectively."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a108",
@@ -89,7 +101,9 @@
     "isRegistered": true,
     "education": "Mathematics",
     "skills": ["React", "Node.js"],
-    "careerGoals": "DevOps Engineer"
+    "careerGoals": "DevOps Engineer",
+    "title": "DevOps Learner",
+    "bio": "Yassin aims to bridge development and operations using cloud technologies and automation."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a109",
@@ -101,7 +115,9 @@
     "isRegistered": true,
     "education": "Information Technology",
     "skills": ["HTML", "CSS"],
-    "careerGoals": "QA Analyst"
+    "careerGoals": "QA Analyst",
+    "title": "QA Enthusiast",
+    "bio": "Hana is focused on building reliable software through testing and analysis."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a10a",
@@ -113,7 +129,9 @@
     "isRegistered": true,
     "education": "Architecture",
     "skills": ["UI/UX Design", "JavaScript"],
-    "careerGoals": "UX Designer"
+    "careerGoals": "UX Designer",
+    "title": "UX Explorer",
+    "bio": "Mostafa blends architectural creativity with UX to build digital spaces users love."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a10b",
@@ -125,7 +143,9 @@
     "isRegistered": true,
     "education": "Business Administration",
     "skills": ["SQL", "React"],
-    "careerGoals": "Product Owner"
+    "careerGoals": "Product Owner",
+    "title": "Product Leader",
+    "bio": "Mariam is learning how to align tech solutions with business goals to lead product development."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11c",
@@ -139,7 +159,9 @@
     "experience": "5 years backend development",
     "languages": ["English"],
     "verified": true,
-    "availability": [{ "day": "Monday", "slots": ["10:00", "14:00"] }]
+    "availability": [{ "day": "Monday", "slots": ["10:00", "14:00"] }],
+    "title": "Backend Specialist",
+    "bio": "Dr. Hossam specializes in building scalable backend APIs and database solutions."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11d",
@@ -153,7 +175,9 @@
     "experience": "7 years in product design",
     "languages": ["Arabic", "English"],
     "verified": true,
-    "availability": [{ "day": "Wednesday", "slots": ["12:00", "16:00"] }]
+    "availability": [{ "day": "Wednesday", "slots": ["12:00", "16:00"] }],
+    "title": "Product Design Mentor",
+    "bio": "Maha empowers learners with strong foundations in UX and human-centered design."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11e",
@@ -167,7 +191,9 @@
     "experience": "6 years in data analytics",
     "languages": ["English", "French"],
     "verified": true,
-    "availability": [{ "day": "Friday", "slots": ["09:00", "13:00"] }]
+    "availability": [{ "day": "Friday", "slots": ["09:00", "13:00"] }],
+    "title": "Data Analytics Mentor",
+    "bio": "Dr. Tarek helps students understand and apply data science to solve real-world problems."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11f",
@@ -181,7 +207,9 @@
     "experience": "8 years in digital marketing",
     "languages": ["Arabic"],
     "verified": true,
-    "availability": [{ "day": "Sunday", "slots": ["11:00", "15:00"] }]
+    "availability": [{ "day": "Sunday", "slots": ["11:00", "15:00"] }],
+    "title": "Digital Marketing Expert",
+    "bio": "Salma mentors aspiring marketers in SEO, brand awareness, and campaign management."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a120",
@@ -195,7 +223,9 @@
     "experience": "12 years in financial consulting",
     "languages": ["English"],
     "verified": true,
-    "availability": [{ "day": "Tuesday", "slots": ["10:00", "13:00"] }]
+    "availability": [{ "day": "Tuesday", "slots": ["10:00", "13:00"] }],
+    "title": "Finance & Investment Mentor",
+    "bio": "Prof. Eissa brings financial concepts to life with examples from real-world consulting."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a121",
@@ -209,7 +239,9 @@
     "experience": "10 years in hospital management",
     "languages": ["English", "Arabic"],
     "verified": true,
-    "availability": [{ "day": "Thursday", "slots": ["08:00", "12:00"] }]
+    "availability": [{ "day": "Thursday", "slots": ["08:00", "12:00"] }],
+    "title": "Public Health Expert",
+    "bio": "Dr. Rania supports future professionals in healthcare administration and policy."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a122",
@@ -223,7 +255,9 @@
     "experience": "4 years in front-end development",
     "languages": ["Arabic"],
     "verified": true,
-    "availability": [{ "day": "Saturday", "slots": ["13:00", "17:00"] }]
+    "availability": [{ "day": "Saturday", "slots": ["13:00", "17:00"] }],
+    "title": "Front-End Developer",
+    "bio": "Youssef helps students master React and build type-safe applications with TypeScript."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a123",
@@ -237,7 +271,9 @@
     "experience": "9 years in startups",
     "languages": ["English"],
     "verified": true,
-    "availability": [{ "day": "Monday", "slots": ["14:00", "18:00"] }]
+    "availability": [{ "day": "Monday", "slots": ["14:00", "18:00"] }],
+    "title": "Startup Advisor",
+    "bio": "Lina coaches aspiring founders on lean startup, business models, and scaling."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a124",
@@ -251,7 +287,9 @@
     "experience": "11 years in security architecture",
     "languages": ["Arabic", "English"],
     "verified": true,
-    "availability": [{ "day": "Wednesday", "slots": ["09:00", "12:00"] }]
+    "availability": [{ "day": "Wednesday", "slots": ["09:00", "12:00"] }],
+    "title": "Cybersecurity Mentor",
+    "bio": "Dr. Ahmed teaches network security and prepares students for careers in cybersecurity."
   },
   {
     "_id": "66dcb0014f2b8509a1c1a125",
@@ -265,6 +303,8 @@
     "experience": "15 years in academic leadership",
     "languages": ["English"],
     "verified": true,
-    "availability": [{ "day": "Tuesday", "slots": ["15:00", "18:00"] }]
+    "availability": [{ "day": "Tuesday", "slots": ["15:00", "18:00"] }],
+    "title": "Education Specialist",
+    "bio": "Prof. Reem designs impactful learning programs and mentors future educators."
   }
 ]

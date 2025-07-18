@@ -10,6 +10,7 @@ const workshopSchema = new mongoose.Schema(
     type: { type: String, enum: ["online", "offline"], required: true },
     price: Number,
     language: String,
+    rating: { type: Number, default: 0 },
     topic: {
       type: String,
       enum: [

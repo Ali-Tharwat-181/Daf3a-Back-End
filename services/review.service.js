@@ -28,6 +28,8 @@ export const createReview = async (reviewData) => {
 
   if (targetType === "mentor") {
     await updateMentorRating(targetId);
+  } else if (targetType === "workshop") {
+    await updateWorkshopRating(targetId);
   }
 
   return savedReview;
@@ -61,4 +63,20 @@ export const updateMentorRating = async (mentorId) => {
     { _id: mentorId, role: "mentor" },
     { rating: avgRating.toFixed(1) }
   );
+};
+
+export const updateWorkshopRating = async (workshopId) => {
+  const reviews = await Review.find({
+    targetType: "workshop",
+    targetId: workshopId,
+  });
+
+  if (reviews.length === 0) return;
+
+  const avgRating =
+    reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+
+  await Workshop.findByIdAndUpdate(workshopId, {
+    rating: avgRating.toFixed(1),
+  });
 };

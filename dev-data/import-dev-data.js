@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createReview } from "../services/review.service.js";
 
 import Workshop from "./../models/Workshop.js";
 import User from "./../models/User.js";
@@ -49,7 +50,13 @@ const importData = async () => {
 
     await Booking.create(bookings);
 
-    await Review.create(reviews);
+    for (const review of reviews) {
+      try {
+        await createReview(review);
+      } catch (err) {
+        console.error("Failed to import review:", review, err.message);
+      }
+    }
     console.log("Data imported successfully with hashed passwords");
   } catch (err) {
     console.error(err);
