@@ -8,6 +8,23 @@ const workshopSchema = new mongoose.Schema(
     time: { type: String, required: true },
     location: { type: String },
     type: { type: String, enum: ["online", "offline"], required: true },
+    price: Number,
+    language: String,
+    topic: {
+      type: String,
+      enum: [
+        "Technical",
+        "Business",
+        "Design",
+        "Marketing",
+        "Finance",
+        "Healthcare",
+        "Education",
+        "Career Development",
+        "Entrepreneurship",
+        "Soft Skills",
+      ],
+    },
     mentor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
