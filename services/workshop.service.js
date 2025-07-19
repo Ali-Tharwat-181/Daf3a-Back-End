@@ -82,6 +82,6 @@ export const getWorkshopsByStudent = async (studentId) => {
 
 export const getWorkshopsByMentor = async (mentorId) => {
   return await Workshop.find({ mentor: mentorId }).populate(
-    "registeredStudents"
+    "registeredStudents title description date time location type price language image rating topic capacity mentor"
   );
 };
