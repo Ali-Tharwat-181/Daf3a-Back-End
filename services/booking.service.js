@@ -22,28 +22,37 @@ export const createFreeBooking = async ({ mentorId, date, slots, type, studentId
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
-  const dayAvailability = mentor.availability.find(av => av.day.toLowerCase() === date.toLowerCase());
+  const dayAvailability = mentor.availability.find(
+    av => av.day.toLowerCase() === date.toLowerCase()
+  );
   if (!dayAvailability) throw new Error(`No availability for ${date}`);
 
-  const invalidSlots = slots.filter(s => !dayAvailability.slots.includes(s));
+  const slotsArray = Array.isArray(slots) ? slots : [slots];
+
+  const invalidSlots = slotsArray.filter(s => !dayAvailability.slots.includes(s));
   if (invalidSlots.length > 0) throw new Error(`Invalid slots: ${invalidSlots.join(", ")}`);
 
   const booking = await Booking.create({
     mentor: mentor._id,
     student: studentId,
     date,
-    timeSlot: slots,
+    timeSlot: slotsArray,
     type,
     paymentStatus: "free",
     status: "confirmed"
   });
 
-  // Remove booked slots
-  dayAvailability.slots = dayAvailability.slots.filter(s => !slots.includes(s));
+  // ✅ حذف الـ slots من الـ availability
+  dayAvailability.slots = dayAvailability.slots.filter(s => !slotsArray.includes(s));
+
+  console.log("✅ Slots after filtering:", dayAvailability.slots);
+
+  // ✅ حفظ mentor بعد التعديل
   await mentor.save();
 
   return booking;
 };
+
 
 // ✅ Create Paid Booking
 export const createPaidBooking = async ({ mentorId, date, slots, type, studentId, amount }) => {
