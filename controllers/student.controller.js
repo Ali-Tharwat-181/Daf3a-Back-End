@@ -7,8 +7,24 @@ import {
   deleteStudentCv,
 } from "../services/student.service.js";
 import * as workshopService from "../services/workshop.service.js";
+
+import User from '../models/User.js';
+import { createCustomer } from '../services/payment.service.js';
 import cloudinary from "../config/cloudinary.js";
 import fs from "fs";
+
+export const createStudentCustomer = async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user || user.role !== 'student') return res.status(403).json({ error: "Unauthorized" });
+
+  if (!user.stripeCustomerId) {
+    const customerId = await createCustomer(user);
+    user.stripeCustomerId = customerId;
+    await user.save();
+  }
+
+  return res.json({ customerId: user.stripeCustomerId });
+};
 
 export const createStudentController = async (req, res) => {
   if (req.user.role !== "student") {

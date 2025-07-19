@@ -6,6 +6,8 @@ import {
   addAvailabilitySlot,
   removeAvailabilitySlot,
 } from "../services/mentor.service.js";
+import { createStripeAccount, generateOnboardingLink } from '../services/payment.service.js';
+import User from '../models/User.js';
 
 export const getMentorsController = async (req, res) => {
   try {
@@ -104,4 +106,19 @@ export const removeAvailabilityController = async (req, res) => {
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }
+};
+
+// Connect Mentor to Stripe
+export const connectMentorToStripe = async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user || user.role !== 'mentor') return res.status(403).json({ error: "Unauthorized" });
+
+  if (!user.stripeAccountId) {
+    const accountId = await createStripeAccount(user);
+    user.stripeAccountId = accountId;
+    await user.save();
+  }
+
+  const link = await generateOnboardingLink(user.stripeAccountId);
+  return res.json({ link });
 };

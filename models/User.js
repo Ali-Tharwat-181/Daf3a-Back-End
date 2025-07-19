@@ -32,6 +32,8 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    stripeAccountId: { type: String }, // mentor فقط
+    stripeCustomerId: { type: String }, // student فقط
     image: {
       type: String,
       default:

@@ -2,100 +2,58 @@ import * as bookingService from "../services/booking.service.js";
 
 export const getAllBookings = async (req, res, next) => {
   try {
-    const bookings = await bookingService.getAllBookings();
-    return res.status(200).json({ success: true, data: bookings });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const createNewBooking = async (req, res, next) => {
-  const { mentorId, date, slots, type } = req.body;
-
-  if (!mentorId || !date || !slots || !type) {
-    return res.status(400).json({
-      success: false,
-      message:
-        "Please provide mentorId, date (e.g., Monday), slots (array), and type.",
-    });
-  }
-
-  try {
-    const booking = await bookingService.createBooking({
-      mentorId,
-      date,
-      slots,
-      type,
-      student: req.user._id,
-    });
-
-    return res.status(201).json({
-      success: true,
-      data: booking,
-      message: "Booking created and waiting for mentor confirmation.",
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const confirmBookingController = async (req, res, next) => {
-  try {
-    const booking = await bookingService.confirmBooking(
-      req.params.id,
-      req.user._id
-    );
-    return res
-      .status(200)
-      .json({ success: true, data: booking, message: "Booking confirmed" });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const cancelBookingById = async (req, res, next) => {
-  try {
-    const booking = await bookingService.cancelBooking(req.params.id);
-    return res
-      .status(200)
-      .json({ success: true, data: booking, message: "Booking cancelled" });
-  } catch (error) {
-    next(error);
-  }
+    const data = await bookingService.getAllBookings();
+    res.status(200).json({ success: true, data });
+  } catch (err) { next(err); }
 };
 
 export const getBookingById = async (req, res, next) => {
   try {
-    const booking = await bookingService.getBookingById(req.params.id);
-    return res.status(200).json({ success: true, data: booking });
-  } catch (error) {
-    next(error);
-  }
+    const data = await bookingService.getBookingById(req.params.id);
+    res.status(200).json({ success: true, data });
+  } catch (err) { next(err); }
 };
 
 export const getBookingsByMentor = async (req, res, next) => {
-  const { mentorId } = req.params;
-  if (!mentorId) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Mentor ID is required" });
-  }
-
   try {
-    const bookings = await bookingService.getBookingsByMentorId(mentorId);
-    return res.status(200).json({ success: true, data: bookings });
-  } catch (error) {
-    next(error);
-  }
+    const data = await bookingService.getBookingsByMentorId(req.params.mentorId);
+    res.status(200).json({ success: true, data });
+  } catch (err) { next(err); }
+};
+
+export const createFreeBookingController = async (req, res, next) => {
+  const { mentorId, date, slots, type } = req.body;
+  try {
+    const data = await bookingService.createFreeBooking({ mentorId, date, slots, type, studentId: req.user._id });
+    res.status(201).json({ success: true, data, message: "Free booking confirmed" });
+  } catch (err) { next(err); }
+};
+
+export const createPaidBookingController = async (req, res, next) => {
+  const { mentorId, date, slots, type, amount } = req.body;
+  try {
+    const { sessionUrl, booking } = await bookingService.createPaidBooking({ mentorId, date, slots, type, studentId: req.user._id, amount });
+    res.status(201).json({ success: true, sessionUrl, booking, message: "Complete payment via Stripe" });
+  } catch (err) { next(err); }
 };
 
 export const updateBookingById = async (req, res, next) => {
   try {
-    const booking = await bookingService.updateBooking(req.params.id, req.body);
-    return res
-      .status(200)
-      .json({ success: true, data: booking, message: "Booking updated" });
-  } catch (error) {
-    next(error);
-  }
+    const data = await bookingService.updateBooking(req.params.id, req.body);
+    res.status(200).json({ success: true, data });
+  } catch (err) { next(err); }
+};
+
+export const cancelBookingById = async (req, res, next) => {
+  try {
+    const data = await bookingService.cancelBooking(req.params.id);
+    res.status(200).json({ success: true, data, message: "Booking cancelled" });
+  } catch (err) { next(err); }
+};
+
+export const confirmBookingController = async (req, res, next) => {
+  try {
+    const data = await bookingService.confirmBooking(req.params.id);
+    res.status(200).json({ success: true, data, message: "Booking confirmed" });
+  } catch (err) { next(err); }
 };
