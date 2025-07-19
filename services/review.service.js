@@ -43,10 +43,23 @@ export const getReviewsByTarget = async (targetType, targetId) => {
 
   // Fetch reviews based on targetType and targetId
   const reviews = await Review.find({ targetType, targetId })
-    .populate("author", "name email") // Populate author details
+    .populate("author", "name email image") // Populate author details
     .sort({ createdAt: -1 }); // Sort by creation date
 
   return reviews;
+};
+
+export const deleteReview = async (id) => {
+  const review = await Review.findByIdAndDelete(id);
+  if (targetType === "mentor") {
+    await updateMentorRating(targetId);
+  } else if (targetType === "workshop") {
+    await updateWorkshopRating(targetId);
+  }
+  if (!review) {
+    throw new Error("Review not found");
+  }
+  return review;
 };
 
 export const updateMentorRating = async (mentorId) => {

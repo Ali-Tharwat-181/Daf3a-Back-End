@@ -1,8 +1,4 @@
-import {
-  verifyMentor,
-  deleteReview,
-  getAnalytics,
-} from "../services/admin.service.js";
+import { verifyMentor, getAnalytics } from "../services/admin.service.js";
 
 export const verifyMentorController = async (req, res) => {
   if (req.user.role !== "admin") {
@@ -12,19 +8,6 @@ export const verifyMentorController = async (req, res) => {
   try {
     const mentor = await verifyMentor(req.params.id);
     res.status(200).json({ success: true, data: mentor });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-export const deleteReviewController = async (req, res) => {
-  if (req.user.role !== "admin") {
-    return res.status(403).json({ success: false, message: "Access denied" });
-  }
-
-  try {
-    const review = await deleteReview(req.params.id);
-    res.status(200).json({ success: true, data: review });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

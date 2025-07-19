@@ -32,7 +32,11 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-    image: { type: String, default: "" },
+    image: {
+      type: String,
+      default:
+        "https://ui-avatars.com/api/?name=User&background=eee&color=888&size=160",
+    },
     title: String,
     bio: String,
     preferredLanguage: {

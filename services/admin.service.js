@@ -14,14 +14,6 @@ export const verifyMentor = async (id) => {
   return mentor;
 };
 
-export const deleteReview = async (id) => {
-  const review = await Review.findByIdAndDelete(id);
-  if (!review) {
-    throw new Error("Review not found");
-  }
-  return review;
-};
-
 export const getAnalytics = async () => {
   const totalUsers = await User.countDocuments();
   const totalMentors = await User.countDocuments({ role: "mentor" });

@@ -93,6 +93,10 @@ export const getBookingById = async (id) => {
   return Booking.findById(id).populate("mentor student review");
 };
 
+export const getBookingsByMentorId = async (mentorId) => {
+  return Booking.find({ mentor: mentorId }).populate("student review");
+};
+
 export const updateBooking = async (id, updates) => {
   return Booking.findByIdAndUpdate(id, updates, { new: true });
 };

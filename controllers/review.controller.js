@@ -1,5 +1,6 @@
 import {
   createReview,
+  deleteReview,
   getReviewsByTarget,
 } from "../services/review.service.js";
 
@@ -22,6 +23,19 @@ export const createReviewController = async (req, res) => {
     return res.status(201).json(review);
   } catch (error) {
     return res.status(500).json({ error: error.message });
+  }
+};
+
+export const deleteReviewController = async (req, res) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ success: false, message: "Access denied" });
+  }
+
+  try {
+    const review = await deleteReview(req.params.id);
+    res.status(200).json({ success: true, data: review });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 

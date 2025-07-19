@@ -79,3 +79,9 @@ export const getWorkshopsByStudent = async (studentId) => {
     "mentor"
   );
 };
+
+export const getWorkshopsByMentor = async (mentorId) => {
+  return await Workshop.find({ mentor: mentorId }).populate(
+    "registeredStudents"
+  );
+};
