@@ -85,3 +85,10 @@ export const getWorkshopsByMentor = async (mentorId) => {
     "registeredStudents title description date time location type price language image rating topic capacity mentor"
   );
 };
+
+// Get workshops for any given mentor by ID
+export const getWorkshopsByMentorId = async (mentorId) => {
+  return await Workshop.find({ mentor: mentorId })
+    .populate("registeredStudents")
+    .populate("mentor");
+};

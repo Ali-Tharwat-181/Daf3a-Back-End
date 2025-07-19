@@ -95,3 +95,13 @@ export const getMentorWorkshops = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getWorkshopsForMentor = async (req, res, next) => {
+  try {
+    const { mentorId } = req.params;
+    const workshops = await workshopService.getWorkshopsByMentorId(mentorId);
+    return res.status(200).json({ success: true, data: workshops });
+  } catch (error) {
+    next(error);
+  }
+};
