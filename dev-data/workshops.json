@@ -9,7 +9,7 @@
     "price": 100,
     "language": "English",
     "topic": "Technical",
-    "mentor": "66aaf9949f1a6b13e4e19b2f",
+    "mentor": "66dcb0014f2b8509a1c1a11c",
     "capacity": 25,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b24", "66aaf9949f1a6b13e4e19b25"]
   },
@@ -23,7 +23,7 @@
     "price": 150,
     "language": "English",
     "topic": "Design",
-    "mentor": "66aaf9949f1a6b13e4e19b30",
+    "mentor": "66dcb0014f2b8509a1c1a11d",
     "capacity": 20,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b26", "66aaf9949f1a6b13e4e19b27"]
   },
@@ -37,7 +37,7 @@
     "price": 120,
     "language": "Arabic",
     "topic": "Entrepreneurship",
-    "mentor": "66aaf9949f1a6b13e4e19b31",
+    "mentor": "66dcb0014f2b8509a1c1a123",
     "capacity": 15,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b28", "66aaf9949f1a6b13e4e19b29"]
   },
@@ -51,7 +51,7 @@
     "price": 90,
     "language": "English",
     "topic": "Marketing",
-    "mentor": "66aaf9949f1a6b13e4e19b32",
+    "mentor": "66dcb0014f2b8509a1c1a11f",
     "capacity": 30,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b2a", "66aaf9949f1a6b13e4e19b2b"]
   },
@@ -65,7 +65,7 @@
     "price": 130,
     "language": "Arabic",
     "topic": "Finance",
-    "mentor": "66aaf9949f1a6b13e4e19b33",
+    "mentor": "66dcb0014f2b8509a1c1a120",
     "capacity": 20,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b2c", "66aaf9949f1a6b13e4e19b2d"]
   },
@@ -79,7 +79,7 @@
     "price": 75,
     "language": "English",
     "topic": "Soft Skills",
-    "mentor": "66aaf9949f1a6b13e4e19b34",
+    "mentor": "66dcb0014f2b8509a1c1a125",
     "capacity": 25,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b24", "66aaf9949f1a6b13e4e19b28"]
   },
@@ -93,7 +93,7 @@
     "price": 85,
     "language": "English",
     "topic": "Career Development",
-    "mentor": "66aaf9949f1a6b13e4e19b35",
+    "mentor": "66dcb0014f2b8509a1c1a122",
     "capacity": 20,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b25", "66aaf9949f1a6b13e4e19b2a"]
   },
@@ -107,7 +107,7 @@
     "price": 95,
     "language": "English",
     "topic": "Education",
-    "mentor": "66aaf9949f1a6b13e4e19b36",
+    "mentor": "66dcb0014f2b8509a1c1a125",
     "capacity": 15,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b26", "66aaf9949f1a6b13e4e19b2b"]
   },
@@ -121,7 +121,7 @@
     "price": 110,
     "language": "English",
     "topic": "Technical",
-    "mentor": "66aaf9949f1a6b13e4e19b37",
+    "mentor": "66dcb0014f2b8509a1c1a122",
     "capacity": 30,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b27", "66aaf9949f1a6b13e4e19b29"]
   },
@@ -135,7 +135,7 @@
     "price": 140,
     "language": "English",
     "topic": "Healthcare",
-    "mentor": "66aaf9949f1a6b13e4e19b38",
+    "mentor": "66dcb0014f2b8509a1c1a121",
     "capacity": 20,
     "registeredStudents": ["66aaf9949f1a6b13e4e19b2c", "66aaf9949f1a6b13e4e19b2d"]
   }

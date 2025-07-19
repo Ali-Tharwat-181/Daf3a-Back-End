@@ -15,9 +15,6 @@ const transporter = nodemailer.createTransport({
  * @param {string} html - Email body as HTML
  */
 
-console.log("Email User:", process.env.EMAIL_USER);
-console.log("Email Pass:", process.env.EMAIL_PASSWORD);
-
 export const sendEmail = async (to, subject, html) => {
   const mailOptions = {
     from: `"MentorMatch" <${process.env.EMAIL_USER}>`,
