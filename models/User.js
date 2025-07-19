@@ -65,6 +65,7 @@ const userSchema = new mongoose.Schema(
     languages: [String],
     availability: [{ date: String, day: String, slots: [String] }],
     rating: { type: Number, default: 0 },
+    price: { type: Number, default: 0 },
     verified: { type: Boolean, default: false },
   },
   {

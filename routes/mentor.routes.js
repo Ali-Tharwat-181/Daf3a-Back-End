@@ -6,6 +6,7 @@ import {
   updateMentorController,
   addAvailabilityController,
   removeAvailabilityController,
+  setMentorPriceController,
 } from "../controllers/mentor.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "./../middlewares/roleCheck.js";
@@ -37,5 +38,7 @@ mentorRouter.post(
   authMiddleware,
   removeAvailabilityController
 );
+
+mentorRouter.put("/mentor/set-price", authMiddleware, setMentorPriceController);
 
 export default mentorRouter;

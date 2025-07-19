@@ -5,6 +5,7 @@ import {
   updateMentor,
   addAvailabilitySlot,
   removeAvailabilitySlot,
+  setMentorPrice,
 } from "../services/mentor.service.js";
 
 export const getMentorsController = async (req, res) => {
@@ -60,18 +61,20 @@ export const updateMentorController = async (req, res) => {
 
 //  Add availability slots
 export const addAvailabilityController = async (req, res) => {
-  const { day, slots } = req.body;
+  const { day, date, slots } = req.body;
 
-  if (!day || !slots || !Array.isArray(slots)) {
-    return res
-      .status(400)
-      .json({ success: false, message: "day and slots (array) are required" });
+  if (!day || !date || !slots || !Array.isArray(slots)) {
+    return res.status(400).json({
+      success: false,
+      message: "day, date, and slots (array) are required",
+    });
   }
 
   try {
     const updatedAvailability = await addAvailabilitySlot(
       req.user._id,
       day,
+      date,
       slots
     );
     return res
@@ -84,23 +87,42 @@ export const addAvailabilityController = async (req, res) => {
 
 // Remove availability slots
 export const removeAvailabilityController = async (req, res) => {
-  const { day, slots } = req.body;
+  const { day, date, slots } = req.body;
 
-  if (!day || !slots || !Array.isArray(slots)) {
-    return res
-      .status(400)
-      .json({ success: false, message: "day and slots (array) are required" });
+  if (!day || !date || !slots || !Array.isArray(slots)) {
+    return res.status(400).json({
+      success: false,
+      message: "day, date, and slots (array) are required",
+    });
   }
 
   try {
     const updatedAvailability = await removeAvailabilitySlot(
       req.user._id,
       day,
+      date,
       slots
     );
     return res
       .status(200)
       .json({ success: true, availability: updatedAvailability });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const setMentorPriceController = async (req, res) => {
+  const { price } = req.body;
+
+  if (req.user.role !== "mentor") {
+    return res
+      .status(403)
+      .json({ success: false, message: "Only mentors can set price" });
+  }
+
+  try {
+    const mentor = await setMentorPrice(req.user._id, price);
+    return res.status(200).json({ success: true, mentor });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }

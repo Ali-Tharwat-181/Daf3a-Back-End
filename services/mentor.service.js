@@ -51,20 +51,22 @@ export const updateMentor = async (id, userId, userRole, body) => {
 };
 
 // add slots to availability
-export const addAvailabilitySlot = async (mentorId, day, slots) => {
+export const addAvailabilitySlot = async (mentorId, day, date, slots) => {
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
-  const dayAvailability = mentor.availability.find((av) => av.day === day);
+  const existingAvailability = mentor.availability.find(
+    (av) => av.date === date
+  );
 
-  if (dayAvailability) {
+  if (existingAvailability) {
     slots.forEach((slot) => {
-      if (!dayAvailability.slots.includes(slot)) {
-        dayAvailability.slots.push(slot);
+      if (!existingAvailability.slots.includes(slot)) {
+        existingAvailability.slots.push(slot);
       }
     });
   } else {
-    mentor.availability.push({ day, slots });
+    mentor.availability.push({ date, day, slots });
   }
 
   await mentor.save();
@@ -73,21 +75,35 @@ export const addAvailabilitySlot = async (mentorId, day, slots) => {
 
 //Remove Slots from Availability
 
-export const removeAvailabilitySlot = async (mentorId, day, slots) => {
+export const removeAvailabilitySlot = async (mentorId, day, date, slots) => {
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
-  const dayAvailability = mentor.availability.find((av) => av.day === day);
-  if (!dayAvailability) throw new Error("No availability found for this day");
+  const dayAvailability = mentor.availability.find((av) => av.date === date);
+  if (!dayAvailability) throw new Error("No availability found for this date");
 
   dayAvailability.slots = dayAvailability.slots.filter(
     (s) => !slots.includes(s)
   );
 
   if (dayAvailability.slots.length === 0) {
-    mentor.availability = mentor.availability.filter((av) => av.day !== day);
+    mentor.availability = mentor.availability.filter((av) => av.date !== date);
   }
 
   await mentor.save();
   return mentor.availability;
+};
+
+export const setMentorPrice = async (mentorId, price) => {
+  if (typeof price !== "number" || price < 0) {
+    throw new Error("Invalid price");
+  }
+
+  const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
+  if (!mentor) throw new Error("Mentor not found");
+
+  mentor.price = price;
+  await mentor.save();
+
+  return mentor;
 };
