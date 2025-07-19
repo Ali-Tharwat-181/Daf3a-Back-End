@@ -89,13 +89,6 @@ export const registerToWorkshop = async (req, res, next) => {
 
 export const getMentorWorkshops = async (req, res, next) => {
   try {
-    if (req.user.role !== "mentor") {
-      return res.status(403).json({
-        success: false,
-        message: "Only mentors can access their workshops",
-      });
-    }
-
     const workshops = await workshopService.getWorkshopsByMentor(req.user._id);
     return res.status(200).json({ success: true, data: workshops });
   } catch (error) {
