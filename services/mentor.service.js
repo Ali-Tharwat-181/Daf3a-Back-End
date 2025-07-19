@@ -7,11 +7,6 @@ export const getMentors = async () => {
 };
 
 export const getMentorById = async (id, user) => {
-  const dbUser = await User.findById(user?._id);
-  if (!dbUser || dbUser.role !== "mentor") {
-    throw new Error("Unauthorized: Only mentors can access this resource");
-  }
-
   const mentor = await User.findOne({ _id: id, role: "mentor" }).select(
     "-password"
   );
