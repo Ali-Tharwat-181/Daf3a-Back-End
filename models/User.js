@@ -63,7 +63,7 @@ const userSchema = new mongoose.Schema(
     links: [String],
     experience: String,
     languages: [String],
-    availability: [{ day: String, slots: [String] }],
+    availability: [{ date: String, day: String, slots: [String] }],
     rating: { type: Number, default: 0 },
     verified: { type: Boolean, default: false },
   },
