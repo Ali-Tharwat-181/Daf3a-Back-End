@@ -105,3 +105,19 @@ export const getWorkshopsForMentor = async (req, res, next) => {
     next(error);
   }
 };
+
+export const markWorkshopAsCompleted = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const updatedWorkshop = await workshopService.markWorkshopAsCompleted(id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Workshop marked as completed",
+      data: updatedWorkshop,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

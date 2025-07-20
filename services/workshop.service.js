@@ -92,3 +92,13 @@ export const getWorkshopsByMentorId = async (mentorId) => {
     .populate("registeredStudents")
     .populate("mentor");
 };
+
+export const markWorkshopAsCompleted = async (workshopId) => {
+  const workshop = await Workshop.findById(workshopId);
+  if (!workshop) {
+    throw new Error("Workshop not found");
+  }
+
+  workshop.status = "completed";
+  return await workshop.save();
+};
