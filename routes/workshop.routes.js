@@ -8,9 +8,9 @@ import {
   registerToWorkshop,
   getMentorWorkshops,
   getWorkshopsForMentor,
+  markWorkshopAsCompleted,
 } from "../controllers/workshop.controller.js";
 import authMiddleware from "../middlewares/auth.js";
-import { markWorkshopAsCompleted } from "../services/workshop.service.js";
 
 const workshopRouter = express.Router();
 
