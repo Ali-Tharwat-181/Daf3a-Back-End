@@ -19,9 +19,10 @@ You are a smart recommendation assistant.
 
 Based on the following student information, mentors, and workshops, respond with ONLY a raw JSON object — no markdown, no explanations.
 
+Return only mentor and workshop IDs like this:
 {
-  "mentors": [{ "_id": "mentor_id", "name": "mentor_name" }],
-  "workshops": [{ "_id": "workshop_id", "title": "workshop_title" }]
+  "recommendedMentors": ["mentor_id_1", "mentor_id_2"],
+  "recommendedWorkshops": ["workshop_id_1", "workshop_id_2"]
 }
 
 Student:
@@ -42,9 +43,23 @@ ${JSON.stringify(workshops.slice(0, 3), null, 2)}
     const text = result.response.text();
 
     const cleanJson = extractJsonFromMarkdown(text);
-    return JSON.parse(cleanJson);
+    const parsed = JSON.parse(cleanJson);
+
+    // Ensure output is just arrays of IDs
+    return {
+      recommendedMentors: Array.isArray(parsed.recommendedMentors)
+        ? parsed.recommendedMentors.map((m) =>
+            typeof m === "object" ? m._id : m
+          )
+        : [],
+      recommendedWorkshops: Array.isArray(parsed.recommendedWorkshops)
+        ? parsed.recommendedWorkshops.map((w) =>
+            typeof w === "object" ? w._id : w
+          )
+        : [],
+    };
   } catch (error) {
     console.error("Gemini recommendation error:", error.message);
-    return { mentors: [], workshops: [] };
+    return { recommendedMentors: [], recommendedWorkshops: [] };
   }
 }

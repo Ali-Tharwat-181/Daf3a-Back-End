@@ -18,19 +18,28 @@ export const getBookingsByMentorId = async (mentorId) => {
 };
 
 // ✅ Create Free Booking
-export const createFreeBooking = async ({ mentorId, date, slots, type, studentId }) => {
+export const createFreeBooking = async ({
+  mentorId,
+  date,
+  slots,
+  type,
+  studentId,
+}) => {
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
   const dayAvailability = mentor.availability.find(
-    av => av.day.toLowerCase() === date.toLowerCase()
+    (av) => av.day.toLowerCase() === date.toLowerCase()
   );
   if (!dayAvailability) throw new Error(`No availability for ${date}`);
 
   const slotsArray = Array.isArray(slots) ? slots : [slots];
 
-  const invalidSlots = slotsArray.filter(s => !dayAvailability.slots.includes(s));
-  if (invalidSlots.length > 0) throw new Error(`Invalid slots: ${invalidSlots.join(", ")}`);
+  const invalidSlots = slotsArray.filter(
+    (s) => !dayAvailability.slots.includes(s)
+  );
+  if (invalidSlots.length > 0)
+    throw new Error(`Invalid slots: ${invalidSlots.join(", ")}`);
 
   const booking = await Booking.create({
     mentor: mentor._id,
@@ -39,11 +48,13 @@ export const createFreeBooking = async ({ mentorId, date, slots, type, studentId
     timeSlot: slotsArray,
     type,
     paymentStatus: "free",
-    status: "confirmed"
+    status: "confirmed",
   });
 
   // ✅ حذف الـ slots من الـ availability
-  dayAvailability.slots = dayAvailability.slots.filter(s => !slotsArray.includes(s));
+  dayAvailability.slots = dayAvailability.slots.filter(
+    (s) => !slotsArray.includes(s)
+  );
 
   console.log("✅ Slots after filtering:", dayAvailability.slots);
 
@@ -53,21 +64,32 @@ export const createFreeBooking = async ({ mentorId, date, slots, type, studentId
   return booking;
 };
 
-
 // ✅ Create Paid Booking
-export const createPaidBooking = async ({ mentorId, date, slots, type, studentId, amount }) => {
+export const createPaidBooking = async ({
+  mentorId,
+  date,
+  slots,
+  type,
+  studentId,
+  amount,
+}) => {
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   const student = await User.findOne({ _id: studentId, role: "student" });
 
   if (!mentor || !student) throw new Error("Mentor or Student not found");
-  if (!student.stripeCustomerId) throw new Error("Student not connected to Stripe");
-  if (!mentor.stripeAccountId) throw new Error("Mentor not connected to Stripe");
+  if (!student.stripeCustomerId)
+    throw new Error("Student not connected to Stripe");
+  if (!mentor.stripeAccountId)
+    throw new Error("Mentor not connected to Stripe");
 
-  const dayAvailability = mentor.availability.find(av => av.day.toLowerCase() === date.toLowerCase());
+  const dayAvailability = mentor.availability.find(
+    (av) => av.day.toLowerCase() === date.toLowerCase()
+  );
   if (!dayAvailability) throw new Error(`No availability for ${date}`);
 
-  const invalidSlots = slots.filter(s => !dayAvailability.slots.includes(s));
-  if (invalidSlots.length > 0) throw new Error(`Invalid slots: ${invalidSlots.join(", ")}`);
+  const invalidSlots = slots.filter((s) => !dayAvailability.slots.includes(s));
+  if (invalidSlots.length > 0)
+    throw new Error(`Invalid slots: ${invalidSlots.join(", ")}`);
 
   // Create Stripe Checkout Session
   const sessionUrl = await createCheckoutSession({
@@ -83,7 +105,7 @@ export const createPaidBooking = async ({ mentorId, date, slots, type, studentId
     timeSlot: slots,
     type,
     paymentStatus: "pending",
-    status: "pending"
+    status: "pending",
   });
 
   return { sessionUrl, booking };
@@ -102,4 +124,8 @@ export const cancelBooking = async (id) => {
 // ✅ Confirm Booking
 export const confirmBooking = async (id) => {
   return Booking.findByIdAndUpdate(id, { status: "confirmed" }, { new: true });
+};
+
+export const getBookingsByStudentId = async (studentId) => {
+  return Booking.find({ student: studentId }).populate("mentor");
 };

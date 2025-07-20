@@ -9,6 +9,7 @@ import {
   getBookingsByMentor,
   createPaidBookingController,
   createFreeBookingController,
+  getMyBookings,
 } from "../controllers/booking.controller.js";
 
 const bookingRouter = express.Router();
@@ -23,6 +24,8 @@ bookingRouter.get("/:id", getBookingById);
 bookingRouter.patch("/:id", updateBookingById);
 
 bookingRouter.get("/mentor/:mentorId", getBookingsByMentor);
+bookingRouter.get("/me/student", getMyBookings);
+
 bookingRouter.patch("/:id/cancel", cancelBookingById);
 
 bookingRouter.patch("/:id/confirm", confirmBookingController);
