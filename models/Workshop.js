@@ -8,6 +8,7 @@ const workshopSchema = new mongoose.Schema(
     time: { type: String, required: true },
     location: { type: String },
     type: { type: String, enum: ["online", "offline"], required: true },
+    status: { type: String, enum: ["pending", "completed"] },
     price: Number,
     language: String,
     image: { type: String, default: "" },
