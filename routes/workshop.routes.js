@@ -34,10 +34,6 @@ workshopRouter.patch("/:id", authMiddleware, updateWorkshopById);
 workshopRouter.delete("/:id", authMiddleware, deleteWorkshopById);
 workshopRouter.post("/:id/register", authMiddleware, registerToWorkshop);
 
-workshopRouter.patch(
-  "/:id/status/completed",
-  authMiddleware,
-  markWorkshopAsCompleted
-);
+workshopRouter.patch("/:id/completed", authMiddleware, markWorkshopAsCompleted);
 
 export default workshopRouter;
