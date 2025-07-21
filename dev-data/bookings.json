@@ -14,8 +14,8 @@
     "date": "2025-07-19",
     "timeSlot": ["09:00"],
     "type": "offline",
-    "paymentStatus": "pending",
-    "status": "pending"
+    "paymentStatus": "free",
+    "status": "confirmed"
   },
   {
     "student": "66dcb0014f2b8509a1c1a104",
@@ -42,7 +42,7 @@
     "timeSlot": ["08:00"],
     "type": "online",
     "paymentStatus": "free",
-    "status": "pending"
+    "status": "confirmed"
   },
   {
     "student": "66dcb0014f2b8509a1c1a107",
@@ -59,8 +59,8 @@
     "date": "2025-07-21",
     "timeSlot": ["11:00"],
     "type": "offline",
-    "paymentStatus": "pending",
-    "status": "pending"
+    "paymentStatus": "free",
+    "status": "cancelled"
   },
   {
     "student": "66dcb0014f2b8509a1c1a109",
@@ -87,6 +87,6 @@
     "timeSlot": ["15:00"],
     "type": "online",
     "paymentStatus": "paid",
-    "status": "pending"
+    "status": "confirmed"
   }
 ]

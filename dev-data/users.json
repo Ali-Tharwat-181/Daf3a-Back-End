@@ -5,7 +5,10 @@
     "email": "admin@example.com",
     "password": "Test1234",
     "role": "admin",
-    "phoneNumber": "01000000001"
+    "phoneNumber": "01000000001",
+    "image": "https://ui-avatars.com/api/?name=Admin+User&background=eee&color=888&size=160",
+    "preferredLanguage": ["english"],
+    "isRegistered": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a102",
@@ -14,12 +17,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000002",
+    "stripeCustomerId": "cus_student1_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Ahmed+Hassan&background=eee&color=888&size=160",
+    "title": "Aspiring Frontend Developer",
+    "bio": "Ahmed is passionate about building modern web interfaces using React and JavaScript.",
+    "preferredLanguage": ["english", "arabic"],
     "isRegistered": true,
     "education": "Computer Science",
     "skills": ["JavaScript", "React"],
     "careerGoals": "Front-end Developer",
-    "title": "Aspiring Frontend Developer",
-    "bio": "Ahmed is passionate about building modern web interfaces using React and JavaScript."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a103",
@@ -28,12 +35,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000003",
+    "stripeCustomerId": "cus_student2_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Sara+Mahmoud&background=eee&color=888&size=160",
+    "title": "Future Data Scientist",
+    "bio": "Sara is exploring data science and machine learning to uncover insights from data.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "education": "Engineering",
     "skills": ["Python", "SQL"],
     "careerGoals": "Data Scientist",
-    "title": "Future Data Scientist",
-    "bio": "Sara is exploring data science and machine learning to uncover insights from data."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a104",
@@ -42,12 +53,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000004",
+    "stripeCustomerId": "cus_student3_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Omar+Ali&background=eee&color=888&size=160",
+    "title": "Creative UI/UX Learner",
+    "bio": "Omar is dedicated to designing intuitive user experiences and enhancing digital interfaces.",
+    "preferredLanguage": ["arabic"],
     "isRegistered": true,
     "education": "Marketing",
     "skills": ["UI/UX Design", "HTML"],
     "careerGoals": "UX Designer",
-    "title": "Creative UI/UX Learner",
-    "bio": "Omar is dedicated to designing intuitive user experiences and enhancing digital interfaces."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a105",
@@ -56,12 +71,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000005",
+    "stripeCustomerId": "cus_student4_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Nour+Tarek&background=eee&color=888&size=160",
+    "title": "AI Enthusiast",
+    "bio": "Nour is combining psychology with machine learning to build smarter AI systems.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "education": "Psychology",
     "skills": ["Machine Learning", "Python"],
     "careerGoals": "AI Engineer",
-    "title": "AI Enthusiast",
-    "bio": "Nour is combining psychology with machine learning to build smarter AI systems."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a106",
@@ -70,12 +89,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000006",
+    "stripeCustomerId": "cus_student5_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Mohamed+Samir&background=eee&color=888&size=160",
+    "title": "Future Software Architect",
+    "bio": "Mohamed is exploring system design and backend development to become a software architect.",
+    "preferredLanguage": ["english", "arabic"],
     "isRegistered": true,
     "education": "Physics",
     "skills": ["C++", "Node.js"],
     "careerGoals": "Software Architect",
-    "title": "Future Software Architect",
-    "bio": "Mohamed is exploring system design and backend development to become a software architect."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a107",
@@ -84,12 +107,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000007",
+    "stripeCustomerId": "cus_student6_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Layla+Youssef&background=eee&color=888&size=160",
+    "title": "Project Manager in the Making",
+    "bio": "Layla brings creativity and structure together to manage tech projects effectively.",
+    "preferredLanguage": ["arabic"],
     "isRegistered": true,
     "education": "Media Studies",
     "skills": ["CSS", "JavaScript"],
     "careerGoals": "Project Manager",
-    "title": "Project Manager in the Making",
-    "bio": "Layla brings creativity and structure together to manage tech projects effectively."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a108",
@@ -98,12 +125,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000008",
+    "stripeCustomerId": "cus_student7_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Yassin+Adel&background=eee&color=888&size=160",
+    "title": "DevOps Learner",
+    "bio": "Yassin aims to bridge development and operations using cloud technologies and automation.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "education": "Mathematics",
     "skills": ["React", "Node.js"],
     "careerGoals": "DevOps Engineer",
-    "title": "DevOps Learner",
-    "bio": "Yassin aims to bridge development and operations using cloud technologies and automation."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a109",
@@ -112,12 +143,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000009",
+    "stripeCustomerId": "cus_student8_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Hana+Salah&background=eee&color=888&size=160",
+    "title": "QA Enthusiast",
+    "bio": "Hana is focused on building reliable software through testing and analysis.",
+    "preferredLanguage": ["english", "arabic"],
     "isRegistered": true,
     "education": "Information Technology",
     "skills": ["HTML", "CSS"],
     "careerGoals": "QA Analyst",
-    "title": "QA Enthusiast",
-    "bio": "Hana is focused on building reliable software through testing and analysis."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a10a",
@@ -126,12 +161,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000010",
+    "stripeCustomerId": "cus_student9_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Mostafa+Hani&background=eee&color=888&size=160",
+    "title": "UX Explorer",
+    "bio": "Mostafa blends architectural creativity with UX to build digital spaces users love.",
+    "preferredLanguage": ["arabic"],
     "isRegistered": true,
     "education": "Architecture",
     "skills": ["UI/UX Design", "JavaScript"],
     "careerGoals": "UX Designer",
-    "title": "UX Explorer",
-    "bio": "Mostafa blends architectural creativity with UX to build digital spaces users love."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a10b",
@@ -140,12 +179,16 @@
     "password": "Test1234",
     "role": "student",
     "phoneNumber": "01000000011",
+    "stripeCustomerId": "cus_student10_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Mariam+Fathy&background=eee&color=888&size=160",
+    "title": "Product Leader",
+    "bio": "Mariam is learning how to align tech solutions with business goals to lead product development.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "education": "Business Administration",
     "skills": ["SQL", "React"],
     "careerGoals": "Product Owner",
-    "title": "Product Leader",
-    "bio": "Mariam is learning how to align tech solutions with business goals to lead product development."
+    "cvs": []
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11c",
@@ -154,14 +197,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000012",
+    "stripeAccountId": "acc_mentor1_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Hossam+Kamal&background=eee&color=888&size=160",
+    "title": "Backend Specialist",
+    "bio": "Dr. Hossam specializes in building scalable backend APIs and database solutions.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "expertise": ["Node.js", "MongoDB"],
+    "links": ["https://github.com/hossamkamal", "https://linkedin.com/in/hossamkamal"],
     "experience": "5 years backend development",
     "languages": ["English"],
-    "verified": true,
-    "availability": [{ "day": "Monday", "slots": ["10:00", "14:00"] }],
-    "title": "Backend Specialist",
-    "bio": "Dr. Hossam specializes in building scalable backend APIs and database solutions."
+    "availability": [
+      {
+        "date": "2024-01-01",
+        "day": "Monday",
+        "slots": ["10:00", "14:00"]
+      }
+    ],
+    "rating": 4.8,
+    "price": 150,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11d",
@@ -170,14 +225,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000013",
+    "stripeAccountId": "acc_mentor2_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Eng.+Maha+Farouk&background=eee&color=888&size=160",
+    "title": "Product Design Mentor",
+    "bio": "Maha empowers learners with strong foundations in UX and human-centered design.",
+    "preferredLanguage": ["arabic", "english"],
     "isRegistered": true,
     "expertise": ["UI/UX", "Design Thinking"],
+    "links": ["https://behance.net/mahafarouk", "https://linkedin.com/in/mahafarouk"],
     "experience": "7 years in product design",
     "languages": ["Arabic", "English"],
-    "verified": true,
-    "availability": [{ "day": "Wednesday", "slots": ["12:00", "16:00"] }],
-    "title": "Product Design Mentor",
-    "bio": "Maha empowers learners with strong foundations in UX and human-centered design."
+    "availability": [
+      {
+        "date": "2024-01-03",
+        "day": "Wednesday",
+        "slots": ["12:00", "16:00"]
+      }
+    ],
+    "rating": 4.9,
+    "price": 200,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11e",
@@ -186,14 +253,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000014",
+    "stripeAccountId": "acc_mentor3_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Tarek+Salem&background=eee&color=888&size=160",
+    "title": "Data Analytics Mentor",
+    "bio": "Dr. Tarek helps students understand and apply data science to solve real-world problems.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "expertise": ["Data Science", "Python"],
+    "links": ["https://github.com/tareksalem", "https://kaggle.com/tareksalem"],
     "experience": "6 years in data analytics",
     "languages": ["English", "French"],
-    "verified": true,
-    "availability": [{ "day": "Friday", "slots": ["09:00", "13:00"] }],
-    "title": "Data Analytics Mentor",
-    "bio": "Dr. Tarek helps students understand and apply data science to solve real-world problems."
+    "availability": [
+      {
+        "date": "2024-01-05",
+        "day": "Friday",
+        "slots": ["09:00", "13:00"]
+      }
+    ],
+    "rating": 4.7,
+    "price": 180,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a11f",
@@ -202,14 +281,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000015",
+    "stripeAccountId": "acc_mentor4_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Ms.+Salma+Mostafa&background=eee&color=888&size=160",
+    "title": "Digital Marketing Expert",
+    "bio": "Salma mentors aspiring marketers in SEO, brand awareness, and campaign management.",
+    "preferredLanguage": ["arabic"],
     "isRegistered": true,
     "expertise": ["Marketing", "SEO"],
+    "links": ["https://linkedin.com/in/salmamostafa", "https://twitter.com/salmamostafa"],
     "experience": "8 years in digital marketing",
     "languages": ["Arabic"],
-    "verified": true,
-    "availability": [{ "day": "Sunday", "slots": ["11:00", "15:00"] }],
-    "title": "Digital Marketing Expert",
-    "bio": "Salma mentors aspiring marketers in SEO, brand awareness, and campaign management."
+    "availability": [
+      {
+        "date": "2024-01-07",
+        "day": "Sunday",
+        "slots": ["11:00", "15:00"]
+      }
+    ],
+    "rating": 4.6,
+    "price": 120,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a120",
@@ -218,14 +309,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000016",
+    "stripeAccountId": "acc_mentor5_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Prof.+Mahmoud+Eissa&background=eee&color=888&size=160",
+    "title": "Finance & Investment Mentor",
+    "bio": "Prof. Eissa brings financial concepts to life with examples from real-world consulting.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "expertise": ["Finance", "Investment"],
+    "links": ["https://linkedin.com/in/mahmoudeissa", "https://researchgate.net/profile/mahmoud-eissa"],
     "experience": "12 years in financial consulting",
     "languages": ["English"],
-    "verified": true,
-    "availability": [{ "day": "Tuesday", "slots": ["10:00", "13:00"] }],
-    "title": "Finance & Investment Mentor",
-    "bio": "Prof. Eissa brings financial concepts to life with examples from real-world consulting."
+    "availability": [
+      {
+        "date": "2024-01-02",
+        "day": "Tuesday",
+        "slots": ["10:00", "13:00"]
+      }
+    ],
+    "rating": 4.9,
+    "price": 250,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a121",
@@ -234,14 +337,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000017",
+    "stripeAccountId": "acc_mentor6_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Rania+Zaki&background=eee&color=888&size=160",
+    "title": "Public Health Expert",
+    "bio": "Dr. Rania supports future professionals in healthcare administration and policy.",
+    "preferredLanguage": ["english", "arabic"],
     "isRegistered": true,
     "expertise": ["Healthcare", "Public Health"],
+    "links": ["https://linkedin.com/in/raniazaki", "https://orcid.org/rania-zaki"],
     "experience": "10 years in hospital management",
     "languages": ["English", "Arabic"],
-    "verified": true,
-    "availability": [{ "day": "Thursday", "slots": ["08:00", "12:00"] }],
-    "title": "Public Health Expert",
-    "bio": "Dr. Rania supports future professionals in healthcare administration and policy."
+    "availability": [
+      {
+        "date": "2024-01-04",
+        "day": "Thursday",
+        "slots": ["08:00", "12:00"]
+      }
+    ],
+    "rating": 4.8,
+    "price": 220,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a122",
@@ -250,14 +365,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000018",
+    "stripeAccountId": "acc_mentor7_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Eng.+Youssef+El+Sayed&background=eee&color=888&size=160",
+    "title": "Front-End Developer",
+    "bio": "Youssef helps students master React and build type-safe applications with TypeScript.",
+    "preferredLanguage": ["arabic"],
     "isRegistered": true,
     "expertise": ["React", "TypeScript"],
+    "links": ["https://github.com/youssefelsayed", "https://portfolio.youssefelsayed.dev"],
     "experience": "4 years in front-end development",
     "languages": ["Arabic"],
-    "verified": true,
-    "availability": [{ "day": "Saturday", "slots": ["13:00", "17:00"] }],
-    "title": "Front-End Developer",
-    "bio": "Youssef helps students master React and build type-safe applications with TypeScript."
+    "availability": [
+      {
+        "date": "2024-01-06",
+        "day": "Saturday",
+        "slots": ["13:00", "17:00"]
+      }
+    ],
+    "rating": 4.5,
+    "price": 130,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a123",
@@ -266,14 +393,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000019",
+    "stripeAccountId": "acc_mentor8_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Ms.+Lina+Adel&background=eee&color=888&size=160",
+    "title": "Startup Advisor",
+    "bio": "Lina coaches aspiring founders on lean startup, business models, and scaling.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "expertise": ["Business Strategy", "Entrepreneurship"],
+    "links": ["https://linkedin.com/in/linaadel", "https://medium.com/@linaadel"],
     "experience": "9 years in startups",
     "languages": ["English"],
-    "verified": true,
-    "availability": [{ "day": "Monday", "slots": ["14:00", "18:00"] }],
-    "title": "Startup Advisor",
-    "bio": "Lina coaches aspiring founders on lean startup, business models, and scaling."
+    "availability": [
+      {
+        "date": "2024-01-01",
+        "day": "Monday",
+        "slots": ["14:00", "18:00"]
+      }
+    ],
+    "rating": 4.7,
+    "price": 190,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a124",
@@ -282,14 +421,26 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000020",
+    "stripeAccountId": "acc_mentor9_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Ahmed+Elbaz&background=eee&color=888&size=160",
+    "title": "Cybersecurity Mentor",
+    "bio": "Dr. Ahmed teaches network security and prepares students for careers in cybersecurity.",
+    "preferredLanguage": ["arabic", "english"],
     "isRegistered": true,
     "expertise": ["Cybersecurity", "Networks"],
+    "links": ["https://github.com/ahmedelbaz", "https://linkedin.com/in/ahmedelbaz"],
     "experience": "11 years in security architecture",
     "languages": ["Arabic", "English"],
-    "verified": true,
-    "availability": [{ "day": "Wednesday", "slots": ["09:00", "12:00"] }],
-    "title": "Cybersecurity Mentor",
-    "bio": "Dr. Ahmed teaches network security and prepares students for careers in cybersecurity."
+    "availability": [
+      {
+        "date": "2024-01-03",
+        "day": "Wednesday",
+        "slots": ["09:00", "12:00"]
+      }
+    ],
+    "rating": 4.9,
+    "price": 240,
+    "verified": true
   },
   {
     "_id": "66dcb0014f2b8509a1c1a125",
@@ -298,13 +449,305 @@
     "password": "Test1234",
     "role": "mentor",
     "phoneNumber": "01000000021",
+    "stripeAccountId": "acc_mentor10_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Prof.+Reem+Alaa&background=eee&color=888&size=160",
+    "title": "Education Specialist",
+    "bio": "Prof. Reem designs impactful learning programs and mentors future educators.",
+    "preferredLanguage": ["english"],
     "isRegistered": true,
     "expertise": ["Education", "Curriculum Design"],
+    "links": ["https://linkedin.com/in/reemalaa", "https://academia.edu/reemalaa"],
     "experience": "15 years in academic leadership",
     "languages": ["English"],
-    "verified": true,
-    "availability": [{ "day": "Tuesday", "slots": ["15:00", "18:00"] }],
-    "title": "Education Specialist",
-    "bio": "Prof. Reem designs impactful learning programs and mentors future educators."
+    "availability": [
+      {
+        "date": "2024-01-02",
+        "day": "Tuesday",
+        "slots": ["15:00", "18:00"]
+      }
+    ],
+    "rating": 5.0,
+    "price": 280,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a126",
+    "name": "Dr. Amina Farid",
+    "email": "mentor11@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000022",
+    "stripeAccountId": "acc_mentor11_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Amina+Farid&background=eee&color=888&size=160",
+    "title": "Mobile Development Expert",
+    "bio": "Dr. Amina specializes in iOS and Android development, helping students build cross-platform mobile applications.",
+    "preferredLanguage": ["english", "arabic"],
+    "isRegistered": true,
+    "expertise": ["Flutter", "React Native", "iOS", "Android"],
+    "links": ["https://github.com/aminafarid", "https://linkedin.com/in/aminafarid"],
+    "experience": "6 years in mobile app development",
+    "languages": ["Arabic", "English"],
+    "availability": [
+      {
+        "date": "2024-01-08",
+        "day": "Monday",
+        "slots": ["09:00", "15:00"]
+      }
+    ],
+    "rating": 4.6,
+    "price": 170,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a127",
+    "name": "Eng. Khaled Nasser",
+    "email": "mentor12@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000023",
+    "stripeAccountId": "acc_mentor12_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Eng.+Khaled+Nasser&background=eee&color=888&size=160",
+    "title": "DevOps & Cloud Architect",
+    "bio": "Khaled guides students through modern DevOps practices, AWS, Docker, and Kubernetes for scalable deployments.",
+    "preferredLanguage": ["english"],
+    "isRegistered": true,
+    "expertise": ["AWS", "Docker", "Kubernetes", "CI/CD"],
+    "links": ["https://github.com/khalednasser", "https://medium.com/@khalednasser"],
+    "experience": "8 years in DevOps and cloud infrastructure",
+    "languages": ["English"],
+    "availability": [
+      {
+        "date": "2024-01-09",
+        "day": "Tuesday",
+        "slots": ["11:00", "16:00"]
+      }
+    ],
+    "rating": 4.8,
+    "price": 210,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a128",
+    "name": "Ms. Dina Helmy",
+    "email": "mentor13@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000024",
+    "stripeAccountId": "acc_mentor13_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Ms.+Dina+Helmy&background=eee&color=888&size=160",
+    "title": "Content Strategy Specialist",
+    "bio": "Dina helps students master content creation, social media strategy, and brand storytelling for digital success.",
+    "preferredLanguage": ["arabic"],
+    "isRegistered": true,
+    "expertise": ["Content Marketing", "Social Media", "Copywriting"],
+    "links": ["https://linkedin.com/in/dinahelmy", "https://instagram.com/dinahelmy"],
+    "experience": "5 years in content strategy and digital marketing",
+    "languages": ["Arabic"],
+    "availability": [
+      {
+        "date": "2024-01-10",
+        "day": "Wednesday",
+        "slots": ["10:00", "14:00"]
+      }
+    ],
+    "rating": 4.4,
+    "price": 110,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a129",
+    "name": "Dr. Sherif Mahmoud",
+    "email": "mentor14@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000025",
+    "stripeAccountId": "acc_mentor14_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Sherif+Mahmoud&background=eee&color=888&size=160",
+    "title": "Machine Learning Researcher",
+    "bio": "Dr. Sherif teaches advanced ML algorithms, deep learning, and AI research methodologies to aspiring data scientists.",
+    "preferredLanguage": ["english"],
+    "isRegistered": true,
+    "expertise": ["Machine Learning", "Deep Learning", "TensorFlow", "PyTorch"],
+    "links": ["https://github.com/sherifmahmoud", "https://scholar.google.com/citations?user=sherifmahmoud"],
+    "experience": "9 years in AI research and development",
+    "languages": ["English"],
+    "availability": [
+      {
+        "date": "2024-01-11",
+        "day": "Thursday",
+        "slots": ["13:00", "17:00"]
+      }
+    ],
+    "rating": 4.9,
+    "price": 260,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a12a",
+    "name": "Ms. Aya Rashad",
+    "email": "mentor15@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000026",
+    "stripeAccountId": "acc_mentor15_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Ms.+Aya+Rashad&background=eee&color=888&size=160",
+    "title": "Product Management Coach",
+    "bio": "Aya mentors future product managers in user research, roadmap planning, and agile methodologies.",
+    "preferredLanguage": ["english", "arabic"],
+    "isRegistered": true,
+    "expertise": ["Product Management", "Agile", "User Research", "Analytics"],
+    "links": ["https://linkedin.com/in/ayarashad", "https://productschool.com/ayarashad"],
+    "experience": "7 years in product management at tech companies",
+    "languages": ["Arabic", "English"],
+    "availability": [
+      {
+        "date": "2024-01-12",
+        "day": "Friday",
+        "slots": ["12:00", "18:00"]
+      }
+    ],
+    "rating": 4.7,
+    "price": 200,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a12b",
+    "name": "Eng. Hatem Soliman",
+    "email": "mentor16@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000027",
+    "stripeAccountId": "acc_mentor16_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Eng.+Hatem+Soliman&background=eee&color=888&size=160",
+    "title": "Blockchain Developer",
+    "bio": "Hatem teaches blockchain technology, smart contracts, and cryptocurrency development using Solidity and Web3.",
+    "preferredLanguage": ["english"],
+    "isRegistered": true,
+    "expertise": ["Blockchain", "Solidity", "Web3", "Smart Contracts"],
+    "links": ["https://github.com/hatemsoliman", "https://ethereum.org/en/developers/docs/"],
+    "experience": "4 years in blockchain and DeFi development",
+    "languages": ["English"],
+    "availability": [
+      {
+        "date": "2024-01-13",
+        "day": "Saturday",
+        "slots": ["15:00", "19:00"]
+      }
+    ],
+    "rating": 4.5,
+    "price": 180,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a12c",
+    "name": "Dr. Noha Ibrahim",
+    "email": "mentor17@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000028",
+    "stripeAccountId": "acc_mentor17_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Noha+Ibrahim&background=eee&color=888&size=160",
+    "title": "Quality Assurance Leader",
+    "bio": "Dr. Noha specializes in software testing, automation frameworks, and quality engineering best practices.",
+    "preferredLanguage": ["arabic", "english"],
+    "isRegistered": true,
+    "expertise": ["Software Testing", "Selenium", "Test Automation", "QA Management"],
+    "links": ["https://linkedin.com/in/nohaibrahim", "https://testautomationu.applitools.com/"],
+    "experience": "10 years in quality assurance and test automation",
+    "languages": ["Arabic", "English"],
+    "availability": [
+      {
+        "date": "2024-01-14",
+        "day": "Sunday",
+        "slots": ["08:00", "13:00"]
+      }
+    ],
+    "rating": 4.6,
+    "price": 160,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a12d",
+    "name": "Mr. Karim Ashraf",
+    "email": "mentor18@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000029",
+    "stripeAccountId": "acc_mentor18_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Mr.+Karim+Ashraf&background=eee&color=888&size=160",
+    "title": "Game Development Mentor",
+    "bio": "Karim guides students through game development using Unity, C#, and game design principles for mobile and PC.",
+    "preferredLanguage": ["arabic"],
+    "isRegistered": true,
+    "expertise": ["Unity", "C#", "Game Design", "3D Modeling"],
+    "links": ["https://github.com/karimashraf", "https://unity.com/learn"],
+    "experience": "6 years in game development and interactive media",
+    "languages": ["Arabic"],
+    "availability": [
+      {
+        "date": "2024-01-15",
+        "day": "Monday",
+        "slots": ["16:00", "20:00"]
+      }
+    ],
+    "rating": 4.3,
+    "price": 140,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a12e",
+    "name": "Ms. Fatma Hassan",
+    "email": "mentor19@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000030",
+    "stripeAccountId": "acc_mentor19_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Ms.+Fatma+Hassan&background=eee&color=888&size=160",
+    "title": "E-commerce Strategy Expert",
+    "bio": "Fatma helps entrepreneurs build successful online stores, optimize conversions, and scale e-commerce operations.",
+    "preferredLanguage": ["arabic", "english"],
+    "isRegistered": true,
+    "expertise": ["E-commerce", "Shopify", "Digital Sales", "Conversion Optimization"],
+    "links": ["https://linkedin.com/in/fatmahassan", "https://shopify.com/partners"],
+    "experience": "8 years in e-commerce and online retail",
+    "languages": ["Arabic", "English"],
+    "availability": [
+      {
+        "date": "2024-01-16",
+        "day": "Tuesday",
+        "slots": ["14:00", "17:00"]
+      }
+    ],
+    "rating": 4.5,
+    "price": 130,
+    "verified": true
+  },
+  {
+    "_id": "66dcb0014f2b8509a1c1a12f",
+    "name": "Dr. Tamer Abdel Rahman",
+    "email": "mentor20@example.com",
+    "password": "Test1234",
+    "role": "mentor",
+    "phoneNumber": "01000000031",
+    "stripeAccountId": "acc_mentor20_stripe_id",
+    "image": "https://ui-avatars.com/api/?name=Dr.+Tamer+Abdel+Rahman&background=eee&color=888&size=160",
+    "title": "Systems Architecture Consultant",
+    "bio": "Dr. Tamer teaches distributed systems, microservices architecture, and scalable system design principles.",
+    "preferredLanguage": ["english"],
+    "isRegistered": true,
+    "expertise": ["System Design", "Microservices", "Distributed Systems", "Architecture"],
+    "links": ["https://github.com/tamerabdelrahman", "https://linkedin.com/in/tamerabdelrahman"],
+    "experience": "12 years in enterprise architecture and system design",
+    "languages": ["English"],
+    "availability": [
+      {
+        "date": "2024-01-17",
+        "day": "Wednesday",
+        "slots": ["11:00", "15:00"]
+      }
+    ],
+    "rating": 4.8,
+    "price": 270,
+    "verified": true
   }
 ]

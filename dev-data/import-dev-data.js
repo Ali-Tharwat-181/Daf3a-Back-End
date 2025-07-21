@@ -40,15 +40,15 @@ const reviews = JSON.parse(
 // Import data (with password hashing via schema hook)
 const importData = async () => {
   try {
-    await Workshop.create(workshops);
+    // await Workshop.create(workshops);
 
     // Loop through users and use .save() to trigger password hashing
-    for (const userData of users) {
-      const user = new User(userData);
-      await user.save();
-    }
+    // for (const userData of users) {
+    //   const user = new User(userData);
+    //   await user.save();
+    // }
 
-    await Booking.create(bookings);
+    // await Booking.create(bookings);
 
     for (const review of reviews) {
       try {

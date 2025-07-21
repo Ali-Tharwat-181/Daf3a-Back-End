@@ -9,16 +9,79 @@
   {
     "author": "66dcb0014f2b8509a1c1a103",
     "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11c",
+    "rating": 4,
+    "comment": "Great MERN stack workshop! The full-stack approach was exactly what I needed."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a104",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11c",
+    "rating": 5,
+    "comment": "Excellent technical depth and hands-on examples. Highly recommend!"
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a105",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11d",
+    "rating": 5,
+    "comment": "Maha's UI/UX approach completely changed how I think about design!"
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a106",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11d",
+    "rating": 4,
+    "comment": "Great design principles and practical exercises. Very engaging bootcamp."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a107",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11d",
+    "rating": 5,
+    "comment": "Amazing attention to user experience details. Learned so much!"
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a108",
+    "targetType": "mentor",
     "targetId": "66dcb0014f2b8509a1c1a11e",
     "rating": 4,
     "comment": "Great insights into data analytics, learned a lot from real-life examples."
   },
   {
+    "author": "66dcb0014f2b8509a1c1a109",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11e",
+    "rating": 5,
+    "comment": "Excellent data visualization techniques and practical case studies."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a10a",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11e",
+    "rating": 4,
+    "comment": "Very knowledgeable in analytics tools. Good mix of theory and practice."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a102",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11f",
+    "rating": 5,
+    "comment": "Outstanding digital marketing strategies! Increased my campaign effectiveness."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a103",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a11f",
+    "rating": 4,
+    "comment": "Solid marketing fundamentals and current trends. Very helpful."
+  },
+  {
     "author": "66dcb0014f2b8509a1c1a104",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11d",
-    "rating": 5,
-    "comment": "Maha's UI/UX approach completely changed how I think about design!"
+    "targetId": "66dcb0014f2b8509a1c1a11f",
+    "rating": 4,
+    "comment": "Good practical examples of successful marketing campaigns."
   },
   {
     "author": "66dcb0014f2b8509a1c1a105",
@@ -30,43 +93,99 @@
   {
     "author": "66dcb0014f2b8509a1c1a106",
     "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a120",
+    "rating": 5,
+    "comment": "Excellent financial planning strategies. Made complex topics easy to understand."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a107",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a120",
+    "rating": 4,
+    "comment": "Great insights into personal and business finance management."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a108",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a121",
+    "rating": 5,
+    "comment": "Amazing healthcare technology insights! Very forward-thinking approach."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a109",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a121",
+    "rating": 4,
+    "comment": "Great overview of emerging health tech trends and innovations."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a10a",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a121",
+    "rating": 5,
+    "comment": "Excellent real-world healthcare applications. Very inspiring session."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a10b",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a122",
+    "rating": 5,
+    "comment": "Best interview prep ever! Mock interviews were super useful."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a102",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a122",
+    "rating": 4,
+    "comment": "Great career development advice and practical tips for tech growth."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a103",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a122",
+    "rating": 5,
+    "comment": "Comprehensive career roadmap and excellent networking strategies."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a104",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a123",
+    "rating": 5,
+    "comment": "Lina gave us a full roadmap on launching startups. Amazing session!"
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a105",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a123",
+    "rating": 4,
+    "comment": "Practical entrepreneurship insights and valuable startup tips."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a106",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a123",
+    "rating": 5,
+    "comment": "Excellent business fundamentals and startup strategy guidance."
+  },
+  {
+    "author": "66dcb0014f2b8509a1c1a107",
+    "targetType": "mentor",
     "targetId": "66dcb0014f2b8509a1c1a125",
     "rating": 5,
     "comment": "Reem is inspiring! Her educational strategies are game-changing."
   },
   {
-    "author": "66dcb0014f2b8509a1c1a107",
-    "targetType": "workshop",
-    "targetId": "687b35f39815c0dc4b3803e6",
-    "rating": 5,
-    "comment": "Hands-on workshop with real-world MERN examples. Loved it!"
-  },
-  {
     "author": "66dcb0014f2b8509a1c1a108",
-    "targetType": "workshop",
-    "targetId": "687b35f39815c0dc4b3803e7",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a125",
     "rating": 4,
-    "comment": "Solid bootcamp! Would've liked more time for Q&A, though."
+    "comment": "Great soft skills development and communication techniques."
   },
   {
     "author": "66dcb0014f2b8509a1c1a109",
-    "targetType": "workshop",
-    "targetId": "687b35f39815c0dc4b3803e8",
+    "targetType": "mentor",
+    "targetId": "66dcb0014f2b8509a1c1a125",
     "rating": 5,
-    "comment": "Lina gave us a full roadmap on launching startups. Amazing session!"
-  },
-  {
-    "author": "66dcb0014f2b8509a1c1a10a",
-    "targetType": "workshop",
-    "targetId": "687b35f39815c0dc4b3803e9",
-    "rating": 4,
-    "comment": "Helpful finance tips, but some parts were a bit too fast-paced."
-  },
-  {
-    "author": "66dcb0014f2b8509a1c1a10b",
-    "targetType": "workshop",
-    "targetId": "687b35f39815c0dc4b3803eb",
-    "rating": 5,
-    "comment": "Best interview prep ever! Mock interviews were super useful."
+    "comment": "Excellent education technology trends and innovative teaching methods."
   }
 ]
