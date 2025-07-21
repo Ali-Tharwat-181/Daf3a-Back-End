@@ -7,6 +7,7 @@ const workshopSchema = new mongoose.Schema(
     date: { type: Date, required: true },
     time: { type: String, required: true },
     location: { type: String },
+    duration: { type: String },
     type: { type: String, enum: ["online", "offline"], required: true },
     status: {
       type: String,

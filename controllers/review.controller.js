@@ -1,3 +1,4 @@
+import Review from "../models/Review.js";
 import {
   createReview,
   deleteReview,
@@ -5,13 +6,23 @@ import {
 } from "../services/review.service.js";
 
 export const createReviewController = async (req, res) => {
-  const { author, targetType, targetId, rating, comment } = req.body;
+  const { targetType, targetId, rating, comment } = req.body;
+  const author = req.user.id; // Get from authenticated user
 
-  if (!author || !targetType || !targetId || !rating || !comment) {
+  if (!targetType || !targetId || !rating || !comment) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
   try {
+    // Check if user has already reviewed this target
+    const existing = await Review.findOne({ author, targetId });
+
+    if (existing) {
+      return res
+        .status(409)
+        .json({ error: "You have already reviewed this item." });
+    }
+
     const review = await createReview({
       author,
       targetType,
