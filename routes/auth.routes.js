@@ -9,6 +9,9 @@ import {
   updatePassword,
 } from "../controllers/auth.controller.js";
 import authMiddleware from "../middlewares/auth.js";
+import passport from "passport";
+import "../config/passport.js"; // important!
+import generateToken from "../utils/generateToken.js";
 
 const authRouter = express.Router();
 
@@ -29,5 +32,33 @@ authRouter.post("/reset-password", resetPassword);
 
 // Update Password (protected)
 authRouter.post("/update-password", authMiddleware, updatePassword);
+
+// Google OAuth
+authRouter.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+authRouter.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false }),
+  (req, res) => {
+    const token = generateToken(req.user._id, req.user.role);
+    res.redirect(`http://localhost:5173/login/success?token=${token}`);
+  }
+);
+
+// GitHub OAuth
+authRouter.get(
+  "/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+authRouter.get(
+  "/github/callback",
+  passport.authenticate("github", { session: false }),
+  (req, res) => {
+    const token = generateToken(req.user._id, req.user.role);
+    res.redirect(`http://localhost:5173/login/success?token=${token}`);
+  }
+);
 
 export default authRouter;

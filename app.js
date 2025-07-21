@@ -16,14 +16,17 @@ import workshopRouter from "./routes/workshop.routes.js";
 import messageRouter from "./routes/message.routes.js";
 import aiRouter from "./routes/ai.routes.js";
 import { multerErrorHandler } from "./middlewares/upload.js";
+import oauthRouter from "./routes/auth.routes.js"; // the new file
 
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: process.env.CLIENT_URL, // your frontend URL
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL, // your frontend URL
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -38,6 +41,7 @@ app.use("/api/admin", adminRouter);
 app.use("/api/workshops", workshopRouter);
 app.use("/api/messages", messageRouter);
 app.use("/api/ai", aiRouter);
+app.use("/api/auth", oauthRouter); // mount OAuth routes
 
 // Multer error handler (for file upload errors)
 app.use(multerErrorHandler);
