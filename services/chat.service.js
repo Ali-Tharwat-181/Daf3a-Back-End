@@ -16,7 +16,7 @@ export const getMessagesBetweenUsers = async (user1Id, user2Id) => {
     .populate("sender receiver");
 };
 
-export const getMessagesReceivedByMentor = async (userId) => {
+export const getMessagesReceivedByUser = async (userId) => {
   return await Message.find({ receiver: userId })
     .sort({ timestamp: -1 })
     .populate("sender", "name email role"); // Only include useful fields

@@ -1,7 +1,7 @@
 import express from "express";
 import {
   getMessagesBetweenUsersController,
-  getMessagesReceivedByMentorController,
+  getMessagesReceivedByUserController,
 } from "../controllers/message.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 
@@ -17,7 +17,7 @@ messageRouter.get(
 messageRouter.get(
   "/received/:userId",
   authMiddleware,
-  getMessagesReceivedByMentorController
+  getMessagesReceivedByUserController
 );
 
 export default messageRouter;

@@ -1,6 +1,6 @@
 import {
   getMessagesBetweenUsers,
-  getMessagesReceivedByMentor,
+  getMessagesReceivedByUser,
 } from "../services/chat.service.js";
 
 export const getMessagesBetweenUsersController = async (req, res, next) => {
@@ -14,11 +14,11 @@ export const getMessagesBetweenUsersController = async (req, res, next) => {
   }
 };
 
-export const getMessagesReceivedByMentorController = async (req, res, next) => {
+export const getMessagesReceivedByUserController = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const messages = await getMessagesReceivedByMentor(userId);
+    const messages = await getMessagesReceivedByUser(userId);
     res.status(200).json({ success: true, data: messages });
   } catch (err) {
     console.error(err);
