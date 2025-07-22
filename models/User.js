@@ -65,7 +65,18 @@ const userSchema = new mongoose.Schema(
     links: [String],
     experience: String,
     languages: [String],
-    availability: [{ date: String, day: String, slots: [String] }],
+    availability: [
+      {
+        date: { type: String }, // e.g., "2025-07-22"
+        day: { type: String }, // e.g., "Monday"
+        slots: [
+          {
+            start: String, // e.g., "10:00"
+            end: String, // e.g., "10:30"
+          },
+        ],
+      },
+    ],
     rating: { type: Number, default: 0 },
     price: { type: Number, default: 0 },
     verified: { type: Boolean, default: false },

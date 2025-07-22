@@ -50,7 +50,7 @@ export const updateMentor = async (id, userId, userRole, body) => {
   return mentor;
 };
 
-// add slots to availability
+// Add availability slot(s)
 export const addAvailabilitySlot = async (mentorId, day, date, slots) => {
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
@@ -61,7 +61,10 @@ export const addAvailabilitySlot = async (mentorId, day, date, slots) => {
 
   if (existingAvailability) {
     slots.forEach((slot) => {
-      if (!existingAvailability.slots.includes(slot)) {
+      const exists = existingAvailability.slots.some(
+        (s) => s.start === slot.start && s.end === slot.end
+      );
+      if (!exists) {
         existingAvailability.slots.push(slot);
       }
     });
@@ -73,8 +76,7 @@ export const addAvailabilitySlot = async (mentorId, day, date, slots) => {
   return mentor.availability;
 };
 
-//Remove Slots from Availability
-
+// Remove availability slot(s)
 export const removeAvailabilitySlot = async (mentorId, day, date, slots) => {
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
@@ -83,14 +85,30 @@ export const removeAvailabilitySlot = async (mentorId, day, date, slots) => {
   if (!dayAvailability) throw new Error("No availability found for this date");
 
   dayAvailability.slots = dayAvailability.slots.filter(
-    (s) => !slots.includes(s)
+    (existingSlot) =>
+      !slots.some(
+        (slotToRemove) =>
+          slotToRemove.start === existingSlot.start &&
+          slotToRemove.end === existingSlot.end
+      )
   );
 
+  // Remove the whole day if no slots left
   if (dayAvailability.slots.length === 0) {
     mentor.availability = mentor.availability.filter((av) => av.date !== date);
   }
 
   await mentor.save();
+  return mentor.availability;
+};
+
+// Get availability
+export const getMentorAvailability = async (mentorId) => {
+  const mentor = await User.findOne({ _id: mentorId, role: "mentor" }).select(
+    "availability"
+  );
+  if (!mentor) throw new Error("Mentor not found");
+
   return mentor.availability;
 };
 

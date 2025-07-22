@@ -48,15 +48,15 @@ const importData = async () => {
     //   await user.save();
     // }
 
-    // await Booking.create(bookings);
+    await Booking.create(bookings);
 
-    for (const review of reviews) {
-      try {
-        await createReview(review);
-      } catch (err) {
-        console.error("Failed to import review:", review, err.message);
-      }
-    }
+    // for (const review of reviews) {
+    //   try {
+    //     await createReview(review);
+    //   } catch (err) {
+    //     console.error("Failed to import review:", review, err.message);
+    //   }
+    // }
     console.log("Data imported successfully with hashed passwords");
   } catch (err) {
     console.error(err);

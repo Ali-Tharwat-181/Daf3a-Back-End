@@ -5,6 +5,7 @@ import {
   updateMentor,
   addAvailabilitySlot,
   removeAvailabilitySlot,
+  getMentorAvailability,
   setMentorPrice,
 } from "../services/mentor.service.js";
 import {
@@ -64,14 +65,14 @@ export const updateMentorController = async (req, res) => {
   }
 };
 
-//  Add availability slots
+// Add slots
 export const addAvailabilityController = async (req, res) => {
   const { day, date, slots } = req.body;
 
-  if (!day || !date || !slots || !Array.isArray(slots)) {
+  if (!day || !date || !Array.isArray(slots)) {
     return res.status(400).json({
       success: false,
-      message: "day, date, and slots (array) are required",
+      message: "day, date, and slots (array of {start, end}) are required",
     });
   }
 
@@ -90,14 +91,14 @@ export const addAvailabilityController = async (req, res) => {
   }
 };
 
-// Remove availability slots
+// Remove slots
 export const removeAvailabilityController = async (req, res) => {
   const { day, date, slots } = req.body;
 
-  if (!day || !date || !slots || !Array.isArray(slots)) {
+  if (!day || !date || !Array.isArray(slots)) {
     return res.status(400).json({
       success: false,
-      message: "day, date, and slots (array) are required",
+      message: "day, date, and slots (array of {start, end}) are required",
     });
   }
 
@@ -111,6 +112,16 @@ export const removeAvailabilityController = async (req, res) => {
     return res
       .status(200)
       .json({ success: true, availability: updatedAvailability });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+// Get availability
+export const getMentorAvailabilityController = async (req, res) => {
+  try {
+    const availability = await getMentorAvailability(req.user._id);
+    return res.status(200).json({ success: true, availability });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }
