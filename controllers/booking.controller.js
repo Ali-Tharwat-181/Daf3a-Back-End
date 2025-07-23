@@ -31,20 +31,14 @@ export const getBookingsByMentor = async (req, res, next) => {
 
 export const createFreeBookingController = async (req, res, next) => {
   const { mentorId, date, slots, type } = req.body;
+
   if (!mentorId || !date || !slots || !type) {
-    console.log(req.body);
-    console.log("Missing required fields for free booking:", {
-      mentorId,
-      date,
-      slots,
-      type,
+    return res.status(400).json({
+      success: false,
+      message: "All fields are required: mentorId, date, slots, type",
     });
-    return res
-      .status(400)
-      .json({ success: false, message: "All fields are required" });
-  } else {
-    console.log("Creating free booking with:", { mentorId, date, slots, type });
   }
+
   try {
     const data = await bookingService.createFreeBooking({
       mentorId,
@@ -53,15 +47,18 @@ export const createFreeBookingController = async (req, res, next) => {
       type,
       studentId: req.user._id,
     });
-    console.log("Free booking created successfully:", data);
-    res
-      .status(201)
-      .json({ success: true, data: data, message: "Free booking confirmed" });
+
+    res.status(201).json({
+      success: true,
+      data,
+      message: "Free booking confirmed",
+    });
   } catch (err) {
-    console.error("Error creating free booking:", err);
+    console.error("❌ Error creating free booking:", err);
     next(err);
   }
 };
+
 
 export const createPaidBookingController = async (req, res, next) => {
   const { mentorId, date, slots, type, amount } = req.body;
