@@ -18,6 +18,7 @@ import messageRouter from "./routes/message.routes.js";
 import aiRouter from "./routes/ai.routes.js";
 import { multerErrorHandler } from "./middlewares/upload.js";
 import oauthRouter from "./routes/auth.routes.js"; // the new file
+import videoRouter from "./routes/video.routes.js";
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use("/api/messages", messageRouter);
 app.use("/api/chats", chatRouter);
 app.use("/api/ai", aiRouter);
 app.use("/api/auth", oauthRouter); // mount OAuth routes
+app.use("/api/video", videoRouter);
 
 // Multer error handler (for file upload errors)
 app.use(multerErrorHandler);
