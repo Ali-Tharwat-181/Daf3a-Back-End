@@ -1,5 +1,5 @@
 // services/report.service.js
-import Report from "../models/report.model.js";
+import Report from "../models/Report.js";
 
 export const createReportService = async ({
   reporter,

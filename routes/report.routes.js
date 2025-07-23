@@ -2,6 +2,7 @@ import express from "express";
 import {
   createReport,
   getAllReports,
+  markReportResolved,
 } from "../controllers/report.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "../middlewares/roleCheck.js";
@@ -9,7 +10,7 @@ import roleCheck from "../middlewares/roleCheck.js";
 const router = express.Router();
 
 // Submit report (by student or mentor)
-router.post("/", createReport);
+router.post("/", authMiddleware, createReport);
 
 // Admin views all reports
 router.get("/", authMiddleware, roleCheck("admin"), getAllReports);
