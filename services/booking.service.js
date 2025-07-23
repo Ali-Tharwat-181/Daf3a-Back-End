@@ -28,41 +28,67 @@ export const createFreeBooking = async ({
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
 
+  // 🔍 Find availability for the specific date
   const dayAvailability = mentor.availability.find(
-    (av) => av.day.toLowerCase() === date.toLowerCase()
+    (av) => av.date === date
   );
-  if (!dayAvailability) throw new Error(`No availability for ${date}`);
+  if (!dayAvailability) throw new Error(`No availability found for ${date}`);
 
+  // 🟨 Make sure each slot is { start, end } object
   const slotsArray = Array.isArray(slots) ? slots : [slots];
 
-  const invalidSlots = slotsArray.filter(
-    (s) => !dayAvailability.slots.includes(s)
-  );
-  if (invalidSlots.length > 0)
-    throw new Error(`Invalid slots: ${invalidSlots.join(", ")}`);
 
+  // ❌ Validate that each slot exists in mentor's availability
+  const invalidSlots = slotsArray.filter((incomingSlot) =>
+    !dayAvailability.slots.some(
+      (availableSlot) =>
+        availableSlot.start === incomingSlot.start &&
+        availableSlot.end === incomingSlot.end
+    )
+  );
+
+  if (invalidSlots.length > 0) {
+    throw new Error(
+      `Invalid slots: ${invalidSlots
+        .map((s) => `${s.start} - ${s.end}`)
+        .join(", ")}`
+    );
+  }
+
+  // ✅ Save full slot objects into DB
   const booking = await Booking.create({
     mentor: mentor._id,
     student: studentId,
     date,
-    timeSlot: slotsArray,
+    timeSlot: slotsArray, // 👈 make sure this is array of { start, end }
     type,
     paymentStatus: "free",
     status: "confirmed",
   });
 
-  // ✅ حذف الـ slots من الـ availability
-  dayAvailability.slots = dayAvailability.slots.filter(
-    (s) => !slotsArray.includes(s)
+  // 🧹 Remove the booked slots from mentor's availability
+  dayAvailability.slots = dayAvailability.slots.filter((availableSlot) =>
+    !slotsArray.some(
+      (bookedSlot) =>
+        bookedSlot.start === availableSlot.start &&
+        bookedSlot.end === availableSlot.end
+    )
   );
 
-  console.log("✅ Slots after filtering:", dayAvailability.slots);
+  // ❌ Remove the date if all slots are booked
+  if (dayAvailability.slots.length === 0) {
+    mentor.availability = mentor.availability.filter(
+      (a) => a.date !== date
+    );
+  }
 
-  // ✅ حفظ mentor بعد التعديل
   await mentor.save();
 
   return booking;
 };
+
+
+
 
 // ✅ Create Paid Booking
 export const createPaidBooking = async ({

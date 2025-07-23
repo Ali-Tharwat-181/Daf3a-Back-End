@@ -13,6 +13,7 @@ import userRouter from "./routes/user.routes.js";
 import reviewRouter from "./routes/review.routes.js";
 import adminRouter from "./routes/admin.routes.js";
 import workshopRouter from "./routes/workshop.routes.js";
+import chatRouter from "./routes/chat.routes.js";
 import messageRouter from "./routes/message.routes.js";
 import aiRouter from "./routes/ai.routes.js";
 import { multerErrorHandler } from "./middlewares/upload.js";
@@ -40,6 +41,7 @@ app.use("/api/reviews", reviewRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/workshops", workshopRouter);
 app.use("/api/messages", messageRouter);
+app.use("/api/chats", chatRouter);
 app.use("/api/ai", aiRouter);
 app.use("/api/auth", oauthRouter); // mount OAuth routes
 

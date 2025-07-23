@@ -6,7 +6,13 @@ const BookingSchema = new mongoose.Schema(
     student: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     mentor: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     date: { type: String, required: true },
-    timeSlot: [{ type: String, required: true }],
+    timeSlot: [
+      {
+        start: { type: String, required: true },
+        end: { type: String, required: true },
+        _id: false
+      }
+    ],
     type: {
       type: String,
       enum: ["online", "offline"],

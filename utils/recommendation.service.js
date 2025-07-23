@@ -37,7 +37,7 @@ ${JSON.stringify(workshops.slice(0, 3), null, 2)}
 
   try {
     const model = genAI.getGenerativeModel({
-      model: "models/gemini-1.5-flash",
+      model: "models/gemini-2.5-flash",
     });
     const result = await model.generateContent(prompt);
     const text = result.response.text();
