@@ -1,29 +1,57 @@
-import {
-  getMessagesBetweenUsers,
-  getMessagesReceivedByUser,
-} from "../services/chat.service.js";
 
-export const getMessagesBetweenUsersController = async (req, res, next) => {
-  const { userId, otherUserId } = req.params;
+import asyncHandler from "express-async-handler";
+import Message from "../models/Message.js";
+import User from "../models/User.js";
+import Chat from "../models/chat.js";
+//@description     Get all Messages
+//@route           GET /api/Message/:chatId
+//@access          Protected
+export const allMessages = asyncHandler(async (req, res) => {
+  try {
+    const messages = await Message.find({ chat: req.params.chatId })
+      .populate("sender", "name pic email")
+      .populate("chat");
+    res.json(messages);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+});
+
+//@description     Create New Message
+//@route           POST /api/Message/
+//@access          Protected
+export const sendMessage = asyncHandler(async (req, res) => {
+  const { content, chatId } = req.body;
+
+  if (!content || !chatId) {
+    console.log("Invalid data passed into request");
+    return res.sendStatus(400);
+  }
+
+  var newMessage = {
+    sender: req.user._id,
+    content: content,
+    chat: chatId,
+  };
 
   try {
-    const messages = await getMessagesBetweenUsers(userId, otherUserId);
-    res.status(200).json({ success: true, data: messages });
-  } catch (err) {
-    next(err);
-  }
-};
+    var message = await Message.create(newMessage);
 
-export const getMessagesReceivedByUserController = async (req, res, next) => {
-  const { userId } = req.params;
+    message = await message.populate("sender", "name pic")
+    message = await message.populate("chat")
+    message = await User.populate(message, {
+      path: "chat.users",
+      select: "name pic email",
+    });
 
-  try {
-    const messages = await getMessagesReceivedByUser(userId);
-    res.status(200).json({ success: true, data: messages });
-  } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({ success: false, message: "Failed to fetch messages" });
+    await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
+
+    res.json(message);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
   }
-};
+});
+
+
