@@ -5,6 +5,7 @@ export const createReportService = async ({
   reporter,
   reportedUser,
   booking,
+  workshop,
   reason,
   message,
 }) => {
@@ -12,6 +13,7 @@ export const createReportService = async ({
     reporter,
     reportedUser,
     booking,
+    workshop,
     reason,
     message,
   });
@@ -24,7 +26,8 @@ export const getAllReportsService = async () => {
   const reports = await Report.find()
     .populate("reporter", "name role")
     .populate("reportedUser", "name role")
-    .populate("booking");
+    .populate("booking")
+    .populate("workshop");
 
   return reports;
 };

@@ -6,13 +6,14 @@ import {
 
 export const createReport = async (req, res) => {
   try {
-    const { reportedUser, booking, reason, message } = req.body;
+    const { reportedUser, booking, workshop, reason, message } = req.body;
     const reporter = req.user._id;
 
     const result = await createReportService({
       reporter,
       reportedUser,
       booking,
+      workshop,
       reason,
       message,
     });

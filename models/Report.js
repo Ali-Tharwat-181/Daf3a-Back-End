@@ -15,7 +15,10 @@ const reportSchema = new mongoose.Schema(
     booking: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Booking",
-      required: true,
+    },
+    workshop: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Workshop",
     },
     reason: {
       type: String,
