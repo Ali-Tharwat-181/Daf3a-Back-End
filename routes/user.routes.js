@@ -5,6 +5,8 @@ import {
   updateUser,
   deleteUser,
   updateUserProfile,
+  suspendUser,
+  unsuspendUser,
 } from "../controllers/user.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "../middlewares/roleCheck.js";
@@ -23,5 +25,8 @@ router.put("/:id", roleCheck("admin"), updateUser);
 router.delete("/:id", roleCheck("admin"), deleteUser);
 
 router.put("/profile/update", upload.single("image"), updateUserProfile);
+
+router.patch("/:id/suspend", suspendUser);
+router.patch("/:id/unsuspend", unsuspendUser);
 
 export default router;

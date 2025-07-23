@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema(
       enum: ["arabic", "english"],
       default: ["english"],
     },
+    suspended: { type: Boolean, default: false },
     isRegistered: { type: Boolean, default: false },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
