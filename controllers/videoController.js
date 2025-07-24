@@ -4,10 +4,11 @@ import { generateLivekitToken } from "../services/generateToken.js";
 export const getVideoToken = async (req, res) => {
   try {
     const { workshopId } = req.params;
-    const userId = req.user._id.toString(); // from authMiddleware
+    const userId = req.user._id.toString();
+    const userName = req.user.name;
 
     const workshop = await Workshop.findById(workshopId).lean();
-    if (!Workshop)
+    if (!workshop)
       return res.status(404).json({ message: "Workshop not found" });
 
     const isMentor = userId === workshop.mentor._id.toString();
@@ -21,9 +22,9 @@ export const getVideoToken = async (req, res) => {
 
     const roomName = `workshop-${workshopId}`;
 
-    // حساب مدة الورشة
     const durationMinutes = parseInt(workshop.duration) || 60;
-    const startTime = new Date(workshop.startTime || workshop.date); // fallback للـ date
+    const datePart = new Date(workshop.date).toISOString().split("T")[0];
+    const startTime = new Date(`${datePart}T${workshop.time}:00`);
 
     const expirationSeconds = Math.floor(
       (startTime.getTime() + durationMinutes * 60000 - Date.now()) / 1000
@@ -35,8 +36,10 @@ export const getVideoToken = async (req, res) => {
 
     const token = await generateLivekitToken({
       identity: userId,
+      name: userName,
       roomName,
       expiration: expirationSeconds,
+      isMentor,
     });
 
     return res.json({ token });
