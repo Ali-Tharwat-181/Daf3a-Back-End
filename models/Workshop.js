@@ -38,6 +38,7 @@ const workshopSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    reported: { type: Boolean, default: false },
     capacity: { type: Number, default: 10 },
     registeredStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
