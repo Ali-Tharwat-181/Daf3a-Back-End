@@ -124,3 +124,37 @@ export async function deleteUserService(userId) {
   }
   return { message: "User deleted successfully." };
 }
+
+export async function suspendUserService(userId) {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error("User not found or has been deleted.");
+  }
+
+  if (user.suspended) {
+    throw new Error("User is already suspended.");
+  }
+
+  user.suspended = true;
+  await user.save();
+
+  return { message: "User suspended successfully." };
+}
+
+export async function unsuspendUserService(userId) {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error("User not found or has been deleted.");
+  }
+
+  if (!user.suspended) {
+    throw new Error("User is not suspended.");
+  }
+
+  user.suspended = false;
+  await user.save();
+
+  return { message: "User unsuspended successfully." };
+}

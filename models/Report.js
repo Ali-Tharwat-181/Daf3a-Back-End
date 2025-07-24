@@ -1,0 +1,40 @@
+import mongoose from "mongoose";
+
+const reportSchema = new mongoose.Schema(
+  {
+    reporter: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    reportedUser: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    booking: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Booking",
+    },
+    workshop: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Workshop",
+    },
+    reason: {
+      type: String,
+      required: true,
+    },
+    message: {
+      type: String,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "reviewed", "resolved"],
+      default: "pending",
+    },
+  },
+  { timestamps: true }
+);
+
+const Report = mongoose.model("Report", reportSchema);
+export default Report;

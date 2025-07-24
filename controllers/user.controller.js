@@ -3,6 +3,8 @@ import {
   getUserByIdService,
   updateUserService,
   deleteUserService,
+  unsuspendUserService,
+  suspendUserService,
 } from "../services/user.service.js";
 
 // Get all users (admin only)
@@ -55,5 +57,25 @@ export async function updateUserProfile(req, res, next) {
     res.status(200).json({ success: true, ...result });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
+  }
+}
+
+export async function suspendUser(req, res) {
+  try {
+    const result = await suspendUserService(req.params.id);
+    res.status(200).json({ success: true, ...result });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+}
+
+// controllers/user.controller.js
+
+export async function unsuspendUser(req, res) {
+  try {
+    const result = await unsuspendUserService(req.params.id);
+    res.status(200).json({ success: true, ...result });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
   }
 }
