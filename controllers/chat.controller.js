@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Chat from "../models/chat.js";
 import User from "../models/User.js";
+import Message from "../models/Message.js"
 //@description     Create or fetch One to One Chat
 //@route           POST /api/chat/
 //@access          Protected
@@ -192,4 +193,39 @@ export const addToGroup = asyncHandler(async (req, res) => {
   }
 });
 
+
+export const markChatAsRead = async (req, res) => {
+  try {
+    const { chatId } = req.params;
+    const userId = req.user._id; 
+
+    const chat = await Chat.findById(chatId).populate("latestMessage");
+
+    if (!chat) {
+      return res.status(404).json({ message: "Chat not found" });
+    }
+
+    const latestMessage = chat.latestMessage;
+
+    if (latestMessage && !latestMessage.readBy.includes(userId)) {
+      await Message.findByIdAndUpdate(
+        latestMessage._id,
+        { $addToSet: { readBy: userId } },
+        { new: true }
+      );
+
+      const updatedChat = await Chat.findById(chatId).populate("latestMessage");
+
+      return res.status(200).json({
+        message: "Message marked as read",
+        chat: updatedChat,
+      });
+    } else {
+      return res.status(200).json({ message: "Already marked as read" });
+    }
+  } catch (error) {
+    console.error("Error marking message as read:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
