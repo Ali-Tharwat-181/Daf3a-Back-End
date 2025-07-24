@@ -3,6 +3,7 @@ import {
   createReport,
   getAllReports,
   markReportResolved,
+  getReports,
 } from "../controllers/report.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "../middlewares/roleCheck.js";
@@ -14,6 +15,8 @@ router.post("/", authMiddleware, createReport);
 
 // Admin views all reports
 router.get("/", authMiddleware, roleCheck("admin"), getAllReports);
+
+router.get("/reportsforuser", authMiddleware, getReports);
 
 router.patch(
   "/:id/resolve",

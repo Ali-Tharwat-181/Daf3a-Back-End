@@ -32,6 +32,26 @@ export const getAllReportsService = async () => {
   return reports;
 };
 
+export const getReportsService = async ({
+  reporter,
+  booking,
+  workshop,
+  reportedUser,
+}) => {
+  const query = {};
+  if (reporter) query.reporter = reporter;
+  if (reportedUser) query.reportedUser = reportedUser;
+  if (booking) query.booking = booking;
+  if (workshop) query.workshop = workshop;
+
+  const reports = await Report.find(query)
+    .populate("reporter", "name role")
+    .populate("reportedUser", "name role")
+    .populate("booking");
+
+  return reports;
+};
+
 export const markReportResolvedService = async (reportId) => {
   const report = await Report.findById(reportId);
   if (!report) {
