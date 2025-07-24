@@ -10,8 +10,8 @@ const BookingSchema = new mongoose.Schema(
       {
         start: { type: String, required: true },
         end: { type: String, required: true },
-        _id: false,
-      },
+        _id: false
+      }
     ],
     type: {
       type: String,
@@ -29,7 +29,6 @@ const BookingSchema = new mongoose.Schema(
       enum: ["confirmed", "cancelled"],
       default: "confirmed",
     },
-    reported: { type: Boolean, default: false },
     review: { type: mongoose.Schema.Types.ObjectId, ref: "Review" },
   },
   { timestamps: true }

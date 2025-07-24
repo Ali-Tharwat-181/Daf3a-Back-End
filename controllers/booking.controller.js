@@ -63,7 +63,7 @@ export const createFreeBookingController = async (req, res, next) => {
 export const createPaidBookingController = async (req, res, next) => {
   const { mentorId, date, slots, type, amount } = req.body;
   try {
-    const { sessionUrl, booking } = await bookingService.createPaidBooking({
+    const { booking } = await bookingService.createPaidBooking({
       mentorId,
       date,
       slots,
@@ -73,7 +73,6 @@ export const createPaidBookingController = async (req, res, next) => {
     });
     res.status(201).json({
       success: true,
-      sessionUrl,
       booking,
       message: "Complete payment via Stripe",
     });
@@ -81,6 +80,7 @@ export const createPaidBookingController = async (req, res, next) => {
     next(err);
   }
 };
+
 
 export const updateBookingById = async (req, res, next) => {
   try {

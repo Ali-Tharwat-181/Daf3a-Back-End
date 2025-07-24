@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
+import User from '../models/User.js';
 dotenv.config();
 
 const SecretKey = process.env.STRIPE_SECRET_KEY;
@@ -9,18 +10,48 @@ if (!SecretKey) {
     console.log("Stripe Secret Key is defined");
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);  // Ensure your environment variable is using your TEST SECRET KEY
 
-// Create Stripe Express Account for Mentor
-export const createStripeAccount = async (user) => {
-    const account = await stripe.accounts.create({
-        type: 'express',
-        country: 'US',
-        email: user.email,
-        capabilities: { transfers: { requested: true } }
-    });
-    return account.id;
+// Create Stripe Express Account for Mentor in Test Mode
+export const createStripeAccountForMentor = async (mentorId) => {
+    console.log("Creating Stripe account for mentor  services", mentorId);
+    const mentor = await User.findById(mentorId);
+    console.log("Mentor found:", mentor);
+    if (!mentor) {
+        console.log("Mentor not found for ID:", mentorId);
+    }
+
+    try {
+        // Step 1: Create Stripe account for the mentor
+        console.log("Creating Stripe account for mentor:", mentorId);
+        const account = await stripe.accounts.create({
+            type: 'express',  // or 'standard'
+            business_type: 'individual', // or 'company'
+            country: 'US',  // or use the mentor's country
+            email: mentor.email,  // Add mentor's email
+        });
+        if (!account) {
+            console.log('Failed to create Stripe account for mentor:', mentorId);
+            return null;
+        }
+        // Step 2: Save the Stripe Account ID to the mentor's record in the database
+        const mentor = await User.findById(mentorId);
+        if (!mentor) {
+            throw new Error("Mentor not found");
+        }
+
+        mentor.stripeAccountId = account.id;  // Save the Stripe Account ID to mentor's record
+        await mentor.save();
+
+        console.log(`Stripe Account ID for mentor ${mentorId} saved: ${account.id}`);
+        return account.id;
+    } catch (error) {
+        console.error("Error creating Stripe account for mentor:", error);
+        console.error("Full error:", error.raw);  // Log the full error for better debugging
+        throw new Error("Error creating Stripe account for mentor");
+    }
 };
+
 
 // Generate Onboarding Link for Mentor
 export const generateOnboardingLink = async (accountId) => {

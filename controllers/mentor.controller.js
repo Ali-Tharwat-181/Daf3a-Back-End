@@ -9,7 +9,7 @@ import {
   setMentorPrice,
 } from "../services/mentor.service.js";
 import {
-  createStripeAccount,
+  createStripeAccountForMentor,
   generateOnboardingLink,
 } from "../services/payment.service.js";
 import User from "../models/User.js";
@@ -146,12 +146,18 @@ export const setMentorPriceController = async (req, res) => {
 
 // Connect Mentor to Stripe
 export const connectMentorToStripe = async (req, res) => {
+  console.log("Connecting mentor to Stripe:", req.user._id);
   const user = await User.findById(req.user._id);
   if (!user || user.role !== "mentor")
     return res.status(403).json({ error: "Unauthorized" });
 
   if (!user.stripeAccountId) {
-    const accountId = await createStripeAccount(user);
+    console.log("Creating Stripe account for mentor:", user._id);
+    const accountId = await createStripeAccountForMentor(user._id);
+    console.log("Stripe account created:", accountId);
+    if (!accountId) {
+      return res.status(500).json({ error: "Failed to create Stripe account" });
+    }
     user.stripeAccountId = accountId;
     await user.save();
   }

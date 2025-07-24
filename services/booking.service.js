@@ -1,6 +1,10 @@
 import Booking from "../models/Booking.js";
 import User from "../models/User.js";
 import { createCheckoutSession } from "./payment.service.js";
+// ✅ Create Paid Booking
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your test secret key
+
 
 // ✅ Get All Bookings
 export const getAllBookings = async () => {
@@ -36,7 +40,6 @@ export const createFreeBooking = async ({
 
   // 🟨 Make sure each slot is { start, end } object
   const slotsArray = Array.isArray(slots) ? slots : [slots];
-
 
   // ❌ Validate that each slot exists in mentor's availability
   const invalidSlots = slotsArray.filter((incomingSlot) =>
@@ -88,9 +91,6 @@ export const createFreeBooking = async ({
 };
 
 
-
-
-// ✅ Create Paid Booking
 export const createPaidBooking = async ({
   mentorId,
   date,
@@ -108,34 +108,81 @@ export const createPaidBooking = async ({
   if (!mentor.stripeAccountId)
     throw new Error("Mentor not connected to Stripe");
 
-  const dayAvailability = mentor.availability.find(
-    (av) => av.day.toLowerCase() === date.toLowerCase()
-  );
+  // ✅ Find availability for the specific date
+  const dayAvailability = mentor.availability.find((av) => av.date === date);
   if (!dayAvailability) throw new Error(`No availability for ${date}`);
 
-  const invalidSlots = slots.filter((s) => !dayAvailability.slots.includes(s));
-  if (invalidSlots.length > 0)
-    throw new Error(`Invalid slots: ${invalidSlots.join(", ")}`);
 
-  // Create Stripe Checkout Session
-  const sessionUrl = await createCheckoutSession({
-    amount,
-    customerId: student.stripeCustomerId,
-    mentorStripeAccountId: mentor.stripeAccountId,
-  });
+  // 🟨 Make sure each slot is { start, end } object
+  const slotsArray = Array.isArray(slots) ? slots : [slots];
 
+  // ❌ Validate that each slot exists in mentor's availability
+  const invalidSlots = slotsArray.filter((incomingSlot) =>
+    !dayAvailability.slots.some(
+      (availableSlot) =>
+        availableSlot.start === incomingSlot.start &&
+        availableSlot.end === incomingSlot.end
+    )
+  );
+
+  if (invalidSlots.length > 0) {
+    throw new Error(
+      `Invalid slots: ${invalidSlots
+        .map((s) => `${s.start} - ${s.end}`)
+        .join(", ")}`
+    );
+  }
+
+  // // ✅ Create Stripe PaymentIntent (not Checkout session)
+  // const paymentIntent = await stripe.paymentIntents.create({
+  //   amount: amount * 100, // convert to cents
+  //   currency: "usd",
+  //   customer: student.stripeCustomerId,
+  //   automatic_payment_methods: {
+  //     enabled: true,
+  //   },
+  //   transfer_data: {
+  //     destination: mentor.stripeAccountId, // connected account
+  //   },
+  // });
+
+  mentor.balance += amount; // Update mentor's balance
+
+  // ✅ Create the booking (slots as full objects)
   const booking = await Booking.create({
     mentor: mentor._id,
-    student: student._id,
+    student: studentId,
     date,
-    timeSlot: slots,
+    timeSlot: slotsArray, // 👈 make sure this is array of { start, end }
     type,
-    paymentStatus: "pending",
-    status: "pending",
+    paymentStatus: "paid",
+    status: "confirmed",
   });
 
-  return { sessionUrl, booking };
+  // 🧹 Remove the booked slots from mentor availability
+  dayAvailability.slots = dayAvailability.slots.filter(
+    (availableSlot) =>
+      !slotsArray.some(
+        (bookedSlot) =>
+          bookedSlot.start === availableSlot.start &&
+          bookedSlot.end === availableSlot.end
+      )
+  );
+
+  if (dayAvailability.slots.length === 0) {
+    mentor.availability = mentor.availability.filter((a) => a.date !== date);
+  }
+
+  await mentor.save();
+
+  return {
+    // clientSecret: paymentIntent.client_secret,
+    booking,
+  };
 };
+
+
+
 
 // ✅ Update Booking
 export const updateBooking = async (id, updates) => {

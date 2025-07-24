@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema(
     },
     stripeAccountId: { type: String }, // mentor فقط
     stripeCustomerId: { type: String }, // student فقط
+    balance: { type: Number, default: 0 },
     image: {
       type: String,
       default:
@@ -116,4 +117,5 @@ userSchema.methods.generatePasswordReset = function () {
   return token;
 };
 
-export default mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+export default User;

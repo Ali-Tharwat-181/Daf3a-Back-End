@@ -8,6 +8,7 @@ import {
   removeAvailabilityController,
   setMentorPriceController,
   getMentorAvailabilityController,
+  connectMentorToStripe,
 } from "../controllers/mentor.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "./../middlewares/roleCheck.js";
@@ -48,5 +49,8 @@ mentorRouter.post(
 );
 
 mentorRouter.put("/mentor/set-price", authMiddleware, setMentorPriceController);
+
+
+mentorRouter.post("/createStripeId", authMiddleware, connectMentorToStripe);
 
 export default mentorRouter;
