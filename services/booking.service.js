@@ -1,9 +1,12 @@
 import Booking from "../models/Booking.js";
 import User from "../models/User.js";
+import { stripe } from "../services/payment.service.js"; // Your configured Stripe instance
+
+import dayjs from "dayjs";
 // import { createCheckoutSession } from "./payment.service.js";
 // ✅ Create Paid Booking
-import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your test secret key
+// import Stripe from "stripe";
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your test secret key
 
 // ✅ Get All Bookings
 export const getAllBookings = async () => {
@@ -146,6 +149,7 @@ export const createPaidBooking = async ({
     type,
     paymentStatus: "paid",
     status: "confirmed",
+    paymentIntentId: paymentIntent.id, // ✅ Save it
   });
 
   // Remove booked slots
@@ -175,14 +179,41 @@ export const updateBooking = async (id, updates) => {
   return Booking.findByIdAndUpdate(id, updates, { new: true });
 };
 
-// ✅ Cancel Booking
-export const cancelBooking = async (id) => {
-  return Booking.findByIdAndUpdate(
-    id,
-    { attendStatus: "cancelled" },
-    { new: true }
-  );
+export const cancelBookingById = async (bookingId) => {
+  const booking = await Booking.findById(bookingId);
+  if (!booking) {
+    throw new Error("Booking not found");
+  }
+
+  const now = dayjs();
+  const sessionDateTime = dayjs(`${booking.date} ${booking.timeSlot[0].start}`);
+  const hoursDiff = sessionDateTime.diff(now, "hour");
+
+  if (hoursDiff >= 24) {
+    if (booking.paymentIntentId && booking.paymentStatus === "paid") {
+      const refund = await stripe.refunds.create({
+        payment_intent: booking.paymentIntentId,
+      });
+
+      booking.paymentStatus = "refunded";
+      booking.attendStatus = "cancelled";
+      await booking.save();
+
+      return {
+        message: "Booking cancelled and refunded",
+        refund,
+      };
+    }
+  }
+
+  booking.attendStatus = "cancelled";
+  await booking.save();
+
+  return {
+    message: "Booking cancelled but not eligible for refund",
+  };
 };
+
 
 // ✅ Confirm Booking
 export const confirmBooking = async (id) => {

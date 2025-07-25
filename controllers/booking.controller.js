@@ -1,5 +1,6 @@
 import * as bookingService from "../services/booking.service.js";
 
+
 export const getAllBookings = async (req, res, next) => {
   try {
     const data = await bookingService.getAllBookings();
@@ -91,10 +92,17 @@ export const updateBookingById = async (req, res, next) => {
   }
 };
 
-export const cancelBookingById = async (req, res, next) => {
+
+
+export const cancelBookingController = async (req, res, next) => {
   try {
-    const data = await bookingService.cancelBooking(req.params.id);
-    res.status(200).json({ success: true, data, message: "Booking cancelled" });
+    const { bookingId } = req.params;
+    const result = await bookingService.cancelBookingById(bookingId);
+
+    res.status(200).json({
+      success: true,
+      ...result,
+    });
   } catch (err) {
     next(err);
   }

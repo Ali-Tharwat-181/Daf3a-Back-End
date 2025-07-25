@@ -21,7 +21,7 @@ const BookingSchema = new mongoose.Schema(
     },
     paymentStatus: {
       type: String,
-      enum: ["paid", "free"],
+      enum: ["paid", "free", "refunded"],
       default: "free",
     },
     status: {
@@ -29,6 +29,7 @@ const BookingSchema = new mongoose.Schema(
       enum: ["confirmed", "cancelled"],
       default: "confirmed",
     },
+    paymentIntentId: { type: String }, // Add this field
     attendStatus: {
       type: String,
       enum: ["confirmed", "cancelled", "pending"],
@@ -36,7 +37,7 @@ const BookingSchema = new mongoose.Schema(
     },
     review: { type: mongoose.Schema.Types.ObjectId, ref: "Review" },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Booking = mongoose.model("Booking", BookingSchema);

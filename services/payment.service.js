@@ -10,7 +10,7 @@ if (!SecretKey) {
     console.log("Stripe Secret Key is defined");
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);  // Ensure your environment variable is using your TEST SECRET KEY
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);  // Ensure your environment variable is using your TEST SECRET KEY
 
 
 export const createStudentStripeCustomer = async (studentEmail, cardDetails) => {

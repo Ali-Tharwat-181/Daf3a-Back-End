@@ -4,13 +4,13 @@ import {
   getAllBookings,
   getBookingById,
   updateBookingById,
-  cancelBookingById,
   confirmBookingController,
   getBookingsByMentor,
   createPaidBookingController,
   createFreeBookingController,
   confirmBookingAttendController,
   getMyBookings,
+  cancelBookingController,
 } from "../controllers/booking.controller.js";
 
 const bookingRouter = express.Router();
@@ -27,7 +27,7 @@ bookingRouter.patch("/:id", updateBookingById);
 bookingRouter.get("/mentor/:mentorId", getBookingsByMentor);
 bookingRouter.get("/me/student", getMyBookings);
 
-bookingRouter.patch("/:id/cancel", cancelBookingById);
+bookingRouter.post("/cancel/:bookingId", cancelBookingController);
 
 bookingRouter.patch("/:id/confirm", confirmBookingController);
 
