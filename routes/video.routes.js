@@ -4,6 +4,6 @@ import authMiddleware from "../middlewares/auth.js";
 
 const videoRouter = express.Router();
 
-videoRouter.get("/token/:workshopId", authMiddleware, getVideoToken);
+videoRouter.get("/token/:id", authMiddleware, getVideoToken);
 
 export default videoRouter;
