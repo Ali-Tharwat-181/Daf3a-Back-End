@@ -128,6 +128,7 @@ export const createPaymentIntent = async (amount, currency, studentEmail, mentor
         const paymentIntent = await stripe.paymentIntents.create({
             amount: amount * 100, // Convert to cents
             currency: currency,
+            capture_method: "automatic",
             customer: studentStripeId, // The student's Stripe ID
             payment_method_types: ['card'], // Assuming only card payments
             transfer_data: {

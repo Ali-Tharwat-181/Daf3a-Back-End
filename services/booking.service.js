@@ -133,6 +133,7 @@ export const createPaidBooking = async ({
   const paymentIntent = await stripe.paymentIntents.create({
     amount: Math.round(amount * 100), // in cents
     currency: "usd",
+    capture_method: "automatic",
     customer: student.stripeCustomerId,
     automatic_payment_methods: { enabled: true },
     transfer_data: {
