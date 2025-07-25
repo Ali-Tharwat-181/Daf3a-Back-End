@@ -9,6 +9,7 @@ import {
   getBookingsByMentor,
   createPaidBookingController,
   createFreeBookingController,
+  confirmBookingAttendController,
   getMyBookings,
 } from "../controllers/booking.controller.js";
 
@@ -29,5 +30,7 @@ bookingRouter.get("/me/student", getMyBookings);
 bookingRouter.patch("/:id/cancel", cancelBookingById);
 
 bookingRouter.patch("/:id/confirm", confirmBookingController);
+
+bookingRouter.patch("/:id/confirmattend", confirmBookingAttendController);
 
 export default bookingRouter;

@@ -5,7 +5,6 @@ import User from "../models/User.js";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your test secret key
 
-
 // ✅ Get All Bookings
 export const getAllBookings = async () => {
   return Booking.find().populate("mentor student");
@@ -33,21 +32,20 @@ export const createFreeBooking = async ({
   if (!mentor) throw new Error("Mentor not found");
 
   // 🔍 Find availability for the specific date
-  const dayAvailability = mentor.availability.find(
-    (av) => av.date === date
-  );
+  const dayAvailability = mentor.availability.find((av) => av.date === date);
   if (!dayAvailability) throw new Error(`No availability found for ${date}`);
 
   // 🟨 Make sure each slot is { start, end } object
   const slotsArray = Array.isArray(slots) ? slots : [slots];
 
   // ❌ Validate that each slot exists in mentor's availability
-  const invalidSlots = slotsArray.filter((incomingSlot) =>
-    !dayAvailability.slots.some(
-      (availableSlot) =>
-        availableSlot.start === incomingSlot.start &&
-        availableSlot.end === incomingSlot.end
-    )
+  const invalidSlots = slotsArray.filter(
+    (incomingSlot) =>
+      !dayAvailability.slots.some(
+        (availableSlot) =>
+          availableSlot.start === incomingSlot.start &&
+          availableSlot.end === incomingSlot.end
+      )
   );
 
   if (invalidSlots.length > 0) {
@@ -70,28 +68,24 @@ export const createFreeBooking = async ({
   });
 
   // 🧹 Remove the booked slots from mentor's availability
-  dayAvailability.slots = dayAvailability.slots.filter((availableSlot) =>
-    !slotsArray.some(
-      (bookedSlot) =>
-        bookedSlot.start === availableSlot.start &&
-        bookedSlot.end === availableSlot.end
-    )
+  dayAvailability.slots = dayAvailability.slots.filter(
+    (availableSlot) =>
+      !slotsArray.some(
+        (bookedSlot) =>
+          bookedSlot.start === availableSlot.start &&
+          bookedSlot.end === availableSlot.end
+      )
   );
 
   // ❌ Remove the date if all slots are booked
   if (dayAvailability.slots.length === 0) {
-    mentor.availability = mentor.availability.filter(
-      (a) => a.date !== date
-    );
+    mentor.availability = mentor.availability.filter((a) => a.date !== date);
   }
 
   await mentor.save();
 
   return booking;
 };
-
-
-
 
 export const createPaidBooking = async ({
   mentorId,
@@ -115,12 +109,13 @@ export const createPaidBooking = async ({
 
   const slotsArray = Array.isArray(slots) ? slots : [slots];
 
-  const invalidSlots = slotsArray.filter((incomingSlot) =>
-    !dayAvailability.slots.some(
-      (availableSlot) =>
-        availableSlot.start === incomingSlot.start &&
-        availableSlot.end === incomingSlot.end
-    )
+  const invalidSlots = slotsArray.filter(
+    (incomingSlot) =>
+      !dayAvailability.slots.some(
+        (availableSlot) =>
+          availableSlot.start === incomingSlot.start &&
+          availableSlot.end === incomingSlot.end
+      )
   );
 
   if (invalidSlots.length > 0) {
@@ -175,10 +170,6 @@ export const createPaidBooking = async ({
   };
 };
 
-
-
-
-
 // ✅ Update Booking
 export const updateBooking = async (id, updates) => {
   return Booking.findByIdAndUpdate(id, updates, { new: true });
@@ -192,6 +183,14 @@ export const cancelBooking = async (id) => {
 // ✅ Confirm Booking
 export const confirmBooking = async (id) => {
   return Booking.findByIdAndUpdate(id, { status: "confirmed" }, { new: true });
+};
+
+export const confirmAttend = async (id) => {
+  return Booking.findByIdAndUpdate(
+    id,
+    { attendStatus: "confirmed" },
+    { new: true }
+  );
 };
 
 export const getBookingsByStudentId = async (studentId) => {

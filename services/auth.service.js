@@ -19,10 +19,10 @@ export async function registerService({
   if (userExists) {
     throw new Error("User already exists.");
   }
-  const phoneExists = await User.findOne({ phoneNumber });
-  if (phoneExists) {
-    throw new Error("Phone number already registered.");
-  }
+  // const phoneExists = await User.findOne({ phoneNumber });
+  // if (phoneExists) {
+  //   throw new Error("Phone number already registered.");
+  // }
   try {
     const user = await User.create({
       name,

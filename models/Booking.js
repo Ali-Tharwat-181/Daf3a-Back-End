@@ -10,8 +10,8 @@ const BookingSchema = new mongoose.Schema(
       {
         start: { type: String, required: true },
         end: { type: String, required: true },
-        _id: false
-      }
+        _id: false,
+      },
     ],
     type: {
       type: String,
@@ -28,6 +28,11 @@ const BookingSchema = new mongoose.Schema(
       type: String,
       enum: ["confirmed", "cancelled"],
       default: "confirmed",
+    },
+    attendStatus: {
+      type: String,
+      enum: ["confirmed", "cancelled", "pending"],
+      default: "pending",
     },
     review: { type: mongoose.Schema.Types.ObjectId, ref: "Review" },
   },

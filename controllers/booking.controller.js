@@ -59,7 +59,6 @@ export const createFreeBookingController = async (req, res, next) => {
   }
 };
 
-
 export const createPaidBookingController = async (req, res, next) => {
   const { mentorId, date, slots, type, amount } = req.body;
   try {
@@ -83,8 +82,6 @@ export const createPaidBookingController = async (req, res, next) => {
   }
 };
 
-
-
 export const updateBookingById = async (req, res, next) => {
   try {
     const data = await bookingService.updateBooking(req.params.id, req.body);
@@ -106,6 +103,15 @@ export const cancelBookingById = async (req, res, next) => {
 export const confirmBookingController = async (req, res, next) => {
   try {
     const data = await bookingService.confirmBooking(req.params.id);
+    res.status(200).json({ success: true, data, message: "Booking confirmed" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const confirmBookingAttendController = async (req, res, next) => {
+  try {
+    const data = await bookingService.confirmAttend(req.params.id);
     res.status(200).json({ success: true, data, message: "Booking confirmed" });
   } catch (err) {
     next(err);
