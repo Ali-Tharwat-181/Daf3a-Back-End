@@ -177,7 +177,11 @@ export const updateBooking = async (id, updates) => {
 
 // ✅ Cancel Booking
 export const cancelBooking = async (id) => {
-  return Booking.findByIdAndUpdate(id, { status: "cancelled" }, { new: true });
+  return Booking.findByIdAndUpdate(
+    id,
+    { attendStatus: "cancelled" },
+    { new: true }
+  );
 };
 
 // ✅ Confirm Booking
