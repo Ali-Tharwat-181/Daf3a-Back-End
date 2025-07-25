@@ -7,6 +7,7 @@ import {
   updateUserProfile,
   suspendUser,
   unsuspendUser,
+  setUserRole,
 } from "../controllers/user.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 import roleCheck from "../middlewares/roleCheck.js";
@@ -28,5 +29,7 @@ router.put("/profile/update", upload.single("image"), updateUserProfile);
 
 router.patch("/:id/suspend", suspendUser);
 router.patch("/:id/unsuspend", unsuspendUser);
+
+router.post("/set-role", setUserRole);
 
 export default router;

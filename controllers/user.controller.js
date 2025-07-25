@@ -5,6 +5,7 @@ import {
   deleteUserService,
   unsuspendUserService,
   suspendUserService,
+  setUserRoleService,
 } from "../services/user.service.js";
 
 // Get all users (admin only)
@@ -79,3 +80,25 @@ export async function unsuspendUser(req, res) {
     res.status(400).json({ success: false, message: error.message });
   }
 }
+
+export const setUserRole = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { role } = req.body;
+
+    if (!role) {
+      return res
+        .status(400)
+        .json({ success: false, message: " Role is required." });
+    }
+
+    const updatedUser = await setUserRoleService(userId, role);
+    res.status(200).json({
+      success: true,
+      message: "User role updated.",
+      user: updatedUser,
+    });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+};

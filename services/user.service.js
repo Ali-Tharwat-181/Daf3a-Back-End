@@ -158,3 +158,19 @@ export async function unsuspendUserService(userId) {
 
   return { message: "User unsuspended successfully." };
 }
+
+export const setUserRoleService = async (userId, role) => {
+  const validRoles = ["student", "mentor"];
+
+  if (!validRoles.includes(role)) {
+    throw new Error("Invalid role.");
+  }
+
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found.");
+
+  user.role = role;
+  await user.save();
+
+  return user;
+};
