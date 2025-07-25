@@ -20,6 +20,7 @@ import { multerErrorHandler } from "./middlewares/upload.js";
 import oauthRouter from "./routes/auth.routes.js";
 import reportRouter from "./routes/report.routes.js";
 import videoRouter from "./routes/video.routes.js";
+import paymentRouter from './routes/payment.routes.js';
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use("/api/ai", aiRouter);
 app.use("/api/auth", oauthRouter); // mount OAuth routes
 app.use("/api/reports", reportRouter); // mount OAuth routes
 app.use("/api/video", videoRouter);
+app.use("/api", paymentRouter);
 
 // Multer error handler (for file upload errors)
 app.use(multerErrorHandler);

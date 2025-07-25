@@ -1,6 +1,6 @@
 import Booking from "../models/Booking.js";
 import User from "../models/User.js";
-import { createCheckoutSession } from "./payment.service.js";
+// import { createCheckoutSession } from "./payment.service.js";
 // ✅ Create Paid Booking
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your test secret key
@@ -91,6 +91,8 @@ export const createFreeBooking = async ({
 };
 
 
+
+
 export const createPaidBooking = async ({
   mentorId,
   date,
@@ -108,15 +110,11 @@ export const createPaidBooking = async ({
   if (!mentor.stripeAccountId)
     throw new Error("Mentor not connected to Stripe");
 
-  // ✅ Find availability for the specific date
   const dayAvailability = mentor.availability.find((av) => av.date === date);
   if (!dayAvailability) throw new Error(`No availability for ${date}`);
 
-
-  // 🟨 Make sure each slot is { start, end } object
   const slotsArray = Array.isArray(slots) ? slots : [slots];
 
-  // ❌ Validate that each slot exists in mentor's availability
   const invalidSlots = slotsArray.filter((incomingSlot) =>
     !dayAvailability.slots.some(
       (availableSlot) =>
@@ -133,33 +131,29 @@ export const createPaidBooking = async ({
     );
   }
 
-  // // ✅ Create Stripe PaymentIntent (not Checkout session)
-  // const paymentIntent = await stripe.paymentIntents.create({
-  //   amount: amount * 100, // convert to cents
-  //   currency: "usd",
-  //   customer: student.stripeCustomerId,
-  //   automatic_payment_methods: {
-  //     enabled: true,
-  //   },
-  //   transfer_data: {
-  //     destination: mentor.stripeAccountId, // connected account
-  //   },
-  // });
+  // ✅ Create PaymentIntent with transfer to mentor
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: Math.round(amount * 100), // in cents
+    currency: "usd",
+    customer: student.stripeCustomerId,
+    automatic_payment_methods: { enabled: true },
+    transfer_data: {
+      destination: mentor.stripeAccountId,
+    },
+  });
 
-  mentor.balance += amount; // Update mentor's balance
-
-  // ✅ Create the booking (slots as full objects)
+  // Booking is created only after payment confirmation on frontend
   const booking = await Booking.create({
     mentor: mentor._id,
     student: studentId,
     date,
-    timeSlot: slotsArray, // 👈 make sure this is array of { start, end }
+    timeSlot: slotsArray,
     type,
     paymentStatus: "paid",
     status: "confirmed",
   });
 
-  // 🧹 Remove the booked slots from mentor availability
+  // Remove booked slots
   dayAvailability.slots = dayAvailability.slots.filter(
     (availableSlot) =>
       !slotsArray.some(
@@ -176,10 +170,11 @@ export const createPaidBooking = async ({
   await mentor.save();
 
   return {
-    // clientSecret: paymentIntent.client_secret,
+    clientSecret: paymentIntent.client_secret, // Needed on frontend
     booking,
   };
 };
+
 
 
 

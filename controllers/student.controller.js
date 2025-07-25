@@ -9,22 +9,22 @@ import {
 import * as workshopService from "../services/workshop.service.js";
 
 import User from '../models/User.js';
-import { createCustomer } from '../services/payment.service.js';
+import { createStudentStripeCustomer } from '../services/payment.service.js';
 import cloudinary from "../config/cloudinary.js";
 import fs from "fs";
 
-export const createStudentCustomer = async (req, res) => {
-  const user = await User.findById(req.user._id);
-  if (!user || user.role !== 'student') return res.status(403).json({ error: "Unauthorized" });
+// export const createStudentCustomer = async (req, res) => {
+//   const user = await User.findById(req.user._id);
+//   if (!user || user.role !== 'student') return res.status(403).json({ error: "Unauthorized" });
 
-  if (!user.stripeCustomerId) {
-    const customerId = await createCustomer(user);
-    user.stripeCustomerId = customerId;
-    await user.save();
-  }
+//   if (!user.stripeCustomerId) {
+//     const customerId = await createCustomer(user);
+//     user.stripeCustomerId = customerId;
+//     await user.save();
+//   }
 
-  return res.json({ customerId: user.stripeCustomerId });
-};
+//   return res.json({ customerId: user.stripeCustomerId });
+// };
 
 export const createStudentController = async (req, res) => {
   if (req.user.role !== "student") {
@@ -143,6 +143,34 @@ export const getRegisteredWorkshops = async (req, res, next) => {
       data: workshops,
       message: "Registered workshops fetched successfully",
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const createStudentStripeCustomerController = async (req, res, next) => {
+  try {
+
+    console.log("Creating Stripe customer for user:", req.user._id);
+    const user = await User.findById(req.user._id);
+    console.log("User found:", user);
+    // Check if customer already exists
+    if (user.stripeCustomerId) {
+      return res.status(200).json({ customerId: user.stripeCustomerId });
+    }
+
+    // Create new Stripe customer
+    const customerStripeId = await createStudentStripeCustomer(user.email);
+
+    if (!customerStripeId) {
+      return res.status(500).json({ error: "Failed to create Stripe customer" });
+    }
+    console.log("Stripe customer created:", customerStripeId);
+    // Save customer ID to user record
+    user.stripeCustomerId = customerStripeId;
+    await user.save();
+
+    return res.status(201).json({ customerId: customerStripeId });
   } catch (error) {
     next(error);
   }
