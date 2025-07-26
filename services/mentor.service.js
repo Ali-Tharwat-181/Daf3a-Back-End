@@ -104,10 +104,15 @@ export const removeAvailabilitySlot = async (mentorId, day, date, slots) => {
 
 // Get availability
 export const getMentorAvailability = async (mentorId) => {
-  const mentor = await User.findOne({ _id: mentorId, role: "mentor" }).select(
-    "availability"
-  );
+  const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   if (!mentor) throw new Error("Mentor not found");
+
+  const today = new Date().toISOString().split("T")[0]; // e.g. "2025-07-26"
+
+  // Remove all past availability
+  mentor.availability = mentor.availability.filter((av) => av.date >= today);
+
+  await mentor.save(); // save updated availability without past dates
 
   return mentor.availability;
 };
