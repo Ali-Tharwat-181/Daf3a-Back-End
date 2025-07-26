@@ -74,6 +74,45 @@ export const registerStudentToWorkshop = async (workshopId, studentId) => {
   return workshop;
 };
 
+//paid student registration to wrkshop
+export const registerPaidStudentToWorkshop = async (
+  workshopId,
+  studentId,
+  paymentIntentId
+) => {
+  const workshop = await Workshop.findById(workshopId).populate("mentor");
+
+  if (!workshop) throw new Error("Workshop not found");
+
+  const student = await User.findOne({ _id: studentId, role: "student" });
+  if (!student) throw new Error("User is not a student");
+
+  if (workshop.registeredStudents.includes(studentId)) {
+    throw new Error("Student already registered in this workshop");
+  }
+
+  if (workshop.registeredStudents.length >= workshop.capacity) {
+    throw new Error("Workshop is full");
+  }
+  const mentor = await User.findById(workshop.mentor);
+  if (!mentor) throw new Error("Mentor not found");
+  // Register student
+  workshop.registeredStudents.push(studentId);
+
+  // Store paymentIntent ID
+  if (paymentIntentId) {
+    if (!workshop.paymentIntentIds) workshop.paymentIntentIds = [];
+    workshop.paymentIntentIds.push(paymentIntentId);
+  }
+  mentor.balance += workshop.price;
+
+  await mentor.save();
+  await workshop.save();
+
+  return workshop;
+};
+
+
 export const getWorkshopsByStudent = async (studentId) => {
   return await Workshop.find({ registeredStudents: studentId }).populate(
     "mentor"

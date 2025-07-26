@@ -14,7 +14,9 @@ const workshopSchema = new mongoose.Schema(
       enum: ["pending", "completed"],
       default: "pending",
     },
-    price: Number,
+    price: { type: Number, default: 0 },
+    isPaid: { type: Boolean, default: false }, // ✅ NEW
+
     language: String,
     image: { type: String, default: "" },
     rating: { type: Number, default: 0 },
@@ -38,9 +40,13 @@ const workshopSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+
     reported: { type: Boolean, default: false },
     capacity: { type: Number, default: 10 },
+
     registeredStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+
+    paymentIntentIds: [String], // ✅ NEW: for tracking related payments
   },
   { timestamps: true }
 );

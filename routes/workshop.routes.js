@@ -9,6 +9,7 @@ import {
   getMentorWorkshops,
   getWorkshopsForMentor,
   markWorkshopAsCompleted,
+  registerPaidWorkshopController,
 } from "../controllers/workshop.controller.js";
 import authMiddleware from "../middlewares/auth.js";
 
@@ -33,6 +34,7 @@ workshopRouter.get("/mentor/:mentorId", getWorkshopsForMentor);
 workshopRouter.patch("/:id", authMiddleware, updateWorkshopById);
 workshopRouter.delete("/:id", authMiddleware, deleteWorkshopById);
 workshopRouter.post("/:id/register", authMiddleware, registerToWorkshop);
+workshopRouter.post("/paid-register", authMiddleware, registerPaidWorkshopController);
 
 workshopRouter.patch("/:id/completed", authMiddleware, markWorkshopAsCompleted);
 

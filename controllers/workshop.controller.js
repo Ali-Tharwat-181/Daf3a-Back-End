@@ -87,6 +87,39 @@ export const registerToWorkshop = async (req, res, next) => {
   }
 };
 
+
+// Register for paid workshop
+export const registerPaidWorkshopController = async (req, res, next) => {
+  const { workshopId, paymentIntentId } = req.body;
+
+  try {
+    if (req.user.role !== "student") {
+      return res.status(403).json({
+        success: false,
+        message: "Only students can register for workshops",
+      });
+    }
+
+    const updatedWorkshop =
+      await workshopService.registerPaidStudentToWorkshop(
+        workshopId,
+        req.user._id,
+        paymentIntentId
+      );
+
+    return res.status(200).json({
+      success: true,
+      data: updatedWorkshop,
+      message: "Registered for paid workshop successfully",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export const getMentorWorkshops = async (req, res, next) => {
   try {
     const workshops = await workshopService.getWorkshopsByMentor(req.user._id);

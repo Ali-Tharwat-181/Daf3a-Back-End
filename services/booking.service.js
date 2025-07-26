@@ -3,10 +3,7 @@ import User from "../models/User.js";
 import { stripe } from "../services/payment.service.js"; // Your configured Stripe instance
 
 import dayjs from "dayjs";
-// import { createCheckoutSession } from "./payment.service.js";
-// ✅ Create Paid Booking
-// import Stripe from "stripe";
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Make sure this is your test secret key
+
 
 // ✅ Get All Bookings
 export const getAllBookings = async () => {
@@ -97,15 +94,12 @@ export const createPaidBooking = async ({
   type,
   studentId,
   amount,
+  paymentIntentId,
 }) => {
   const mentor = await User.findOne({ _id: mentorId, role: "mentor" });
   const student = await User.findOne({ _id: studentId, role: "student" });
 
   if (!mentor || !student) throw new Error("Mentor or Student not found");
-  if (!student.stripeCustomerId)
-    throw new Error("Student not connected to Stripe");
-  if (!mentor.stripeAccountId)
-    throw new Error("Mentor not connected to Stripe");
 
   const dayAvailability = mentor.availability.find((av) => av.date === date);
   if (!dayAvailability) throw new Error(`No availability for ${date}`);
@@ -129,19 +123,6 @@ export const createPaidBooking = async ({
     );
   }
 
-  // ✅ Create PaymentIntent with transfer to mentor
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: Math.round(amount * 100), // in cents
-    currency: "usd",
-    capture_method: "automatic",
-    customer: student.stripeCustomerId,
-    automatic_payment_methods: { enabled: true },
-    transfer_data: {
-      destination: mentor.stripeAccountId,
-    },
-  });
-
-  // Booking is created only after payment confirmation on frontend
   const booking = await Booking.create({
     mentor: mentor._id,
     student: studentId,
@@ -150,7 +131,8 @@ export const createPaidBooking = async ({
     type,
     paymentStatus: "paid",
     status: "confirmed",
-    paymentIntentId: paymentIntent.id, // ✅ Save it
+    paymentIntentId: paymentIntentId, // ✅ Save the existing one, don’t create a new one
+    amount: amount, // Store the amount for later use
   });
 
   // Remove booked slots
@@ -167,13 +149,12 @@ export const createPaidBooking = async ({
     mentor.availability = mentor.availability.filter((a) => a.date !== date);
   }
 
+  mentor.balance += amount;
   await mentor.save();
 
-  return {
-    clientSecret: paymentIntent.client_secret, // Needed on frontend
-    booking,
-  };
+  return { booking };
 };
+
 
 // ✅ Update Booking
 export const updateBooking = async (id, updates) => {
@@ -185,6 +166,8 @@ export const cancelBookingById = async (bookingId) => {
   if (!booking) {
     throw new Error("Booking not found");
   }
+  const mentor = await User.findById(booking.mentor);
+  if (!mentor) throw new Error("Mentor not found");
 
   const now = dayjs();
   const sessionDateTime = dayjs(`${booking.date} ${booking.timeSlot[0].start}`);
@@ -206,9 +189,13 @@ export const cancelBookingById = async (bookingId) => {
       };
     }
   }
+  mentor.balance -= booking.amount || 0; // Deduct amount if paid
+
+
 
   booking.attendStatus = "cancelled";
   await booking.save();
+  await mentor.save();
 
   return {
     message: "Booking cancelled but not eligible for refund",

@@ -35,6 +35,7 @@ const BookingSchema = new mongoose.Schema(
       enum: ["confirmed", "cancelled", "pending"],
       default: "pending",
     },
+    amount: { type: Number, default: 0 }, // Store the amount for paid bookings
     review: { type: mongoose.Schema.Types.ObjectId, ref: "Review" },
   },
   { timestamps: true },

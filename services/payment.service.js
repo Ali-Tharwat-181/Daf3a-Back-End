@@ -146,3 +146,31 @@ export const createPaymentIntent = async (amount, currency, studentEmail, mentor
         throw new Error(error.message);
     }
 };
+
+export const createStripeAccountLinkService = async (userId) => {
+    const user = await User.findById(userId);
+
+    // إنشاء حساب Stripe إذا لم يكن موجودًا
+    if (!user.stripeAccountId) {
+        const account = await stripe.accounts.create({
+            type: "express",
+            country: "US",
+            email: user.email,
+            capabilities: {
+                transfers: { requested: true },
+            },
+        });
+        user.stripeAccountId = account.id;
+        await user.save();
+    }
+
+    // إنشاء رابط الـ onboarding
+    const accountLink = await stripe.accountLinks.create({
+        account: user.stripeAccountId,
+        refresh_url: `${process.env.CLIENT_URL}/stripe/onboarding/refresh`,
+        return_url: `${process.env.CLIENT_URL}/mentordashboard`,
+        type: "account_onboarding",
+    });
+
+    return accountLink.url;
+};

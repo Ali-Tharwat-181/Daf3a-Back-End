@@ -61,7 +61,7 @@ export const createFreeBookingController = async (req, res, next) => {
 };
 
 export const createPaidBookingController = async (req, res, next) => {
-  const { mentorId, date, slots, type, amount } = req.body;
+  const { mentorId, date, slots, type, amount, paymentIntentId } = req.body;
   try {
     const { booking, clientSecret } = await bookingService.createPaidBooking({
       mentorId,
@@ -70,6 +70,7 @@ export const createPaidBookingController = async (req, res, next) => {
       type,
       studentId: req.user._id,
       amount,
+      paymentIntentId,
     });
 
     res.status(201).json({
