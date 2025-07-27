@@ -124,7 +124,7 @@ export async function forgotPasswordService(email) {
   const token = user.generatePasswordReset();
   await user.save();
   // Send email with reset link (replace URL as needed)
-  const resetUrl = `https://localhost:5173/reset-password/${token}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${token}`;
   await sendEmail(
     user.email,
     "Password Reset",

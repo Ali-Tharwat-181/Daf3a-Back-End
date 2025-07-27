@@ -43,7 +43,7 @@ authRouter.get(
   passport.authenticate("google", { session: false }),
   (req, res) => {
     const token = generateToken(req.user._id, req.user.role);
-    res.redirect(`https://localhost:5173/login/success?token=${token}`);
+    res.redirect(`${process.env.CLIENT_URL}/login/success?token=${token}`);
   }
 );
 
@@ -57,7 +57,7 @@ authRouter.get(
   passport.authenticate("github", { session: false }),
   (req, res) => {
     const token = generateToken(req.user._id, req.user.role);
-    res.redirect(`https://localhost:5173/login/success?token=${token}`);
+    res.redirect(`${process.env.CLIENT_URL}/login/success?token=${token}`);
   }
 );
 
