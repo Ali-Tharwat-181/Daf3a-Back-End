@@ -125,21 +125,27 @@ export async function deleteUserService(userId) {
   return { message: "User deleted successfully." };
 }
 
-export async function suspendUserService(userId) {
+export async function suspendUserService(userId, durationInHours) {
   const user = await User.findById(userId);
 
   if (!user) {
     throw new Error("User not found or has been deleted.");
   }
 
-  if (user.suspended) {
+  const now = new Date();
+  if (user.suspendedUntil && user.suspendedUntil > now) {
     throw new Error("User is already suspended.");
   }
 
+  const suspendUntil = new Date(
+    now.getTime() + durationInHours * 60 * 60 * 1000
+  );
+
   user.suspended = true;
+  user.suspendedUntil = suspendUntil;
   await user.save();
 
-  return { message: "User suspended successfully." };
+  return { message: `User suspended until ${suspendUntil.toISOString()}` };
 }
 
 export async function unsuspendUserService(userId) {
