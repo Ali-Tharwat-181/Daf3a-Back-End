@@ -8,6 +8,7 @@ import {
   removeAvailabilityController,
   setMentorPriceController,
   getMentorAvailabilityController,
+  getMentorAvailabilityMenotr,
   connectMentorToStripe,
 } from "../controllers/mentor.controller.js";
 import authMiddleware from "../middlewares/auth.js";
@@ -20,6 +21,11 @@ mentorRouter.get(
   "/availability",
   authMiddleware,
   getMentorAvailabilityController
+);
+mentorRouter.get(
+  "/availability/:id",
+  authMiddleware,
+  getMentorAvailabilityMenotr
 );
 
 mentorRouter.get("/:id", authMiddleware, getMentorByIdController);

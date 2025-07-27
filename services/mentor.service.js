@@ -117,6 +117,23 @@ export const getMentorAvailability = async (mentorId) => {
   return mentor.availability;
 };
 
+export const getMentorAvailabilityMentorService = async (mentorId) => {
+  const mentor = await User.findOne({ _id: mentorId });
+  if (!mentor) throw new Error("Mentor not found");
+
+  // Get tomorrow's date in YYYY-MM-DD format
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split("T")[0]; // e.g. "2025-07-28"
+
+  // Filter out availability before tomorrow
+  mentor.availability = mentor.availability.filter((av) => av.date >= tomorrowStr);
+
+  await mentor.save(); // Save updated availability
+
+  return mentor.availability;
+};
+
 export const setMentorPrice = async (mentorId, price) => {
   if (typeof price !== "number" || price < 0) {
     throw new Error("Invalid price");

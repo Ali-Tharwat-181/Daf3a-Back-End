@@ -7,6 +7,7 @@ import {
   removeAvailabilitySlot,
   getMentorAvailability,
   setMentorPrice,
+  getMentorAvailabilityMentorService,
 } from "../services/mentor.service.js";
 import {
   createStripeAccountForMentor,
@@ -126,6 +127,15 @@ export const getMentorAvailabilityController = async (req, res) => {
     return res.status(400).json({ success: false, message: error.message });
   }
 };
+export const getMentorAvailabilityMenotr = async (req, res) => {
+  try {
+    const availability = await getMentorAvailabilityMentorService(req.params.id);
+    return res.status(200).json({ success: true, availability });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
 
 export const setMentorPriceController = async (req, res) => {
   const { price } = req.body;
