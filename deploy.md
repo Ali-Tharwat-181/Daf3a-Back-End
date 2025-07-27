@@ -100,6 +100,10 @@ Configure Stripe webhook endpoints:
 
 Your API will be available at: `https://your-project-name.vercel.app`
 
+### Health Check
+
+- `/health` - Check if the server is running
+
 ### Base URL: `/api`
 
 Available endpoints:
@@ -117,7 +121,20 @@ Available endpoints:
 
 ## Socket.IO
 
-The real-time messaging feature uses Socket.IO and will be available at the same URL as your API.
+**Note**: Socket.IO real-time messaging is not supported in Vercel's serverless environment. For real-time features, consider:
+
+1. **Alternative Solutions**:
+
+   - Use a separate WebSocket service (like Pusher, Socket.io Cloud, or Ably)
+   - Implement polling for real-time updates
+   - Use Server-Sent Events (SSE) for one-way real-time communication
+
+2. **Migration Options**:
+   - Deploy Socket.IO server separately on a platform that supports WebSockets (Railway, Render, Heroku)
+   - Use a managed WebSocket service
+   - Implement real-time features using polling or SSE
+
+For now, the REST API endpoints will work perfectly on Vercel.
 
 ## Troubleshooting
 
