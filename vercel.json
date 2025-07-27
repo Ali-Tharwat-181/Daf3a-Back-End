@@ -12,6 +12,10 @@
       "dest": "/api/health.js"
     },
     {
+      "src": "/debug",
+      "dest": "/api/debug.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.js"
     }

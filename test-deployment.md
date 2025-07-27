@@ -4,6 +4,14 @@
 
 After deploying to Vercel, test these endpoints to ensure everything is working:
 
+### 0. Debug Endpoint (for troubleshooting)
+
+```bash
+curl https://your-project-name.vercel.app/debug
+```
+
+This will show you request details to help debug routing issues.
+
 ### 1. Health Check
 
 ```bash
@@ -20,15 +28,62 @@ Expected response:
 }
 ```
 
-### 2. API Root
+### 2. Root Endpoint
+
+```bash
+curl https://your-project-name.vercel.app/
+```
+
+Expected response:
+
+```json
+{
+  "message": "MentorMatch API is running!",
+  "version": "1.0.0",
+  "endpoints": {
+    "auth": "/api/auth",
+    "mentors": "/api/mentors",
+    "students": "/api/students",
+    "bookings": "/api/bookings",
+    "messages": "/api/messages",
+    "reviews": "/api/reviews",
+    "workshops": "/api/workshops",
+    "admin": "/api/admin",
+    "ai": "/api/ai",
+    "payments": "/api/payment"
+  }
+}
+```
+
+### 3. API Root
 
 ```bash
 curl https://your-project-name.vercel.app/api
 ```
 
-Expected response: 404 (Endpoint not found) - This is normal as there's no root endpoint.
+Expected response:
 
-### 3. Test Authentication Endpoint
+```json
+{
+  "message": "MentorMatch API",
+  "version": "1.0.0",
+  "status": "running",
+  "endpoints": {
+    "auth": "/api/auth",
+    "mentors": "/api/mentors",
+    "students": "/api/students",
+    "bookings": "/api/bookings",
+    "messages": "/api/messages",
+    "reviews": "/api/reviews",
+    "workshops": "/api/workshops",
+    "admin": "/api/admin",
+    "ai": "/api/ai",
+    "payments": "/api/payment"
+  }
+}
+```
+
+### 4. Test Authentication Endpoint
 
 ```bash
 curl https://your-project-name.vercel.app/api/auth

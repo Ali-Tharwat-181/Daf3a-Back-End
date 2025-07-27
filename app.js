@@ -20,7 +20,7 @@ import { multerErrorHandler } from "./middlewares/upload.js";
 import oauthRouter from "./routes/auth.routes.js";
 import reportRouter from "./routes/report.routes.js";
 import videoRouter from "./routes/video.routes.js";
-import paymentRouter from './routes/payment.routes.js';
+import paymentRouter from "./routes/payment.routes.js";
 
 const app = express();
 
@@ -33,6 +33,47 @@ app.use(
 );
 app.use(express.json());
 app.use(morgan("dev"));
+
+// Root endpoint
+app.get("/", (req, res) => {
+  res.json({
+    message: "MentorMatch API is running!",
+    version: "1.0.0",
+    endpoints: {
+      auth: "/api/auth",
+      mentors: "/api/mentors",
+      students: "/api/students",
+      bookings: "/api/bookings",
+      messages: "/api/messages",
+      reviews: "/api/reviews",
+      workshops: "/api/workshops",
+      admin: "/api/admin",
+      ai: "/api/ai",
+      payments: "/api/payment",
+    },
+  });
+});
+
+// API root endpoint
+app.get("/api", (req, res) => {
+  res.json({
+    message: "MentorMatch API",
+    version: "1.0.0",
+    status: "running",
+    endpoints: {
+      auth: "/api/auth",
+      mentors: "/api/mentors",
+      students: "/api/students",
+      bookings: "/api/bookings",
+      messages: "/api/messages",
+      reviews: "/api/reviews",
+      workshops: "/api/workshops",
+      admin: "/api/admin",
+      ai: "/api/ai",
+      payments: "/api/payment",
+    },
+  });
+});
 
 // API routes
 app.use("/api/mentors", mentorRouter);
