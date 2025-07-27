@@ -4,6 +4,7 @@ import app from "./app.js";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import express from "express";
+
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
@@ -13,6 +14,7 @@ const server = app.listen(
   PORT,
   console.log(`Server running on PORT ${PORT}...`)
 );
+
 const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
@@ -36,26 +38,21 @@ io.on("connection", (socket) => {
 
   socket.on("typing", (data) => {
     console.log("Typing event received:", data);
-    socket.to(data.room).emit("typing", data);
+    socket.to(data.room).emit("typing", {
+      user: data.user,
+      userName: data.userName,
+      room: data.room
+    });
   });
-
-  //   socket.to(data.room).emit("typing", {
-  //     user: data.user,
-  //     userName: data.userName,
-  //     room: data.room,
-  //   });
-  // });
 
   socket.on("stop typing", (data) => {
     console.log("Stop typing event received:", data);
-    socket.to(data.room).emit("stop typing", data);
+    socket.to(data.room).emit("stop typing", {
+      user: data.user,
+      userName: data.userName,
+      room: data.room
+    });
   });
-  //   socket.to(data.room).emit("stop typing", {
-  //     user: data.user,
-  //     userName: data.userName,
-  //     room: data.room,
-  //   });
-  // });
 
   socket.on("new message", (newMessageRecieved) => {
     var chat = newMessageRecieved.chat;
@@ -63,6 +60,7 @@ io.on("connection", (socket) => {
 
     chat.users.forEach((user) => {
       if (user._id == newMessageRecieved.sender._id) return;
+      
       // Emit message to all users except sender
       socket.in(user._id).emit("message received", newMessageRecieved);
 
@@ -76,8 +74,10 @@ io.on("connection", (socket) => {
         // User is not in the chat room, send notification
         socket
           .in(user._id)
-          .emit("notification", { chat: chat, message: newMessageRecieved });
-        //
+          .emit("notification", { 
+            chat: chat, 
+            message: newMessageRecieved 
+          });
       }
     });
   });
