@@ -21,11 +21,10 @@ const io = new Server(server, {
   },
 });
 
-
 io.on("connection", (socket) => {
   console.log("Connected to socket.io");
+
   socket.on("setup", (userData) => {
-    
     socket.join(userData._id);
     socket.emit("connected");
   });
@@ -34,25 +33,59 @@ io.on("connection", (socket) => {
     socket.join(room);
     console.log("User Joined Room: " + room);
   });
-  socket.on("typing", (room) => socket.in(room).emit("typing"));
-  socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
-  socket.on("new message", (newMessageReceived) => {
-    var chat = newMessageReceived.chat;
+  socket.on("typing", (data) => {
+    console.log("Typing event received:", data);
+    socket.to(data.room).emit("typing", data);
+  });
 
+  //   socket.to(data.room).emit("typing", {
+  //     user: data.user,
+  //     userName: data.userName,
+  //     room: data.room,
+  //   });
+  // });
+
+  socket.on("stop typing", (data) => {
+    console.log("Stop typing event received:", data);
+    socket.to(data.room).emit("stop typing", data);
+  });
+  //   socket.to(data.room).emit("stop typing", {
+  //     user: data.user,
+  //     userName: data.userName,
+  //     room: data.room,
+  //   });
+  // });
+
+  socket.on("new message", (newMessageRecieved) => {
+    var chat = newMessageRecieved.chat;
     if (!chat.users) return console.log("chat.users not defined");
 
     chat.users.forEach((user) => {
-      if (user._id == newMessageReceived.sender._id) return;
+      if (user._id == newMessageRecieved.sender._id) return;
+      // Emit message to all users except sender
+      socket.in(user._id).emit("message received", newMessageRecieved);
 
-      socket.in(user._id).emit("message received", newMessageReceived);
+      // Check if user is NOT in the chat room, then emit notification
+      const roomSockets = io.sockets.adapter.rooms.get(chat._id);
+      const userSocketId = Array.from(io.sockets.sockets).find(([id, s]) =>
+        s.rooms.has(user._id)
+      )?.[0];
+
+      if (!roomSockets || !userSocketId || !roomSockets.has(userSocketId)) {
+        // User is not in the chat room, send notification
+        socket
+          .in(user._id)
+          .emit("notification", { chat: chat, message: newMessageRecieved });
+        //
+      }
     });
   });
 
-  socket.off("setup", () => {
+  socket.on("disconnect", () => {
     console.log("USER DISCONNECTED");
-    socket.leave(userData._id);
   });
 });
+
 // Connect DB and start server
-connectDB(MONGO_URI)
+connectDB(MONGO_URI);
