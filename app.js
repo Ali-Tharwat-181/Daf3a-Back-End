@@ -51,6 +51,10 @@ app.use("/api/reports", reportRouter); // mount OAuth routes
 app.use("/api/video", videoRouter);
 app.use("/api", paymentRouter);
 
+app.get("/", (req, res) => {
+  res.json({ message: "Seerver API", status: "running" });
+});
+
 // Multer error handler (for file upload errors)
 app.use(multerErrorHandler);
 
