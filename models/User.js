@@ -48,6 +48,10 @@ const userSchema = new mongoose.Schema(
       default: ["english"],
     },
     suspended: { type: Boolean, default: false },
+    suspendedUntil: {
+      type: Date,
+      default: null,
+    },
     isRegistered: { type: Boolean, default: false },
     resetPasswordToken: String,
     resetPasswordExpires: Date,

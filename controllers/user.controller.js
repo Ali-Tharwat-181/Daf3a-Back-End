@@ -63,7 +63,14 @@ export async function updateUserProfile(req, res, next) {
 
 export async function suspendUser(req, res) {
   try {
-    const result = await suspendUserService(req.params.id);
+    const duration = parseInt(req.body.duration); // in hours, or you can accept days and convert
+    if (!duration || isNaN(duration)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid suspension duration." });
+    }
+
+    const result = await suspendUserService(req.params.id, duration);
     res.status(200).json({ success: true, ...result });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
