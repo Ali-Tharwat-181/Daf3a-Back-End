@@ -181,6 +181,9 @@ export const cancelBookingById = async (bookingId) => {
 
       booking.paymentStatus = "refunded";
       booking.attendStatus = "cancelled";
+      mentor.balance -= booking.amount || 0; // Deduct amount if paid
+
+      await mentor.save();
       await booking.save();
 
       return {
@@ -189,9 +192,6 @@ export const cancelBookingById = async (bookingId) => {
       };
     }
   }
-  mentor.balance -= booking.amount || 0; // Deduct amount if paid
-
-
 
   booking.attendStatus = "cancelled";
   await booking.save();
