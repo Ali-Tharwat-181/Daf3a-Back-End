@@ -1,191 +1,355 @@
+
 [
   {
-    "author": "66dcb0014f2b8509a1c1a102",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d1",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11c",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c1",
     "rating": 5,
-    "comment": "Dr. Hossam explained backend concepts in a very clear and practical way."
+    "comment": "Noura is an exceptional mentor! Her insights on React were invaluable. Highly recommend her for frontend development guidance.",
+    "timestamps": {
+      "createdAt": "2025-07-20T10:00:00.000Z",
+      "updatedAt": "2025-07-20T10:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a103",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d3",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11c",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c1",
     "rating": 4,
-    "comment": "Great MERN stack workshop! The full-stack approach was exactly what I needed."
+    "comment": "Great session with Noura. She helped me understand some complex JavaScript concepts. Very patient and clear.",
+    "timestamps": {
+      "createdAt": "2025-07-21T11:00:00.000Z",
+      "updatedAt": "2025-07-21T11:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a104",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d2",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11c",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c2",
     "rating": 5,
-    "comment": "Excellent technical depth and hands-on examples. Highly recommend!"
+    "comment": "Mohamed is brilliant in Data Science. He clarified many doubts about machine learning algorithms. Excellent mentor!",
+    "timestamps": {
+      "createdAt": "2025-07-20T12:00:00.000Z",
+      "updatedAt": "2025-07-20T12:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a105",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d4",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11d",
-    "rating": 5,
-    "comment": "Maha's UI/UX approach completely changed how I think about design!"
-  },
-  {
-    "author": "66dcb0014f2b8509a1c1a106",
-    "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11d",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c2",
     "rating": 4,
-    "comment": "Great design principles and practical exercises. Very engaging bootcamp."
+    "comment": "Very knowledgeable on TensorFlow. Mohamed provided practical examples that truly helped my project.",
+    "timestamps": {
+      "createdAt": "2025-07-22T10:00:00.000Z",
+      "updatedAt": "2025-07-22T10:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a107",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d6",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11d",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c3",
     "rating": 5,
-    "comment": "Amazing attention to user experience details. Learned so much!"
+    "comment": "Laila is an amazing UX/UI expert. Her feedback on my design portfolio was incredibly detailed and constructive.",
+    "timestamps": {
+      "createdAt": "2025-07-21T09:00:00.000Z",
+      "updatedAt": "2025-07-21T09:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a108",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d8",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11e",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c3",
     "rating": 4,
-    "comment": "Great insights into data analytics, learned a lot from real-life examples."
+    "comment": "Got some excellent tips on prototyping tools from Laila. She's very experienced and easy to talk to.",
+    "timestamps": {
+      "createdAt": "2025-07-23T14:00:00.000Z",
+      "updatedAt": "2025-07-23T14:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a109",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d5",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11e",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c4",
     "rating": 5,
-    "comment": "Excellent data visualization techniques and practical case studies."
+    "comment": "Youssef helped me set up my first CI/CD pipeline. His explanation was clear and he guided me through every step. Fantastic DevOps mentor!",
+    "timestamps": {
+      "createdAt": "2025-07-22T12:00:00.000Z",
+      "updatedAt": "2025-07-22T12:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a10a",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d7",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11e",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c4",
     "rating": 4,
-    "comment": "Very knowledgeable in analytics tools. Good mix of theory and practice."
+    "comment": "Learned a lot about Docker and Kubernetes from Youssef. He has deep knowledge and is good at explaining complex topics.",
+    "timestamps": {
+      "createdAt": "2025-07-24T16:00:00.000Z",
+      "updatedAt": "2025-07-24T16:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a102",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d9",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11f",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c5",
     "rating": 5,
-    "comment": "Outstanding digital marketing strategies! Increased my campaign effectiveness."
+    "comment": "Amina is a cybersecurity wizard! She gave me practical tips for penetration testing and network security. Highly recommended.",
+    "timestamps": {
+      "createdAt": "2025-07-23T10:00:00.000Z",
+      "updatedAt": "2025-07-23T10:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a103",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d1",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11f",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c5",
     "rating": 4,
-    "comment": "Solid marketing fundamentals and current trends. Very helpful."
+    "comment": "Very insightful session on ethical hacking. Amina is very clear and concise in her explanations.",
+    "timestamps": {
+      "createdAt": "2025-07-25T15:00:00.000Z",
+      "updatedAt": "2025-07-25T15:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a104",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d2",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a11f",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c6",
+    "rating": 5,
+    "comment": "Omar is a fantastic mobile app developer. He helped me debug a complex Flutter issue quickly and efficiently.",
+    "timestamps": {
+      "createdAt": "2025-07-24T11:00:00.000Z",
+      "updatedAt": "2025-07-24T11:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4da",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c6",
     "rating": 4,
-    "comment": "Good practical examples of successful marketing campaigns."
+    "comment": "Great advice on React Native best practices. Omar shared valuable insights from his experience.",
+    "timestamps": {
+      "createdAt": "2025-07-26T14:00:00.000Z",
+      "updatedAt": "2025-07-26T14:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a105",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d3",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a120",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c7",
+    "rating": 5,
+    "comment": "Sara is an incredible AI researcher. Her explanation of NLP models was very clear and easy to grasp.",
+    "timestamps": {
+      "createdAt": "2025-07-25T09:00:00.000Z",
+      "updatedAt": "2025-07-25T09:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4d5",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c7",
     "rating": 4,
-    "comment": "Very knowledgeable in finance, appreciated the structured delivery."
+    "comment": "Gained a lot of new perspectives on deep learning from Sara. She's a true expert in the field.",
+    "timestamps": {
+      "createdAt": "2025-07-27T13:00:00.000Z",
+      "updatedAt": "2025-07-27T13:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a106",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d4",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a120",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c8",
     "rating": 5,
-    "comment": "Excellent financial planning strategies. Made complex topics easy to understand."
+    "comment": "Khalid provided excellent guidance on product strategy. His experience is evident, and he offers practical advice.",
+    "timestamps": {
+      "createdAt": "2025-07-26T10:00:00.000Z",
+      "updatedAt": "2025-07-26T10:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a107",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d7",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a120",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c8",
     "rating": 4,
-    "comment": "Great insights into personal and business finance management."
+    "comment": "Very helpful session on Agile methodologies. Khalid is a great product manager and mentor.",
+    "timestamps": {
+      "createdAt": "2025-07-28T16:00:00.000Z",
+      "updatedAt": "2025-07-28T16:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a108",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d6",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a121",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c9",
     "rating": 5,
-    "comment": "Amazing healthcare technology insights! Very forward-thinking approach."
+    "comment": "Fatima is an amazing Frontend Architect. She helped me refactor my React component for better performance.",
+    "timestamps": {
+      "createdAt": "2025-07-27T11:00:00.000Z",
+      "updatedAt": "2025-07-27T11:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a109",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d9",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a121",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4c9",
     "rating": 4,
-    "comment": "Great overview of emerging health tech trends and innovations."
+    "comment": "Excellent guidance on TypeScript and GraphQL integration. Fatima is very knowledgeable and supportive.",
+    "timestamps": {
+      "createdAt": "2025-07-29T15:00:00.000Z",
+      "updatedAt": "2025-07-29T15:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a10a",
+    "author": "65f1a2b3c8e9d0f1e2a3b4da",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a121",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4ca",
     "rating": 5,
-    "comment": "Excellent real-world healthcare applications. Very inspiring session."
+    "comment": "Ahmed is a top-notch Backend Engineer. He helped me optimize my PostgreSQL queries and understand microservices architecture.",
+    "timestamps": {
+      "createdAt": "2025-07-28T08:00:00.000Z",
+      "updatedAt": "2025-07-28T08:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a10b",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d1",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a122",
-    "rating": 5,
-    "comment": "Best interview prep ever! Mock interviews were super useful."
-  },
-  {
-    "author": "66dcb0014f2b8509a1c1a102",
-    "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a122",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4ca",
     "rating": 4,
-    "comment": "Great career development advice and practical tips for tech growth."
+    "comment": "Learned a lot about Go and building scalable backend systems. Ahmed is very practical and clear.",
+    "timestamps": {
+      "createdAt": "2025-07-30T12:00:00.000Z",
+      "updatedAt": "2025-07-30T12:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a103",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d2",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a122",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cb",
     "rating": 5,
-    "comment": "Comprehensive career roadmap and excellent networking strategies."
+    "comment": "Hana is a fantastic Data Visualization Specialist. She showed me how to use D3.js effectively to tell a story with data.",
+    "timestamps": {
+      "createdAt": "2025-07-29T10:00:00.000Z",
+      "updatedAt": "2025-07-29T10:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a104",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d3",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a123",
-    "rating": 5,
-    "comment": "Lina gave us a full roadmap on launching startups. Amazing session!"
-  },
-  {
-    "author": "66dcb0014f2b8509a1c1a105",
-    "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a123",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cb",
     "rating": 4,
-    "comment": "Practical entrepreneurship insights and valuable startup tips."
+    "comment": "Got some great tips on Tableau from Hana. Her ability to explain complex visualizations is impressive.",
+    "timestamps": {
+      "createdAt": "2025-07-31T14:00:00.000Z",
+      "updatedAt": "2025-07-31T14:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a106",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d4",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a123",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cc",
     "rating": 5,
-    "comment": "Excellent business fundamentals and startup strategy guidance."
+    "comment": "Ali is a solid Blockchain Developer. He walked me through smart contract deployment on Ethereum. Very helpful!",
+    "timestamps": {
+      "createdAt": "2025-07-30T09:00:00.000Z",
+      "updatedAt": "2025-07-30T09:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a107",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d5",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a125",
-    "rating": 5,
-    "comment": "Reem is inspiring! Her educational strategies are game-changing."
-  },
-  {
-    "author": "66dcb0014f2b8509a1c1a108",
-    "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a125",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cc",
     "rating": 4,
-    "comment": "Great soft skills development and communication techniques."
+    "comment": "Good session on Solidity. Ali explained the nuances of decentralized applications very well.",
+    "timestamps": {
+      "createdAt": "2025-08-01T13:00:00.000Z",
+      "updatedAt": "2025-08-01T13:00:00.000Z"
+    }
   },
   {
-    "author": "66dcb0014f2b8509a1c1a109",
+    "author": "65f1a2b3c8e9d0f1e2a3b4d6",
     "targetType": "mentor",
-    "targetId": "66dcb0014f2b8509a1c1a125",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cd",
     "rating": 5,
-    "comment": "Excellent education technology trends and innovative teaching methods."
+    "comment": "Aisha is an excellent QA Automation Engineer. She gave me great strategies for improving my test automation framework.",
+    "timestamps": {
+      "createdAt": "2025-07-31T11:00:00.000Z",
+      "updatedAt": "2025-07-31T11:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4d7",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cd",
+    "rating": 4,
+    "comment": "Helpful session on Cypress. Aisha provided practical tips for writing more robust tests.",
+    "timestamps": {
+      "createdAt": "2025-08-02T15:00:00.000Z",
+      "updatedAt": "2025-08-02T15:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4d8",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4ce",
+    "rating": 5,
+    "comment": "Ziad is an incredible Game Developer! He gave me great insights into Unity and game design principles.",
+    "timestamps": {
+      "createdAt": "2025-08-01T10:00:00.000Z",
+      "updatedAt": "2025-08-01T10:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4d9",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4ce",
+    "rating": 4,
+    "comment": "Very practical advice on C# for game development. Ziad is passionate and knowledgeable.",
+    "timestamps": {
+      "createdAt": "2025-08-03T14:00:00.000Z",
+      "updatedAt": "2025-08-03T14:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4da",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cf",
+    "rating": 5,
+    "comment": "Noor is an excellent Technical Writer. She helped me structure my API documentation effectively.",
+    "timestamps": {
+      "createdAt": "2025-08-02T09:00:00.000Z",
+      "updatedAt": "2025-08-02T09:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4d1",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4cf",
+    "rating": 4,
+    "comment": "Very clear and concise advice on technical content creation. Noor is a great mentor for documentation.",
+    "timestamps": {
+      "createdAt": "2025-08-04T13:00:00.000Z",
+      "updatedAt": "2025-08-04T13:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4d2",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4d0",
+    "rating": 5,
+    "comment": "Hassan is a brilliant Cloud Architect. He helped me understand cloud security best practices for AWS.",
+    "timestamps": {
+      "createdAt": "2025-08-03T11:00:00.000Z",
+      "updatedAt": "2025-08-03T11:00:00.000Z"
+    }
+  },
+  {
+    "author": "65f1a2b3c8e9d0f1e2a3b4d3",
+    "targetType": "mentor",
+    "targetId": "65f1a2b3c8e9d0f1e2a3b4d0",
+    "rating": 4,
+    "comment": "Excellent session on designing scalable cloud solutions. Hassan is very knowledgeable about Azure as well.",
+    "timestamps": {
+      "createdAt": "2025-08-05T16:00:00.000Z",
+      "updatedAt": "2025-08-05T16:00:00.000Z"
+    }
   }
 ]
