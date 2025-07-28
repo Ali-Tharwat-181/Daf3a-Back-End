@@ -117,17 +117,60 @@ export const getMentorAvailability = async (mentorId) => {
   return mentor.availability;
 };
 
+// export const getMentorAvailabilityMentorService = async (mentorId) => {
+//   const mentor = await User.findOne({ _id: mentorId });
+//   if (!mentor) throw new Error("Mentor not found");
+
+//   // Get tomorrow's date in YYYY-MM-DD format
+//   const tomorrow = new Date();
+//   tomorrow.setDate(tomorrow.getDate() + 1);
+//   const tomorrowStr = tomorrow.toISOString().split("T")[0]; // e.g. "2025-07-28"
+
+//   // Filter out availability before tomorrow
+//   mentor.availability = mentor.availability.filter((av) => av.date >= tomorrowStr);
+
+//   await mentor.save(); // Save updated availability
+
+//   return mentor.availability;
+// };
+
+import dayjs from "dayjs";
+
 export const getMentorAvailabilityMentorService = async (mentorId) => {
   const mentor = await User.findOne({ _id: mentorId });
   if (!mentor) throw new Error("Mentor not found");
 
-  // Get tomorrow's date in YYYY-MM-DD format
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const tomorrowStr = tomorrow.toISOString().split("T")[0]; // e.g. "2025-07-28"
+  const now = dayjs(); // current date and time
+  const todayStr = now.format("YYYY-MM-DD");
 
-  // Filter out availability before tomorrow
-  mentor.availability = mentor.availability.filter((av) => av.date >= tomorrowStr);
+  // Filter mentor availability
+  mentor.availability = mentor.availability
+    .filter((av) => {
+      if (av.date < todayStr) {
+        // ❌ remove yesterday and any day before
+        return false;
+      }
+
+      if (av.date === todayStr) {
+        // ✅ keep today, but remove past time slots
+        const updatedSlots = av.slots.filter((slot) => {
+          const slotTime = dayjs(`${av.date} ${slot.start}`);
+          return slotTime.isAfter(now);
+        });
+
+        // if no slots remain for today, remove the whole day
+        if (updatedSlots.length === 0) {
+          return false;
+        }
+
+        // update the slots
+        av.slots = updatedSlots;
+        return true;
+      }
+
+      // ✅ keep future dates as they are
+      return true;
+    });
 
   await mentor.save(); // Save updated availability
 
