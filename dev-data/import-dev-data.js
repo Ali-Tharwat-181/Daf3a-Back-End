@@ -18,7 +18,7 @@ const __dirname = path.dirname(__filename);
 // Connect to DB
 try {
   await mongoose.connect(
-    "mongodb+srv://alitharwathassan:rnCMERhKmSUSlHA4@cluster0.o25p0do.mongodb.net/Daf3a?retryWrites=true&w=majority&appName=Cluster0"
+    "your mongo db URI"
   );
   console.log("DB connection successful");
 } catch (err) {
